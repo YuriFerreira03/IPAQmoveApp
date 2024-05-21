@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: -40,
-    marginTop: -50,
+    marginTop: -70,
     width: '100%',
   },
   gradient: {
@@ -39,5 +39,46 @@ export default StyleSheet.create({
     color: 'white',
     fontFamily: 'inter-regular',
     fontSize: 15,
+  },
+  googleButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#103B41',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    marginTop: 30,
+  },
+  googleButtonText: {
+    fontFamily: 'inter-regular',
+    color: 'white',
+    fontSize: 25,
+    marginLeft: 10,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  switchLabel: {
+    fontSize: 20,
+    color: '#032D45',
+    fontFamily: 'inter-regular',
+    marginTop: 60,
+    marginHorizontal: 30,
+  },
+  switchStyle: {
+    marginTop: 50,
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
+  },
+  termsContainer: {
+    alignItems: 'center',
+    transform: [{ scaleX: 1.2 }, { scaleY: 1.3 }],
+    marginTop: 100,
+  },
+  termsText: {
+    marginTop: 10,
+    fontFamily: 'inter-regular',
+    fontSize: 16,
+    color: '#032D45',
   },
 });

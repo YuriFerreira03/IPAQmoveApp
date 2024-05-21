@@ -1,33 +1,126 @@
-// Importações necessárias
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import styles from '../styles/LoginStyles';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  TouchableOpacity,
+  Switch,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import * as Google from "expo-auth-session/providers/google";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import styles from "../styles/LoginStyles";
+import * as WebBrowser from "expo-web-browser";
+import { makeRedirectUri } from "expo-auth-session";
+
+WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = () => {
+  const [userInfo, setUserInfo] = useState<any>(null);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    iosClientId:
+      "8816283272-fp34mou9e5ekoqd8lpjpucktsri9a315.apps.googleusercontent.com",
+    redirectUri: makeRedirectUri({
+      scheme:
+        "com.googleusercontent.apps.8816283272-fp34mou9e5ekoqd8lpjpucktsri9a315",
+      path: "redirect",
+    }),
+  });
+
+  useEffect(() => {
+    if (response?.type === "success" && response.authentication) {
+      console.log(response.authentication);
+      const { accessToken } = response.authentication;
+      fetchUserInfo(accessToken);
+    }
+  }, [response]);
+
+  const fetchUserInfo = async (token: string) => {
+    const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const user = await response.json();
+    setUserInfo(user);
+    await AsyncStorage.setItem("@user", JSON.stringify(user));
+  };
+
+  const handleSignOut = async () => {
+    setUserInfo(null);
+    await AsyncStorage.removeItem("@user");
+  };
+
+  const handleToggleSwitch = () => {
+    setIsSwitchOn((previousState) => !previousState);
+  };
+
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={['#14E2C3', '#032D45']}
+        colors={isSwitchOn ? ["#032D45", "#14E2C3"] : ["#14E2C3", "#032D45"]}
         style={styles.gradient}
       >
         <Image
-          source={require("../images/logo.png")}  // Atualize o caminho conforme necessário
+          source={require("../images/logo.png")}
           style={styles.imageStyle}
         />
-        <Text style={styles.textStyle}>
-          Seja bem-vindo ao
-        </Text>
+        <Text style={styles.textStyle}>Seja bem-vindo ao</Text>
         <Text style={styles.textStyleII}>
-          <Text style={{ color: '#082D47' }}>IPAQ</Text>
-          <Text style={{ color: '#15E2C3' }}>move</Text>
+          <Text style={{ color: "#082D47" }}>IPAQ</Text>
+          <Text style={{ color: "#15E2C3" }}>move</Text>
         </Text>
-        <Text style={styles.textStyleIII}>
-          Use sua Conta Google para 
-        </Text>
-        <Text style={styles.textStyleIII}>
-          acessar o nosso app
-        </Text>
+        <Text style={styles.textStyleIII}>Use sua Conta Google para</Text>
+        <Text style={styles.textStyleIII}>acessar o nosso app</Text>
+        {userInfo ? (
+          <>
+            <Text style={styles.textStyleIII}>Olá, {userInfo.name}</Text>
+            <Button title="Sign Out" onPress={handleSignOut} />
+          </>
+        ) : (
+          <TouchableOpacity
+            style={styles.googleButton}
+            disabled={!request}
+            onPress={() => promptAsync()}
+          >
+            <AntDesign name="google" size={24} color="white" />
+            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+          </TouchableOpacity>
+        )}
+        <View style={styles.switchContainer}>
+          <Text
+            style={[
+              styles.switchLabel,
+              { color: isSwitchOn ? "#00263E" : "#fff" },
+            ]}
+          >
+            Pesquisador
+          </Text>
+          <Switch
+            style={styles.switchStyle}
+            value={isSwitchOn}
+            onValueChange={handleToggleSwitch}
+            trackColor={{ false: "#14E2C3", true: "#00263E" }}
+            thumbColor={isSwitchOn ? "#14E2C3" : "#00263E"}
+          />
+          <Text
+            style={[
+              styles.switchLabel,
+              { color: isSwitchOn ? "#00263E" : "#fff"},
+            ]}
+          >
+            Visitante
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.termsContainer}>
+        <FontAwesome name="file-text-o" size={40} color={isSwitchOn ? "#00263E" : "#fff"} />
+          <Text  style={[
+              styles.termsText,
+              { color: isSwitchOn ? "#00263E" : "#fff"},
+            ]}>Termos de Uso</Text>
+        </TouchableOpacity>
       </LinearGradient>
     </View>
   );

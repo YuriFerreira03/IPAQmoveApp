@@ -5,8 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "scheme": "com.googleusercontent.apps.8816283272-fp34mou9e5ekoqd8lpjpucktsri9a315",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",

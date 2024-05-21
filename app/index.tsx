@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import LoginScreen from '../app/LoginScreen';  // Certifique-se de que o caminho está correto
+import LoginScreen from '../app/LoginScreen'; 
 
 export default function App() {
   return (
