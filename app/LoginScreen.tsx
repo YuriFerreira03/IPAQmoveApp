@@ -8,45 +8,16 @@ import {
   Switch,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Google from "expo-auth-session/providers/google";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles/LoginStyles";
 import * as WebBrowser from "expo-web-browser";
-import { makeRedirectUri } from "expo-auth-session";
 
 WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = () => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    iosClientId:
-      "8816283272-fp34mou9e5ekoqd8lpjpucktsri9a315.apps.googleusercontent.com",
-    redirectUri: makeRedirectUri({
-      scheme:
-        "com.googleusercontent.apps.8816283272-fp34mou9e5ekoqd8lpjpucktsri9a315",
-      path: "redirect",
-    }),
-  });
-
-  useEffect(() => {
-    if (response?.type === "success" && response.authentication) {
-      console.log(response.authentication);
-      const { accessToken } = response.authentication;
-      fetchUserInfo(accessToken);
-    }
-  }, [response]);
-
-  const fetchUserInfo = async (token: string) => {
-    const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const user = await response.json();
-    setUserInfo(user);
-    await AsyncStorage.setItem("@user", JSON.stringify(user));
-  };
 
   const handleSignOut = async () => {
     setUserInfo(null);
@@ -82,8 +53,6 @@ const LoginScreen = () => {
         ) : (
           <TouchableOpacity
             style={styles.googleButton}
-            disabled={!request}
-            onPress={() => promptAsync()}
           >
             <AntDesign name="google" size={24} color="white" />
             <Text style={styles.googleButtonText}>Entrar com o Google</Text>
