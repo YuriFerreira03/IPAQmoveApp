@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        
           <LinearGradient
             colors={['#0A4E66', '#14E2C3']}
             style={styles.header}
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
             </View>
             <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
           </LinearGradient>
-          <Text style={styles.title}></Text>
+          <Text></Text>
           <View style={styles.card}>
             <Icon name="favorite" size={24} color="#FFFFFF" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>SAÚDE AO SEU ALCANCE</Text>
@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
               <Text style={styles.buttonText}>ACESSAR</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+       
       </SafeAreaView>
     </LinearGradient>
   );
