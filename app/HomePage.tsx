@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
             </View>
             <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
           </LinearGradient>
-          <Text style={styles.title}>RECURSOS:</Text>
+          <Text style={styles.title}></Text>
           <View style={styles.card}>
             <Icon name="favorite" size={24} color="#FFFFFF" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>SAÚDE AO SEU ALCANCE</Text>
