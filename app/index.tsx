@@ -9,5 +9,6 @@ export default function App() {
       {/*<LoginScreen />*/}
       <HomePage />
     </View>
+    
   );
 }
