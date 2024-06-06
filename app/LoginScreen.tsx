@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  TouchableOpacity,
-  Switch,
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles/LoginStyles";
-import * as WebBrowser from "expo-web-browser";
-
-WebBrowser.maybeCompleteAuthSession();
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "./index";
 
 const LoginScreen = () => {
-  const [userInfo, setUserInfo] = useState<any>(null);
   const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-  const handleSignOut = async () => {
-    setUserInfo(null);
-    await AsyncStorage.removeItem("@user");
-  };
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleToggleSwitch = () => {
     setIsSwitchOn((previousState) => !previousState);
+  };
+
+  const handleLoginPress = () => {
+    navigation.navigate('Home');
   };
 
   return (
@@ -45,19 +35,13 @@ const LoginScreen = () => {
         </Text>
         <Text style={styles.textStyleIII}>Use sua Conta Google para</Text>
         <Text style={styles.textStyleIII}>acessar o nosso app</Text>
-        {userInfo ? (
-          <>
-            <Text style={styles.textStyleIII}>Olá, {userInfo.name}</Text>
-            <Button title="Sign Out" onPress={handleSignOut} />
-          </>
-        ) : (
-          <TouchableOpacity
-            style={styles.googleButton}
-          >
-            <AntDesign name="google" size={24} color="white" />
-            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          style={styles.googleButton}
+          onPress={handleLoginPress}
+        >
+          <AntDesign name="google" size={24} color="white" />
+          <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+        </TouchableOpacity>
         <View style={styles.switchContainer}>
           <Text
             style={[
@@ -77,18 +61,26 @@ const LoginScreen = () => {
           <Text
             style={[
               styles.switchLabel,
-              { color: isSwitchOn ? "#00263E" : "#fff"},
+              { color: isSwitchOn ? "#00263E" : "#fff" },
             ]}
           >
             Visitante
           </Text>
         </View>
         <TouchableOpacity style={styles.termsContainer}>
-        <FontAwesome name="file-text-o" size={40} color={isSwitchOn ? "#00263E" : "#fff"} />
-          <Text  style={[
+          <FontAwesome
+            name="file-text-o"
+            size={40}
+            color={isSwitchOn ? "#00263E" : "#fff"}
+          />
+          <Text
+            style={[
               styles.termsText,
-              { color: isSwitchOn ? "#00263E" : "#fff"},
-            ]}>Termos de Uso</Text>
+              { color: isSwitchOn ? "#00263E" : "#fff" },
+            ]}
+          >
+            Termos de Uso
+          </Text>
         </TouchableOpacity>
       </LinearGradient>
     </View>
