@@ -1,9 +1,12 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StatusBar, SafeAreaView, StyleSheet, View } from 'react-native';
-import HomePage from './HomePage';
-import LoginScreen from './LoginScreen';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
+import HomePage from "./HomePage";
+import LoginScreen from "./LoginScreen";
+import SplachScreen from "./Session_1/SplachScreen";
+import Tela1 from "./Session_1/Tela_1";
+import Tela2 from "./Session_1/Tela_2";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -26,11 +29,14 @@ export default function App() {
             initialRouteName="Login"
             screenOptions={{
               headerShown: false,
-              cardStyle: { backgroundColor: 'transparent' },
+              cardStyle: { backgroundColor: "transparent" },
             }}
           >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="Splach" component={SplachScreen} />
+            <Stack.Screen name="Tela1" component={Tela1} />
+            <Stack.Screen name="Tela2" component={Tela2} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>

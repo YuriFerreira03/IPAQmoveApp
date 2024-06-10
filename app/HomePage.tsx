@@ -3,8 +3,17 @@ import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles/HomePage";
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../app'; 
 
 const HomePage: React.FC = () => {
+
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  
+    const handleAccessPress = () => {
+      navigation.navigate('Splach'); 
+    };
+
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
@@ -22,7 +31,7 @@ const HomePage: React.FC = () => {
             Descubra mais sobre seu bem-estar com o questionário IPAQ. Rápido,
             fácil e adaptado para você.
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleAccessPress}>
             <Text style={styles.buttonText}>ACESSAR</Text>
           </TouchableOpacity>
         </View>
