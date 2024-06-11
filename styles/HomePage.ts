@@ -37,6 +37,11 @@ export default StyleSheet.create({
     color: '#ffff',
     fontFamily: 'inter-medium',
   },
+  userName: {
+    fontSize: 24,
+    color: '#032D45',
+    fontFamily: 'inter-bold',
+  },
   location: {
     fontSize: 18,
     color: '#FFFFFF',

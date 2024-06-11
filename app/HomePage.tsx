@@ -3,23 +3,30 @@ import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles/HomePage";
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation, NavigationProp, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../app'; 
 
-const HomePage: React.FC = () => {
+type HomePageRouteProp = RouteProp<RootStackParamList, 'Home'>;
 
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+type HomePageProps = {
+  route: HomePageRouteProp;
+};
+
+const HomePage: React.FC<HomePageProps> = ({ route }) => {
   
-    const handleAccessPress = () => {
-      navigation.navigate('Splach'); 
-    };
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { userName } = route.params;
+
+  const handleAccessPress = () => {
+    navigation.navigate('Splach'); 
+  };
 
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
         <LinearGradient colors={["#0A4E66", "#14E2C3"]} style={styles.header}>
           <View style={styles.textContainer}>
-            <Text style={styles.greeting}>Olá, Yuri</Text>
+            <Text style={styles.greeting}>Olá, <Text style={styles.userName}>{userName}</Text></Text>
             <Text style={styles.location}>Cataguases, MG</Text>
           </View>
           <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
