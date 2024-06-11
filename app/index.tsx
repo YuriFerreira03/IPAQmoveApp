@@ -7,6 +7,7 @@ import LoginScreen from "./LoginScreen";
 import SplachScreen from "./Session_1/SplachScreen";
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
+ //teste branch 
 
 export type RootStackParamList = {
   Login: undefined;
