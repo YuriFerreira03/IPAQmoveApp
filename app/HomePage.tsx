@@ -21,6 +21,8 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
     navigation.navigate('Splach'); 
   };
 
+  //estou adicionado um comentario teste na Home Page
+
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
