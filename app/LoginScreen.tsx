@@ -5,8 +5,8 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import styles from "../styles/LoginStyles";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-import Dialog from "react-native-dialog";
-import axios from "axios";
+// import Dialog from "react-native-dialog";
+// import axios from "axios";
 
 const LoginScreen = () => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -20,27 +20,27 @@ const LoginScreen = () => {
   };
 
   const handleLoginPress = () => {
-    setVisible(true);
+    navigation.navigate('Home');
   };
 
   const handleCancel = () => {
     setVisible(false);
   };
 
-  const handleSubmit = async () => {
-    setVisible(false);
-    try {
-      await axios.post("http://192.168.15.84:8080/usuario", 
-        { name, type: "user" },
-        { timeout: 10000 } // 10 segundos de tempo limite
-      );
-      Alert.alert("Usuario Salvo!");
-      navigation.navigate('Home', { userName: name }); // nome do usuário aqui
-    } catch (error) {
-      Alert.alert("Erro ao salvar o usuário!");
-      console.error(error);
-    }
-  };
+  // const handleSubmit = async () => {
+  //   setVisible(false);
+  //   try {
+  //     await axios.post("http://192.168.15.84:8080/usuario", 
+  //       { name, type: "user" },
+  //       { timeout: 10000 } // 10 segundos de tempo limite
+  //     );
+  //     Alert.alert("Usuario Salvo!");
+  //     navigation.navigate('Home', { userName: name }); // nome do usuário aqui
+  //   } catch (error) {
+  //     Alert.alert("Erro ao salvar o usuário!");
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -107,7 +107,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </LinearGradient>
-      <Dialog.Container visible={visible}>
+      {/* <Dialog.Container visible={visible}>
         <Dialog.Title>Escreva seu nome</Dialog.Title>
         <Dialog.Input
           value={name}
@@ -115,7 +115,7 @@ const LoginScreen = () => {
         />
         <Dialog.Button label="Cancelar" onPress={handleCancel} />
         <Dialog.Button label="Entrar" onPress={handleSubmit} />
-      </Dialog.Container>
+      </Dialog.Container> */}
     </View>
   );
 };
