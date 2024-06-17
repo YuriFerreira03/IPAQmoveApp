@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "../styles/HomePage";
+import styles from "../styles/HomePageVisitante";
 import { useNavigation, NavigationProp, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../app'; 
 
@@ -12,7 +12,7 @@ type HomePageProps = {
   route: HomePageRouteProp;
 };
 
-const HomePage: React.FC<HomePageProps> = ({ route }) => {
+const HomePageVisitante: React.FC<HomePageProps> = ({ route }) => {
   
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   // const { userName } = route.params;
@@ -20,12 +20,6 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   const handleAccessPress = () => {
     navigation.navigate('Splach'); 
   };
-
-  const handleSearchPress = () => { //adicionando uma constante para conectar à tela de Pesquisa
-    navigation.navigate('Search'); //tem que ter o mesmo nome que foi declarado no index
-  };
-
-  //estou adicionado um comentario teste na Home Page
 
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
@@ -59,20 +53,9 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
             <Text style={styles.buttonText}>ACESSAR</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.card}>
-          <Icon name="search" size={24} color="#FFFFFF" style={styles.cardIcon} />
-          <Text style={styles.cardTitle}>CADASTRAR PESQUISA</Text>
-          <Text style={styles.cardDescription}>
-            Cadastre seu projeto de pesquisa e consiga de uma forma simples ver
-            todos os dados dos usuários juntos.
-          </Text>
-          <TouchableOpacity style={styles.button} onPress={handleSearchPress}>
-            <Text style={styles.buttonText}>ACESSAR</Text> 
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     </LinearGradient>
   );
 };
 
-export default HomePage;
+export default HomePageVisitante;

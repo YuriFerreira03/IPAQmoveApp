@@ -4,14 +4,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
 import HomePage from "./HomePage";
 import LoginScreen from "./LoginScreen";
+import SearchScreen from "./SearchScreen"; //importando a tela 
+import HomePageVisitante from "./HomePageVisitante"; //importando a home page sem possibilidade de cadastrar uma pesquisa
 import SplachScreen from "./Session_1/SplachScreen";
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
- //teste branch 
+//teste branch 
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  SearchScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -35,6 +38,8 @@ export default function App() {
           >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
+            <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />

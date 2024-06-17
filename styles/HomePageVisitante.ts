@@ -56,7 +56,7 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 10,
     padding: 12,
-    marginTop: 20,
+    marginTop: 80,
     //marginBottom: 18,
     alignSelf: 'center',
     width: '90%',

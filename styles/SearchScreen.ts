@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  gradient: {
+  container: {
     flex: 1,
-    marginBottom: -40,
-    marginTop: -50,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
   },
   safeArea: {
     flex: 1,
@@ -12,10 +13,6 @@ export default StyleSheet.create({
   scrollView: {
     flexGrow: 1,
     justifyContent: 'center',
-  },
-  container: {
-    flex: 1,
-    padding: 16,
   },
   header: {
     flexDirection: 'row',
@@ -52,40 +49,39 @@ export default StyleSheet.create({
     height: 60,
     marginTop: 35,
   },
-  card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 10,
-    padding: 12,
-    marginTop: 20,
-    //marginBottom: 18,
-    alignSelf: 'center',
-    width: '90%',
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    borderWidth: 1,
+  texthead: {
+    marginTop: 40,
+    fontSize: 23,
+    fontFamily: 'inter-bold',
+    color: "#FFFF",
   },
-  cardIcon: {
-    marginBottom: 10,
+  textbox: {
+    width: 300,
+    height: 60,
+    marginTop: 40,
+    marginVertical: 20,
+    justifyContent: 'center',
+    backgroundColor: "transparent",
+    color: "#FFFFF"
   },
-  cardTitle: {
-    fontSize: 18,
-    color: '#FFFFFF',
-    fontFamily: 'inter-black',
-    marginBottom: 10,
-  },
-  cardDescription: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    marginBottom: 20,
-  },
-  button: {
+  buttonSearch: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#14E2C3',
-    paddingVertical: 9,
+    paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 50,
+    marginTop: 40,
   },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    textAlign: 'center',
-  },
+  textButtonSearch: {
+    width: 130,
+    alignItems: 'center',
+    fontFamily: 'inter-bold',
+    color: '#0A4E66',
+    fontSize: 18,
+    marginLeft: 15,
+
+  }
+
+
 });

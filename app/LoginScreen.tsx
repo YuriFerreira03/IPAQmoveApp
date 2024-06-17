@@ -23,6 +23,10 @@ const LoginScreen = () => {
     navigation.navigate('Home');
   };
 
+  const handleHomeVPress = () => {
+    navigation.navigate('HomeVisitante');
+  };
+
   const handleCancel = () => {
     setVisible(false);
   };
@@ -59,6 +63,19 @@ const LoginScreen = () => {
         </Text>
         <Text style={styles.textStyleIII}>Use sua Conta Google para</Text>
         <Text style={styles.textStyleIII}>acessar o nosso app</Text>
+
+        {isSwitchOn ? (
+
+          <TouchableOpacity
+          style={styles.googleButton}
+          onPress={handleHomeVPress}
+          >
+            <AntDesign name="google" size={24} color="white" />
+            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+          </TouchableOpacity>
+
+      ) : (
+
         <TouchableOpacity
           style={styles.googleButton}
           onPress={handleLoginPress}
@@ -66,6 +83,9 @@ const LoginScreen = () => {
           <AntDesign name="google" size={24} color="white" />
           <Text style={styles.googleButtonText}>Entrar com o Google</Text>
         </TouchableOpacity>
+        
+      )}
+
         <View style={styles.switchContainer}>
           <Text
             style={[

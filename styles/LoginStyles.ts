@@ -52,7 +52,7 @@ export default StyleSheet.create({
   googleButtonText: {
     fontFamily: 'inter-regular',
     color: 'white',
-    fontSize: 25,
+    fontSize: 23,
     marginLeft: 10,
   },
   switchContainer: {
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     fontSize: 20,
     color: '#032D45',
     fontFamily: 'inter-regular',
-    marginTop: 60,
+    marginTop: 65,
     marginHorizontal: 30,
   },
   switchStyle: {
@@ -78,7 +78,7 @@ export default StyleSheet.create({
   termsText: {
     marginTop: 10,
     fontFamily: 'inter-regular',
-    fontSize: 16,
+    fontSize: 13,
     color: '#032D45',
   },
 });
