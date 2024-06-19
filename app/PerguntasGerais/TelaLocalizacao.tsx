@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const TelaLocalizacao = () => {
+  
   const navigation = useNavigation();
 
   const handlePress = () => {

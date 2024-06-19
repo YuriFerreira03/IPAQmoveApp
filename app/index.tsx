@@ -10,11 +10,13 @@ import SplachScreen from "./Session_1/SplachScreen";
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
 import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais"
-import Tela_1 from "./PerguntasGerais/TelaLocalizacao";
 import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
 import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
-import TelaTexto from "./PerguntasGerais/TelaTexto";
-//teste branch 
+import ScreenExpli1 from "./PerguntasGerais/ScreenExpli1";
+import ScreenExpli2 from "./PerguntasGerais/ScreenExpli2";
+import ScreenExpli3 from "./PerguntasGerais/ScreenExpli3";
+import ScreenExpli4 from "./PerguntasGerais/ScreenExpli4";
+import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -48,7 +50,11 @@ export default function App() {
             <Stack.Screen name="InicioPerguntasGerais" component={InicioPerguntasGerais} />
             <Stack.Screen name="TelaLocalizacao" component={TelaLocalizacao} />
             <Stack.Screen name="InformacoesProjeto" component={InformacoesProjeto} />
-            <Stack.Screen name="TelaTexto" component={TelaTexto} />
+            <Stack.Screen name="ScreenExpli1" component={ScreenExpli1} />
+            <Stack.Screen name="ScreenExpli2" component={ScreenExpli2} />
+            <Stack.Screen name="ScreenExpli3" component={ScreenExpli3} />
+            <Stack.Screen name="ScreenExpli4" component={ScreenExpli4} />
+            <Stack.Screen name="GeneralQuestionsScreen" component={GeneralQuestionsScreen} />
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />

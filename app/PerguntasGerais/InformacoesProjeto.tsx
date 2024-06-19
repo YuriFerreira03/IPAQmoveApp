@@ -9,10 +9,11 @@ import handlePress from '../Components/Button'; // Importa a função do arquivo
 import { useNavigation } from "@react-navigation/native";
 
 const InformacoesProjeto = () => {
-    const navigation=useNavigation();
+    
+    const navigation = useNavigation();
 
-    const handlePress = () => {
-        navigation.navigate('TelaLocalizacao');
+    const handleScreenExpli1Press = () => {
+        navigation.navigate('ScreenExpli1');
       };
 
     return(
@@ -32,10 +33,12 @@ const InformacoesProjeto = () => {
                     Nome do Pesquisador
                 </Text>
             </View>
-            <TouchableOpacity onPress={handlePress} style={styles.button}>
+            <TouchableOpacity onPress={handleScreenExpli1Press} style={styles.button}>
                 <Text style={styles.buttonText}>ACESSAR</Text>
             </TouchableOpacity>
         </LinearGradient>
 
     );  
 }
+
+export default InformacoesProjeto;
