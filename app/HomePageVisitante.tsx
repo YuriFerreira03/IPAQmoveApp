@@ -18,7 +18,7 @@ const HomePageVisitante: React.FC<HomePageProps> = ({ route }) => {
   // const { userName } = route.params;
 
   const handleAccessPress = () => {
-    navigation.navigate('Splach'); 
+    navigation.navigate('InicioPerguntasGerais');
   };
 
   return (

@@ -18,11 +18,11 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   // const { userName } = route.params;
 
   const handleAccessPress = () => {
-    navigation.navigate('Splach'); 
+    navigation.navigate('InicioPerguntasGerais'); 
   };
 
   const handleSearchPress = () => { //adicionando uma constante para conectar à tela de Pesquisa
-    navigation.navigate('Search'); //tem que ter o mesmo nome que foi declarado no index
+    navigation.navigate('SearchScreen'); //tem que ter o mesmo nome que foi declarado no index
   };
 
   //estou adicionado um comentario teste na Home Page

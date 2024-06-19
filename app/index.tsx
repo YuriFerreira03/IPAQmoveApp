@@ -9,6 +9,11 @@ import HomePageVisitante from "./HomePageVisitante"; //importando a home page se
 import SplachScreen from "./Session_1/SplachScreen";
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
+import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais"
+import Tela_1 from "./PerguntasGerais/TelaLocalizacao";
+import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
+import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
+import TelaTexto from "./PerguntasGerais/TelaTexto";
 //teste branch 
 
 export type RootStackParamList = {
@@ -17,7 +22,7 @@ export type RootStackParamList = {
   SearchScreen: undefined;
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
@@ -40,6 +45,10 @@ export default function App() {
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
+            <Stack.Screen name="InicioPerguntasGerais" component={InicioPerguntasGerais} />
+            <Stack.Screen name="TelaLocalizacao" component={TelaLocalizacao} />
+            <Stack.Screen name="InformacoesProjeto" component={InformacoesProjeto} />
+            <Stack.Screen name="TelaTexto" component={TelaTexto} />
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />
