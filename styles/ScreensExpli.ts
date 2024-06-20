@@ -15,25 +15,26 @@ export default StyleSheet.create({
         marginVertical: -100
     },
     textXII: {
-        fontSize: 30,
+        fontSize: 32,
         color: "white",
         textAlign: "left",
-        marginTop: 260,
+        marginTop: 160,
         fontFamily: "inter-regular",
         marginHorizontal: 25,
-        lineHeight: 45,
+        lineHeight: 50,
     },
     textXIII: {
         fontSize: 30,
         fontFamily: 'inter-bold',
         color: "#FFFF",
-        marginTop: 2,
+        marginBottom: -50,
+        marginTop: 80,
     },
     textXIV: {
         fontSize: 30,
         color: "white",
         textAlign: "left",
-        marginTop: 90,
+        marginTop: 100,
         fontFamily: "inter-regular",
         marginHorizontal: 25,
         marginVertical: 20,
@@ -55,7 +56,7 @@ export default StyleSheet.create({
         width: 140,
         height: 3,
         backgroundColor: 'white',
-        marginTop: 2,
+        marginTop: 70,
     },
     button: {
         width: 50,
@@ -68,7 +69,6 @@ export default StyleSheet.create({
         marginBottom: 30, 
         marginLeft: 280, 
       },
-
       button3: {
         width: 50,
         height: 50,

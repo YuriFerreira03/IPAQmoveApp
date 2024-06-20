@@ -50,7 +50,7 @@ export default StyleSheet.create({
     marginTop: 35,
   },
   texthead: {
-    marginTop: 40,
+    marginTop: 70,
     fontSize: 23,
     fontFamily: 'inter-bold',
     color: "#FFFF",
@@ -62,7 +62,6 @@ export default StyleSheet.create({
     marginVertical: 20,
     justifyContent: 'center',
     backgroundColor: "transparent",
-    color: "#FFFFF"
   },
   buttonSearch: {
     flexDirection: 'row',

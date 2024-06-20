@@ -139,6 +139,16 @@ const styles = StyleSheet.create({
     marginLeft: 170
   },
 
+  button3: {width: 50,
+  height: 50,
+  borderRadius: 25,
+  backgroundColor: "white",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 10, 
+  marginBottom: 30, 
+  marginLeft: 300, 
+  }
 });
 
 export default styles;

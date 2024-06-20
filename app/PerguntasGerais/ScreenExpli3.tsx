@@ -47,7 +47,6 @@ const ScreenExpli3 = () =>{
                 <Icon name="chevron-right" size={30} color="#032D45" />
             </TouchableOpacity>
            </View>
-
         </LinearGradient>
         </KeyboardAwareScrollView>
     );

@@ -5,8 +5,8 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import styles from "../styles/LoginStyles";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-// import Dialog from "react-native-dialog";
-// import axios from "axios";
+import Dialog from "react-native-dialog";
+import axios from "axios";
 
 const LoginScreen = () => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -20,31 +20,39 @@ const LoginScreen = () => {
   };
 
   const handleLoginPress = () => {
-    navigation.navigate('Home');
+    setVisible(true);
   };
 
   const handleHomeVPress = () => {
-    navigation.navigate('HomeVisitante');
+    navigation.navigate("HomeVisitante");
   };
 
   const handleCancel = () => {
     setVisible(false);
   };
 
-  // const handleSubmit = async () => {
-  //   setVisible(false);
-  //   try {
-  //     await axios.post("http://192.168.15.84:8080/usuario", 
-  //       { name, type: "user" },
-  //       { timeout: 10000 } // 10 segundos de tempo limite
-  //     );
-  //     Alert.alert("Usuario Salvo!");
-  //     navigation.navigate('Home', { userName: name }); // nome do usuário aqui
-  //   } catch (error) {
-  //     Alert.alert("Erro ao salvar o usuário!");
-  //     console.error(error);
-  //   }
-  // };
+  const handleSubmit = async () => {
+    setVisible(false);
+    try {
+      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+      const url = `http://${ip}:8080/usuario`;
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", { name, type: "user" });
+  
+      const response = await axios.post(url, 
+        { name, type: "user" },
+        { timeout: 10000 } // 10 segundos de tempo limite
+      );
+      
+      console.log("Resposta do backend:", response.data);
+      Alert.alert("Usuario Salvo!");
+      navigation.navigate('Home', { userName: name });
+    } catch (error) {
+      console.error("Erro ao salvar o usuário:", error);
+      Alert.alert("Erro ao salvar o usuário!");
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -67,24 +75,24 @@ const LoginScreen = () => {
         {isSwitchOn ? (
 
           <TouchableOpacity
-          style={styles.googleButton}
-          onPress={handleHomeVPress}
+            style={styles.googleButton}
+            onPress={handleHomeVPress}
           >
             <AntDesign name="google" size={24} color="white" />
             <Text style={styles.googleButtonText}>Entrar com o Google</Text>
           </TouchableOpacity>
 
-      ) : (
+        ) : (
 
-        <TouchableOpacity
-          style={styles.googleButton}
-          onPress={handleLoginPress}
-        >
-          <AntDesign name="google" size={24} color="white" />
-          <Text style={styles.googleButtonText}>Entrar com o Google</Text>
-        </TouchableOpacity>
-        
-      )}
+          <TouchableOpacity
+            style={styles.googleButton}
+            onPress={handleLoginPress}
+          >
+            <AntDesign name="google" size={24} color="white" />
+            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+          </TouchableOpacity>
+          
+        )}
 
         <View style={styles.switchContainer}>
           <Text
@@ -127,7 +135,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </LinearGradient>
-      {/* <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}>
         <Dialog.Title>Escreva seu nome</Dialog.Title>
         <Dialog.Input
           value={name}
@@ -135,7 +143,7 @@ const LoginScreen = () => {
         />
         <Dialog.Button label="Cancelar" onPress={handleCancel} />
         <Dialog.Button label="Entrar" onPress={handleSubmit} />
-      </Dialog.Container> */}
+      </Dialog.Container>
     </View>
   );
 };

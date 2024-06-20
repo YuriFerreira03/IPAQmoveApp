@@ -3,12 +3,8 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import styles from "../../styles/InicioPerguntasGerais";
 import { useNavigation } from "@react-navigation/native";
-import handlePress from '../Components/Button'; // Importa a função do arquivo Button.js (ou Button.tsx)
-import { StyleSheet } from 'react-native';
-
+import styles from "../../styles/InicioPerguntasGerais";
 
 const InicioPerguntasGerais = () => {
   const navigation = useNavigation();
@@ -23,10 +19,9 @@ const InicioPerguntasGerais = () => {
         source={require("../../images/logo.png")}
         style={styles.imageStyle}
       />
-      <Text style={styles.textStyleII}>
-        <Text style={{ color: "#082D47" }}>IPAQ</Text>
-      </Text>
-      <Text style={styles.textStyleIII}>Questionário Internacional de Atividade Física</Text>
+      <Text style={styles.textIPAQ}>IPAQ</Text>
+      <View style={styles.underline} />
+      <Text style={styles.textSubtitle}>Questionário Internacional de Atividade Física</Text>
       <TouchableOpacity onPress={handlePress} style={styles.button}>
         <Text style={styles.buttonText}>COMEÇAR</Text>
       </TouchableOpacity>
