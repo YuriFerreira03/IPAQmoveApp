@@ -17,7 +17,7 @@ const TelaLocalizacao = () => {
   };
 
   return (
-    <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.gradient}>
+    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <View style={styles.container}>
         <Text style={styles.textI}>
           Nós estamos interessados em saber que tipos de atividade física as pessoas fazem como parte do seu dia a dia!

@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   textIPAQ: {
     fontFamily: 'inter-bold',
-    color: '#082D47',
+    color: '#FFFFFF',
     fontSize: 60,
     textAlign: 'center',
     marginVertical: 10,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
   underline: {
     width: '60%',
     height: 4,
-    backgroundColor: '#ffff',
+    backgroundColor: '#14E2C3',
     alignSelf: 'center',
     marginBottom: 20,
   },

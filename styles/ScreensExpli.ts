@@ -12,13 +12,22 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
-        marginVertical: -100
+        marginVertical: -150,
+        paddingVertical: 150
+    },
+    clock: {
+
+        marginTop: 90,
+
+    },
+    home: {
+        marginTop: 25
     },
     textXII: {
         fontSize: 32,
         color: "white",
         textAlign: "left",
-        marginTop: 160,
+        marginTop: 50,
         fontFamily: "inter-regular",
         marginHorizontal: 25,
         lineHeight: 50,
@@ -28,13 +37,23 @@ export default StyleSheet.create({
         fontFamily: 'inter-bold',
         color: "#FFFF",
         marginBottom: -50,
-        marginTop: 80,
+        marginTop: 50,
     },
     textXIV: {
         fontSize: 30,
         color: "white",
         textAlign: "left",
-        marginTop: 100,
+        marginTop: 90,
+        fontFamily: "inter-regular",
+        marginHorizontal: 25,
+        marginVertical: 20,
+        lineHeight: 45,
+    },
+    textXIV1: {
+        fontSize: 30,
+        color: "white",
+        textAlign: "left",
+        marginTop: 70,
         fontFamily: "inter-regular",
         marginHorizontal: 25,
         marginVertical: 20,
@@ -50,13 +69,14 @@ export default StyleSheet.create({
         lineHeight: 45,
     },
     view3: {
-        marginVertical: 100
+        marginTop: 25
     },
     line: {
         width: 140,
         height: 3,
         backgroundColor: 'white',
-        marginTop: 70,
+        marginTop: 50,
+        marginBottom: 40
     },
     button: {
         width: 50,
@@ -65,7 +85,7 @@ export default StyleSheet.create({
         backgroundColor: "white",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 140, 
+        marginTop: 50, 
         marginBottom: 30, 
         marginLeft: 280, 
       },

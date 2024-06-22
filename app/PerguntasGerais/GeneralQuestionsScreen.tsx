@@ -26,91 +26,13 @@ const GeneralQuestionsScreen = () => {
       enableOnAndroid={true}
       extraScrollHeight={20}
     >
-      <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.container}>
-        <TextInput
-          style={styles.textbox}
-          label="Nome: "
-          value={name}
-          mode="outlined"
-          onChangeText={(text) => Name(text)}
-          theme={{
-            colors: {
-              primary: "#FFFFF",
-              text: "#FFFFFF",
-              placeholder: "#FFFFF",
-            },
-          }}
-          underlineColor="#FFFFF"
-          outlineColor="#FFFFFF"
-        />
-
-        <TextInput
-          style={styles.textboxI}
-          label="Idade: "
-          value={age}
-          mode="outlined"
-          onChangeText={(text) => Age(text)}
-          theme={{
-            colors: {
-              primary: "#FFFFF",
-              text: "#FFFFFF",
-              placeholder: "#FFFFF",
-            },
-          }}
-          underlineColor="#FFFFF"
-          outlineColor="#FFFFFF"
-        />
-
-        <TextInput
-          style={styles.textbox}
-          label="Sexo: "
-          value={gender}
-          mode="outlined"
-          onChangeText={(text) => Gender(text)}
-          theme={{
-            colors: {
-              primary: "#FFFFF",
-              text: "#FFFFFF",
-              placeholder: "#FFFFF",
-            },
-          }}
-          underlineColor="#FFFFF"
-          outlineColor="#FFFFFF"
-        />
-
-        <TextInput
-          style={styles.textboxII}
-          label="Estatura: "
-          value={estatura}
-          mode="outlined"
-          onChangeText={(text) => Estatura(text)}
-          theme={{
-            colors: {
-              primary: "#FFFFF",
-              text: "#FFFFFF",
-              placeholder: "#FFFFF",
-            },
-          }}
-          underlineColor="#FFFFF"
-          outlineColor="#FFFFFF"
-        />
-
-        <TextInput
-          style={styles.textboxIII}
-          label="Peso: "
-          value={peso}
-          mode="outlined"
-          onChangeText={(text) => Peso(text)}
-          theme={{
-            colors: {
-              primary: "#FFFFF",
-              text: "#FFFFFF",
-              placeholder: "#FFFFF",
-            },
-          }}
-          underlineColor="#FFFFF"
-          outlineColor="#FFFFFF"
-        />
+      <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
+      
+      <TextInput style={styles.textbox} placeholder="Nome:" placeholderTextColor="#b3b3b3" />
+      <TextInput style={styles.textboxI} placeholder="Idade:" placeholderTextColor="#b3b3b3" />
+      <TextInput style={styles.textboxII} placeholder="Sexo: " placeholderTextColor="#b3b3b3" />
+      <TextInput style={styles.textboxIII} placeholder="Estatura: " placeholderTextColor="#b3b3b3" />
+      <TextInput style={styles.textboxIV} placeholder="Peso: " placeholderTextColor="#b3b3b3" />
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>
@@ -136,12 +58,14 @@ const GeneralQuestionsScreen = () => {
           <Text style={styles.cardTitle}>
             Quantas horas você trabalha por dia:
           </Text>
+          <TextInput style={styles.textboxV} placeholder="Digite aqui:" placeholderTextColor="#b3b3b3" />
         </View>
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>
             Quantas horas você dorme por dia:
           </Text>
+          <TextInput style={styles.textboxV} placeholder="Digite aqui:" placeholderTextColor="#b3b3b3" />
         </View>
         <TouchableOpacity
                 style={styles.button3}

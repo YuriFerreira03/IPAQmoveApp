@@ -12,7 +12,7 @@ const InformacoesProjeto: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={['#032D45', '#14E2C3']}
+      colors={["#032D45", "#0A4E66"]}
       style={styles.gradient}
     >
       <View style={styles.container}>
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     color: '#ffff',
     textAlign: 'center',
     fontSize: 34,
-    marginBottom: 200,
-    marginTop: -60,
+    marginBottom: 180,
+    marginTop: 50,
   },
   textVIII: {
     fontFamily: 'inter-bold',
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: -120,
     fontFamily: 'inter-regular',
-    marginHorizontal: 20,
     letterSpacing: 1,
     lineHeight: 50,
     marginBottom: 50,

@@ -23,10 +23,10 @@ const ScreenExpli3 = () =>{
         extraScrollHeight={20}
         >
 
-        <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.container3}>
+        <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container3}>
 
            <View style={styles.view3}>
-           <Text style={styles.textXIV}>
+           <Text style={styles.textXIV1}>
             Para responder as questões lembre que: 
             </Text>
 

@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 17,
+    marginVertical: -200,
+    paddingVertical: 200
+    
   },
   body: {
     fontSize: 32,
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 25,
-    marginBottom:40,
+    marginBottom: 40,
     color: 'white',
     fontFamily: "inter-light",
   },
@@ -105,50 +108,98 @@ const styles = StyleSheet.create({
   textbox: {
     width: 300,
     height: 60,
-    marginTop: 40,
+    marginTop: 100,
     marginVertical: 20,
     justifyContent: 'center',
     backgroundColor: "transparent",
-    color: "#FFFFF"
+    color: "#FFFFF",
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
   },
-
   textboxI: {
+    width: 300,
+    height: 60,
+    marginTop: 1,
+    marginVertical: 20,
+    justifyContent: 'center',
+    backgroundColor: "transparent",
+    color: "#FFFFF",
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  textboxII: {
     width: 80,
     height: 60,
-    marginTop: 15,
+    marginTop: 5,
+    marginLeft: -220,
     backgroundColor: "transparent",
     color: "#FFFFF",
-    marginLeft: -220
-  },
-
-  textboxII: {
-    width: 120,
-    height: 60,
-    marginTop: 15,
-    backgroundColor: "transparent",
-    color: "#FFFFF",
-    marginLeft: -180
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
   },
 
   textboxIII: {
     width: 120,
     height: 60,
-    marginTop: -67,
+    marginTop: 5,
     backgroundColor: "transparent",
     color: "#FFFFF",
-    marginLeft: 170
+    marginLeft: -180,
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 20,
   },
 
-  button3: {width: 50,
+  textboxIV: {
+    width: 120,
+    height: 60,
+    marginTop: -80,
+    backgroundColor: "transparent",
+    color: "#FFFFF",
+    marginLeft: 170,
+    borderColor: "#FFFFFF",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+
+  },
+  textboxV: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+  },
+  button3: {
+  width: 50,
   height: 50,
   borderRadius: 25,
   backgroundColor: "white",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: 10, 
+  marginTop: 5, 
   marginBottom: 30, 
   marginLeft: 300, 
-  }
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    color: "#fffff",
+    marginBottom: 20,
+    backgroundColor: 'transparent'
+  },
 });
 
 export default styles;

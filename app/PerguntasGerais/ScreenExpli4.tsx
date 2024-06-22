@@ -16,7 +16,7 @@ const ScreenExpli4 = () => {
   }, [navigation]);
 
   return (
-    <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.container}>
+    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
       <View style={styles.lineContainer}>
         <Text style={styles.section}>PERGUNTAS</Text>
         <View style={styles.viewI}>

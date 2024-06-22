@@ -17,9 +17,10 @@ export default StyleSheet.create({
     fontSize: 32,
     color: "white",
     textAlign: "left",
-    marginBottom: 30,
+    marginBottom: 10,
     fontFamily: "inter-regular",
     lineHeight: 50,
+    marginTop: 40
   },
   textII: {
     fontSize: 20,
@@ -67,8 +68,8 @@ export default StyleSheet.create({
     fontSize: 20,
     color: "white",
     textAlign: "center",
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 2,
+    marginBottom: 20,
     fontFamily: "inter-regular",
     lineHeight: 28,
   },
@@ -78,7 +79,7 @@ export default StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 50,
-    marginBottom: 20,
+    marginBottom: 10,
     width: "80%",
   },
   buttonText: {

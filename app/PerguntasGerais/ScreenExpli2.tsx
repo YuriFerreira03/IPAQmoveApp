@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
 import { View, Text, StyleSheet } from 'react-native';
 import styles from "../../styles/ScreensExpli";
 import { TouchableOpacity } from 'react-native';
@@ -12,7 +13,7 @@ const ScreenExpli2 = () =>{
 
     return (
 
-        <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.container}>
+        <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
 
             <Text style={styles.textXIV}>
             As perguntas incluem as atividades que você faz no trabalho, 
@@ -20,6 +21,8 @@ const ScreenExpli2 = () =>{
             como parte das suas atividades em casa ou no jardim. Suas respostas são 
             <Text style={styles.textXIII}> MUITO </Text>importantes.
             </Text>
+
+            <Icon2 name="home" size={80} color="white" style={styles.home}></Icon2>
 
             <TouchableOpacity
                 style={styles.button}
