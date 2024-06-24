@@ -15,14 +15,26 @@ type HomePageProps = {
 const HomePage: React.FC<HomePageProps> = ({ route }) => {
   
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  // const { userName } = route.params;
+  const { userName } = route.params; // Recebe o parâmetro userName
 
   const handleAccessPress = () => {
     navigation.navigate('InicioPerguntasGerais'); 
   };
 
   const handleSearchPress = () => { //adicionando uma constante para conectar à tela de Pesquisa
-    navigation.navigate('Search'); //tem que ter o mesmo nome que foi declarado no index
+    navigation.navigate('Search', { userName }); // Passa o userName como parâmetro
+  };
+
+  const handleProfilePress = () => {
+    // Lógica para o perfil
+  };
+
+  const handleSettingsPress = () => {
+    // Lógica para configurações
+  };
+
+  const handleLogoutPress = () => {
+    // Lógica para logout
   };
 
   //estou adicionado um comentario teste na Home Page
@@ -32,7 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
       <SafeAreaView style={styles.safeArea}>
         <LinearGradient colors={["#0A4E66", "#14E2C3"]} style={styles.header}>
           <View style={styles.textContainer}>
-            <Text style={styles.greeting}>Olá, <Text style={styles.userName}>Yuri</Text></Text>
+            <Text style={styles.greeting}>Olá, <Text style={styles.userName}>{userName}</Text></Text>
             <Text style={styles.location}>Cataguases, MG</Text>
           </View>
           <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />

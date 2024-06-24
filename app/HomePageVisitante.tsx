@@ -30,6 +30,18 @@ const HomePageVisitante: React.FC<HomePageProps> = ({ route }) => {
     navigation.navigate("InicioPerguntasGerais");
   };
 
+  const handleProfilePress = () => {
+    // Lógica para o perfil
+  };
+
+  const handleSettingsPress = () => {
+    // Lógica para configurações
+  };
+
+  const handleLogoutPress = () => {
+    // Lógica para logout
+  };
+
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
@@ -74,6 +86,23 @@ const HomePageVisitante: React.FC<HomePageProps> = ({ route }) => {
             <Text style={styles.buttonText}>ACESSAR</Text>
           </TouchableOpacity>
         </View>
+        <LinearGradient colors={["#14E2C3", "#0A4E66"]} style={styles.navBar}>
+          <TouchableOpacity style={styles.navItem} onPress={handleProfilePress}>
+            <Icon name="person" size={30} color="#FFFFFF" />
+            <Text style={styles.navText}>Perfil</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navItem}
+            onPress={handleSettingsPress}
+          >
+            <Icon name="settings" size={30} color="#FFFFFF" />
+            <Text style={styles.navText}>Configurações</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navItem} onPress={handleLogoutPress}>
+            <Icon name="logout" size={30} color="#FFFFFF" />
+            <Text style={styles.navText}>Logout</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </SafeAreaView>
     </LinearGradient>
   );

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, Switch, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Switch,
+  Alert,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import styles from "../styles/LoginStyles";
@@ -38,21 +45,22 @@ const LoginScreen = () => {
       const url = `http://${ip}:8080/usuario`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", { name, type: "user" });
-  
-      const response = await axios.post(url, 
+
+      const response = await axios.post(
+        url,
         { name, type: "user" },
         { timeout: 10000 } // 10 segundos de tempo limite
       );
-      
+
       console.log("Resposta do backend:", response.data);
       Alert.alert("Usuario Salvo!");
-      navigation.navigate('Home', { userName: name });
-    } catch (error) {
+      navigation.navigate("Home", { userName: name });
+    }
+      catch (error) {
       console.error("Erro ao salvar o usuário:", error);
       Alert.alert("Erro ao salvar o usuário!");
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -73,7 +81,6 @@ const LoginScreen = () => {
         <Text style={styles.textStyleIII}>acessar o nosso app</Text>
 
         {isSwitchOn ? (
-
           <TouchableOpacity
             style={styles.googleButton}
             onPress={handleHomeVPress}
@@ -81,9 +88,7 @@ const LoginScreen = () => {
             <AntDesign name="google" size={24} color="white" />
             <Text style={styles.googleButtonText}>Entrar com o Google</Text>
           </TouchableOpacity>
-
         ) : (
-
           <TouchableOpacity
             style={styles.googleButton}
             onPress={handleLoginPress}
@@ -91,7 +96,6 @@ const LoginScreen = () => {
             <AntDesign name="google" size={24} color="white" />
             <Text style={styles.googleButtonText}>Entrar com o Google</Text>
           </TouchableOpacity>
-          
         )}
 
         <View style={styles.switchContainer}>
@@ -137,10 +141,7 @@ const LoginScreen = () => {
       </LinearGradient>
       <Dialog.Container visible={visible}>
         <Dialog.Title>Escreva seu nome</Dialog.Title>
-        <Dialog.Input
-          value={name}
-          onChangeText={setName}
-        />
+        <Dialog.Input value={name} onChangeText={setName} />
         <Dialog.Button label="Cancelar" onPress={handleCancel} />
         <Dialog.Button label="Entrar" onPress={handleSubmit} />
       </Dialog.Container>

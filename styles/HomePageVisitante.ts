@@ -3,15 +3,9 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   gradient: {
     flex: 1,
-    marginBottom: -40,
-    marginTop: -50,
   },
   safeArea: {
     flex: 1,
-  },
-  scrollView: {
-    flexGrow: 1,
-    justifyContent: 'center',
   },
   container: {
     flex: 1,
@@ -21,10 +15,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 1,
+    marginTop: -47,
     paddingVertical: 26,
     paddingHorizontal: 20,
-    borderRadius: 5,
   },
   textContainer: {
     flex: 1,
@@ -34,7 +27,7 @@ export default StyleSheet.create({
   },
   greeting: {
     fontSize: 24,
-    color: '#ffff',
+    color: '#FFFFFF',
     fontFamily: 'inter-medium',
   },
   userName: {
@@ -57,7 +50,6 @@ export default StyleSheet.create({
     borderRadius: 10,
     padding: 12,
     marginTop: 80,
-    //marginBottom: 18,
     alignSelf: 'center',
     width: '90%',
     borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -87,5 +79,23 @@ export default StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     textAlign: 'center',
+  },
+  navBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 40,
+    position: 'absolute',
+    marginTop: 770,
+    width: '100%',
+  },
+  navItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginTop: 5,
   },
 });

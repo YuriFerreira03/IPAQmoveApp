@@ -5,15 +5,18 @@ import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles/SearchScreen";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { useNavigation, NavigationProp, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../app";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const SearchScreen = () => {
+type SearchScreenRouteProp = RouteProp<RootStackParamList, 'SearchScreen'>;
+
+const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { userName } = route.params; // Recebe o parâmetro userName
 
   const [searchName, setSearchName] = React.useState("");
-  const [researcherName, setResearcherName] = React.useState("");
+  const [researcherName, setResearcherName] = React.useState(userName);
   const [location, setLocation] = React.useState("");
 
   const handleRegister = async () => {
@@ -55,7 +58,7 @@ const SearchScreen = () => {
         <LinearGradient colors={["#0A4E66", "#14E2C3"]} style={styles.header}>
           <View style={styles.textContainer}>
             <Text style={styles.greeting}>
-              Olá, <Text style={styles.userName}>Yuri</Text>
+              Olá, <Text style={styles.userName}>{researcherName}</Text>
             </Text>
             <Text style={styles.location}>Cataguases, MG</Text>
           </View>
@@ -65,40 +68,33 @@ const SearchScreen = () => {
         <Text style={styles.texthead}>CADASTRAR PESQUISA</Text>
 
         <TextInput
-          style={styles.textbox}
-          label="Nome da pesquisa:"
+          style={styles.input}
+          placeholder="Nome da Pesquisa:"
+          placeholderTextColor="#b3b3b3"
+          textColor="#FFFFFF"
           value={searchName}
-          mode="outlined"
-          onChangeText={(text) => setSearchName(text)}
-          activeUnderlineColor="#FFFFFF"
-          activeOutlineColor="#14E2C3"
-          outlineColor="#FFFFFF"
-          textColor="#FFFFFF"
+          onChangeText={setSearchName}
         />
-
         <TextInput
-          style={styles.textbox}
-          label="Nome do pesquisador:"
-          value={researcherName}
-          mode="outlined"
-          onChangeText={(text) => setResearcherName(text)}
-          underlineColor="#FFFFFf"
-          outlineColor="#FFFFFF"
-          activeUnderlineColor="#FFFFFF"
-          activeOutlineColor="#14E2C3"
+          style={styles.input}
+          placeholder="Nome do Pesquisador:"
+          placeholderTextColor="#b3b3b3"
           textColor="#FFFFFF"
+          value={userName}
+          editable={false}
         />
-
         <TextInput
-          style={styles.textbox}
-          label="Localização:"
+          style={styles.input}
+          placeholder="Localização:"
+          placeholderTextColor="#b3b3b3"
+          textColor="#FFFFFF"
           value={location}
-          mode="outlined"
-          onChangeText={(text) => setLocation(text)}
-          underlineColor="#FFFFFf"
-          outlineColor="#FFFFFF"
-          activeUnderlineColor="#FFFFFF"
-          activeOutlineColor="#14E2C3"
+          onChangeText={setLocation}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Instituição:"
+          placeholderTextColor="#b3b3b3"
           textColor="#FFFFFF"
         />
 

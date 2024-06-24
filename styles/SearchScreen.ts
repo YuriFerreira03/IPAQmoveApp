@@ -14,6 +14,18 @@ export default StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
+  input: {
+    width: "75%",
+    height: 60,
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 50,
+    marginBottom: 10,
+    paddingHorizontal: 20,
+    color: "#fff",
+    backgroundColor: "transparent",
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
