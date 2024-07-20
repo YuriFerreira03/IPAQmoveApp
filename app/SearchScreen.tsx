@@ -9,30 +9,39 @@ import { useNavigation, NavigationProp, RouteProp } from "@react-navigation/nati
 import { RootStackParamList } from "../app";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-type SearchScreenRouteProp = RouteProp<RootStackParamList, 'SearchScreen'>;
+type SearchScreenRouteProp = RouteProp<RootStackParamList, "SearchScreen">;
 
 const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { userName } = route.params; // Recebe o parâmetro userName
+  const { userName, userId } = route.params; // Recebe o parâmetro userName e userId
 
   const [searchName, setSearchName] = React.useState("");
   const [researcherName, setResearcherName] = React.useState(userName);
   const [location, setLocation] = React.useState("");
+  const [institution, setInstitution] = React.useState("");
 
   const handleRegister = async () => {
     try {
       console.log("Iniciando cadastro de pesquisa...");
-      const ip = "192.168.1.231"; // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/pesquisa`;
+      const ip = "192.168.15.6"; // Endereço IP da sua máquina
+      const url = `http://${ip}:8080/Pesquisa`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         nome_pesquisa: searchName,
+        fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
+        fk_Questionario_id_quest: 1, // Substitua pelo ID do questionário correto
+        localizacao: location,
+        instituicao: institution // Utilize o valor do campo instituição
       });
 
       const response = await axios.post(
         url,
         {
           nome_pesquisa: searchName,
+          fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
+          fk_Questionario_id_quest: 1, // Substitua pelo ID do questionário correto
+          localizacao: location,
+          instituicao: institution // Utilize o valor do campo instituição
         },
         {
           timeout: 10000, // 10 segundos de tempo limite
@@ -80,7 +89,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
           placeholder="Nome do Pesquisador:"
           placeholderTextColor="#b3b3b3"
           textColor="#FFFFFF"
-          value={userName}
+          value={researcherName}
           editable={false}
         />
         <TextInput
@@ -96,6 +105,8 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
           placeholder="Instituição:"
           placeholderTextColor="#b3b3b3"
           textColor="#FFFFFF"
+          value={institution} // Utilize a variável de estado
+          onChangeText={setInstitution} // Adicione esta linha
         />
 
         <TouchableOpacity style={styles.buttonSearch} onPress={handleRegister}>
