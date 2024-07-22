@@ -41,7 +41,7 @@ const LoginScreen = () => {
   const handleSubmit = async () => {
     setVisible(false);
     try {
-      const ip = "192.168.15.6"; // Endereço IP da sua máquina
+      const ip = "192.168.1.231"; // Endereço IP da sua máquina
       const url = `http://${ip}:8080/Usuario`;
 
       // Verifique se o nome não está vazio
@@ -65,7 +65,8 @@ const LoginScreen = () => {
 
       console.log("Resposta do backend:", response.data);
       Alert.alert("Usuário Salvo!");
-      navigation.navigate("Home", { userName: name });
+      const userId = response.data.userId; // backend retorna o userId
+      navigation.navigate("Home", { userName: name, userId }); // userId como parâmetro
     } catch (error) {
       console.error("Erro ao salvar o usuário:", error);
       Alert.alert("Erro ao salvar o usuário!");

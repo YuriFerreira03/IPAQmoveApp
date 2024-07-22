@@ -1,3 +1,4 @@
+// src/screens/SplashScreen.js
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -6,7 +7,7 @@ import axios from "axios";
 import styles from "../../styles/SplachScreen";
 
 const SplashScreen = () => {
-  const [secao, setSecao] = useState({ id_secao: '', titulo: '' });
+  const [secao, setSecao] = useState({ id_secao: '', titulo: '', fk_Questionario_id_quest: '' });
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
@@ -14,7 +15,7 @@ const SplashScreen = () => {
     const fetchSecao = async () => {
       try {
         const ip = "192.168.1.231"; // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/secao/1`;
+        const url = `http://${ip}:8080/secao/:0_secao`;
         console.log("URL de requisição:", url);
 
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -47,7 +48,7 @@ const SplashScreen = () => {
       ) : (
         <>
           <View style={styles.lineContainer}>
-            <Text style={styles.number}>{secao.id_secao}</Text>
+            <Text style={styles.number}>{secao.fk_Questionario_id_quest}</Text>
             <Text style={styles.section}> SEÇÃO </Text>
             <View style={styles.line} />
           </View>

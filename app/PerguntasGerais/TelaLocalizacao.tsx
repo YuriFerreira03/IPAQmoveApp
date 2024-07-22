@@ -1,19 +1,45 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Checkbox from "expo-checkbox";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
 import styles from "../../styles/TelaLocalizacao";
 
 const TelaLocalizacao = () => {
+  const [localizacao, setLocalizacao] = useState('');
   const [isChecked, setChecked] = useState(false);
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    navigation.navigate('InformacoesProjeto');
+  const handleSaveLocation = async () => {
+    try {
+      console.log("Iniciando o salvamento da localização...");
+      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+      const url = `http://${ip}:8080/SalvarLocalizacao`;
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", { localizacao });
+
+      const response = await axios.post(
+        url,
+        { localizacao },
+        { timeout: 10000 } // 10 segundos de tempo limite
+      );
+
+      console.log("Resposta do backend:", response.data);
+      Alert.alert("Sucesso", "Localização salva com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar localização:", error);
+      Alert.alert("Erro", "Não foi possível salvar a localização.");
+    }
   };
-  const handlePressII = () => {
-    navigation.navigate('ScreenExpli1');
+
+  const handlePress = async (destination) => {
+    if (localizacao && isChecked) {
+      await handleSaveLocation();
+      navigation.navigate(destination);
+    } else {
+      Alert.alert("Aviso", "Preencha a localização e aceite os termos de uso.");
+    }
   };
 
   return (
@@ -25,7 +51,13 @@ const TelaLocalizacao = () => {
         <Text style={styles.textII}>
           Para começar coloque sua <Text style={styles.localizacao}>localização</Text>:
         </Text>
-        <TextInput style={styles.input} placeholder="Localização:" placeholderTextColor="#b3b3b3" />
+        <TextInput
+          style={styles.input}
+          placeholder="Localização:"
+          placeholderTextColor="#b3b3b3"
+          value={localizacao}
+          onChangeText={setLocalizacao}
+        />
         <View style={styles.checkboxContainer}>
           <Checkbox
             value={isChecked}
@@ -37,10 +69,10 @@ const TelaLocalizacao = () => {
           </Text>
         </View>
         <Text style={styles.textV}>Deseja responder o questionário como:</Text>
-        <TouchableOpacity onPress={handlePressII} style={styles.button}>
+        <TouchableOpacity onPress={() => handlePress('ScreenExpli1')} style={styles.button}>
           <Text style={styles.buttonText}>VISITANTE</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handlePress} style={styles.button}>
+        <TouchableOpacity onPress={() => handlePress('InformacoesProjeto')} style={styles.button}>
           <Text style={styles.buttonText}>PARTICIPANTE</Text>
         </TouchableOpacity>
       </View>

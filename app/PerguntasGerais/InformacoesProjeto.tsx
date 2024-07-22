@@ -1,14 +1,40 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const InformacoesProjeto: React.FC = () => {
   const navigation = useNavigation();
+  const [nomePesquisa, setNomePesquisa] = useState('');
+  const [nomePesquisador, setNomePesquisador] = useState('');
+  const [pesquisas, setPesquisas] = useState([]);
+  const [pesquisadores, setPesquisadores] = useState([]);
+
 
   const handleScreenExpli1Press = () => {
     navigation.navigate('ScreenExpli1');
   };
+
+  useEffect(() => {
+    const fetchPesquisas = async () => {
+      if (nomePesquisa.length > 0) {
+        try {
+          const ip = "192.168.1.231"; // Endereço IP da sua máquina
+          const url = `http://${ip}:8080/search-pesquisa?query=${nomePesquisa}`;
+
+          const response = await axios.get(url);
+          setPesquisas(response.data);
+        } catch (error) {
+          console.error('Erro ao buscar pesquisas:', error);
+        }
+      } else {
+        setPesquisas([]);
+      }
+    };
+    fetchPesquisas();
+  }, [nomePesquisa]);
 
   return (
     <LinearGradient
@@ -26,7 +52,25 @@ const InformacoesProjeto: React.FC = () => {
           style={styles.input}
           placeholder="Nome da Pesquisa"
           placeholderTextColor="#b3b3b3"
+          value={nomePesquisa}
+          onChangeText={setNomePesquisa}
         />
+        {pesquisas.length > 0 && (
+          <ScrollView style={styles.suggestions}>
+            {pesquisas.map((pesquisa, index) => (
+              <TouchableOpacity 
+                key={index} 
+                style={styles.suggestionItem} 
+                onPress={() => {
+                  setNomePesquisa(pesquisa.nome_pesq);
+                  setPesquisas([]); // Esta linha faz o campo de sugestões sumir
+                }}
+              >
+                <Text style={styles.suggestionText}>{pesquisa.nome_pesq}</Text>
+              </TouchableOpacity>
+            ))}
+            </ScrollView>
+        )}
         <TextInput
           style={styles.input}
           placeholder="Nome do Pesquisador"
@@ -106,4 +150,23 @@ const styles = StyleSheet.create({
     bottom: 20,
     left: -30, // Alinhar completamente à esquerda
   },
+  suggestions: {
+    width: '100%',
+    maxHeight: 200, // Definindo a altura máxima
+    borderColor: '#14E2C3',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    color: '#fff',
+    marginBottom: 20,
+  },
+  suggestionItem: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc', // Cor do separador
+  },
+  suggestionText: {
+    color: '#fff',
+    fontSize: 16,
+  },  
 });

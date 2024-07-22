@@ -1,15 +1,15 @@
+// src/screens/Tela1.js
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Alert } from "react-native";
+import { View, Text, ActivityIndicator, Alert, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native";
 import CustomStepper from "../Components/CustomStepper";
 import Button from "../Components/Button";
+import axios from "axios";
 import styles from "../../styles/Tela_1";
-import axios from "axios"; // Certifique-se de ter instalado axios
 
 const Tela1 = () => {
-  const [descricao, setDescricao] = useState("");
+  const [secao, setSecao] = useState({descricao: '' });
   const [loading, setLoading] = useState(true);
   const steps = ["1", "2", "3", "4", "5"];
   const activeStep = 0;
@@ -17,16 +17,16 @@ const Tela1 = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const fetchDescricao = async () => {
+    const fetchSecao = async () => {
       try {
         const ip = "192.168.1.231"; // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/secao/1`;
+        const url = `http://${ip}:8080/secao/descricao`;
         console.log("URL de requisição:", url);
 
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
         console.log("Dados da seção recebidos:", response.data);
 
-        setDescricao(response.data.descricao);
+        setSecao(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados da seção:", error);
@@ -35,7 +35,7 @@ const Tela1 = () => {
       }
     };
 
-    fetchDescricao();
+    fetchSecao();
   }, []);
 
   return (
@@ -48,7 +48,7 @@ const Tela1 = () => {
         <ScrollView>
           <Text style={styles.title}>SEÇÃO 1</Text>
           <CustomStepper steps={steps} activeStep={activeStep} />
-          <Text style={styles.body}>{descricao}</Text>
+          <Text style={styles.body}>{secao.descricao}</Text>
           <Button />
         </ScrollView>
       )}

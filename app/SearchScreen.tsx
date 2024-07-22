@@ -23,7 +23,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
   const handleRegister = async () => {
     try {
       console.log("Iniciando cadastro de pesquisa...");
-      const ip = "192.168.15.6"; // Endereço IP da sua máquina
+      const ip = "192.168.1.231"; // Endereço IP da sua máquina
       const url = `http://${ip}:8080/Pesquisa`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
@@ -33,7 +33,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
         localizacao: location,
         instituicao: institution // Utilize o valor do campo instituição
       });
-
+  
       const response = await axios.post(
         url,
         {
@@ -47,7 +47,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
           timeout: 10000, // 10 segundos de tempo limite
         }
       );
-
+  
       console.log("Resposta do backend:", response.data);
       Alert.alert("Sucesso", "Pesquisa cadastrada com sucesso!");
       setSearchName("");
@@ -55,7 +55,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
       console.error("Erro ao cadastrar pesquisa:", error);
       Alert.alert("Erro", "Não foi possível cadastrar a pesquisa.");
     }
-  };
+  };  
 
   return (
     <KeyboardAwareScrollView
@@ -105,8 +105,8 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
           placeholder="Instituição:"
           placeholderTextColor="#b3b3b3"
           textColor="#FFFFFF"
-          value={institution} // Utilize a variável de estado
-          onChangeText={setInstitution} // Adicione esta linha
+          value={institution} 
+          onChangeText={setInstitution} 
         />
 
         <TouchableOpacity style={styles.buttonSearch} onPress={handleRegister}>
