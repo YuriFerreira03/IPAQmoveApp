@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import styles from "../../styles/SplachScreen";
+import getIp from "../getIp";
 
 const SplashScreen = () => {
   const [secao, setSecao] = useState({ id_secao: '', titulo: '', fk_Questionario_id_quest: '' });
@@ -14,7 +15,7 @@ const SplashScreen = () => {
   useEffect(() => {
     const fetchSecao = async () => {
       try {
-        const ip = "192.168.1.231"; // Endereço IP da sua máquina
+        const ip = getIp(); // Endereço IP da sua máquina
         const url = `http://${ip}:8080/secao/:0_secao`;
         console.log("URL de requisição:", url);
 

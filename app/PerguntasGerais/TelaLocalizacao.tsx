@@ -5,6 +5,7 @@ import Checkbox from "expo-checkbox";
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import styles from "../../styles/TelaLocalizacao";
+import getIp from '../getIp';
 
 const TelaLocalizacao = () => {
   const [localizacao, setLocalizacao] = useState('');
@@ -14,7 +15,7 @@ const TelaLocalizacao = () => {
   const handleSaveLocation = async () => {
     try {
       console.log("Iniciando o salvamento da localização...");
-      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+      const ip = getIp(); // Endereço IP da sua máquina
       const url = `http://${ip}:8080/SalvarLocalizacao`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", { localizacao });

@@ -14,6 +14,7 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
 import Dialog from "react-native-dialog";
 import axios from "axios";
+import getIp from '../app/getIp';
 
 const LoginScreen = () => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -41,7 +42,7 @@ const LoginScreen = () => {
   const handleSubmit = async () => {
     setVisible(false);
     try {
-      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+      const ip = getIp(); // Endereço IP da sua máquina
       const url = `http://${ip}:8080/Usuario`;
 
       // Verifique se o nome não está vazio

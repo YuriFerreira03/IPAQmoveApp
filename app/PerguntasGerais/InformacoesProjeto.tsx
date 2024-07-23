@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import getIp from '../getIp';
 
 const InformacoesProjeto: React.FC = () => {
   const navigation = useNavigation();
@@ -21,7 +22,7 @@ const InformacoesProjeto: React.FC = () => {
     const fetchPesquisas = async () => {
       if (nomePesquisa.length > 0) {
         try {
-          const ip = "192.168.1.231"; // Endereço IP da sua máquina
+          const ip = getIp(); // Endereço IP da sua máquina
           const url = `http://${ip}:8080/search-pesquisa?query=${nomePesquisa}`;
 
           const response = await axios.get(url);

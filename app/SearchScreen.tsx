@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { useNavigation, NavigationProp, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../app";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import getIp from '../app/getIp';
 
 type SearchScreenRouteProp = RouteProp<RootStackParamList, "SearchScreen">;
 
@@ -23,7 +24,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
   const handleRegister = async () => {
     try {
       console.log("Iniciando cadastro de pesquisa...");
-      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+      const ip = getIp() ; // Endereço IP da sua máquina
       const url = `http://${ip}:8080/Pesquisa`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {

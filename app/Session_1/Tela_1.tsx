@@ -7,6 +7,7 @@ import CustomStepper from "../Components/CustomStepper";
 import Button from "../Components/Button";
 import axios from "axios";
 import styles from "../../styles/Tela_1";
+import getIp from "../getIp";
 
 const Tela1 = () => {
   const [secao, setSecao] = useState({descricao: '' });
@@ -19,7 +20,7 @@ const Tela1 = () => {
   useEffect(() => {
     const fetchSecao = async () => {
       try {
-        const ip = "192.168.1.231"; // Endereço IP da sua máquina
+        const ip = getIp(); // Endereço IP da sua máquina
         const url = `http://${ip}:8080/secao/descricao`;
         console.log("URL de requisição:", url);
 
