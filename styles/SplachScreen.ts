@@ -7,6 +7,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'linear-gradient(to bottom, #00c6ff, #0072ff)',
   },
+  loadingContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   number: {
     fontSize: 100,
     marginLeft: 160,

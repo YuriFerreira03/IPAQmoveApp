@@ -7,6 +7,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 17,
   },
+  loadingContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  questao: {
+    fontSize: 16,
+    color: "#fff",
+    marginVertical: 8,
+  },
   scrollView: {
     flexGrow: 1,
     justifyContent: "center",
