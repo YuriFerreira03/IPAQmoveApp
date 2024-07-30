@@ -16,6 +16,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { userName } = route.params; // Recebe o parâmetro userName
+  const { userLocality } = route.params; // Recebe o parâmetro userLocality
 
   const handleAccessPress = () => {
     navigation.navigate('InicioPerguntasGerais'); 
@@ -23,7 +24,10 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
 
   const handleSearchPress = () => { //adicionando uma constante para conectar à tela de Pesquisa
     navigation.navigate('Search', { userName }); // Passa o userName como parâmetro
+    navigation.navigate('Search', { userLocality }); 
   };
+
+
 
   const handleProfilePress = () => {
     // Lógica para o perfil
@@ -45,7 +49,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
         <LinearGradient colors={["#0A4E66", "#14E2C3"]} style={styles.header}>
           <View style={styles.textContainer}>
             <Text style={styles.greeting}>Olá, <Text style={styles.userName}>{userName}</Text></Text>
-            <Text style={styles.location}>Cataguases, MG</Text>
+            <Text style={styles.location}>{userLocality}</Text>
           </View>
           <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
         </LinearGradient>

@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  Switch,
+  Alert,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Checkbox from "expo-checkbox";
 import styles from "../../styles/GeneralQuestionsScreen";
@@ -8,6 +14,9 @@ import { TextInput } from "react-native-paper";
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Dialog from "react-native-dialog";
+import axios from "axios";
+//import getIp from '../app/getIp';
 
 
 const GeneralQuestionsScreen = () => {

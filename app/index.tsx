@@ -9,6 +9,7 @@ import HomePageVisitante from "./HomePageVisitante"; //importando a home page se
 import SplachScreen from "./Session_1/SplachScreen";
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
+import Tela1S2 from "./Session_2/Tela1S2";
 import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais";
 import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
 import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
@@ -67,6 +68,7 @@ export default function App() {
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />
+            <Stack.Screen name="Tela1S2" component={Tela1S2} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>

@@ -20,6 +20,7 @@ const LoginScreen = () => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
+  const [locality, setLocality] = useState("");
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -50,17 +51,21 @@ const LoginScreen = () => {
         Alert.alert("Erro", "O nome do usuário não pode estar vazio!");
         return;
       }
+      if (!locality) {
+        Alert.alert("Erro", "A localização do usuário não pode estar vazia!");
+        return;
+      }
 
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         name,
         type: "user",
-        locality: "Desconhecida",
+        locality //mexer aqui
       });
 
       const response = await axios.post(
         url,
-        { name, type: "user", locality: "Desconhecida" },
+        { name, type: "user", locality }, 
         { timeout: 20000 } // 20 segundos de tempo limite
       );
 
@@ -152,11 +157,13 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </LinearGradient>
       <Dialog.Container visible={visible}>
-        <Dialog.Title>Escreva seu nome</Dialog.Title>
-        <Dialog.Input value={name} onChangeText={setName} />
+        <Dialog.Title> Realizar login </Dialog.Title>
+        <Dialog.Input label="Digite seu nome:" value={name} onChangeText={setName} />
+        <Dialog.Input label="Digite sua localização:" value={locality} onChangeText={setLocality} />
         <Dialog.Button label="Cancelar" onPress={handleCancel} />
         <Dialog.Button label="Entrar" onPress={handleSubmit} />
       </Dialog.Container>
+      
     </View>
   );
 };
