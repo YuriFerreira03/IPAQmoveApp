@@ -17,6 +17,8 @@ import ScreenExpli2 from "./PerguntasGerais/ScreenExpli2";
 import ScreenExpli3 from "./PerguntasGerais/ScreenExpli3";
 import ScreenExpli4 from "./PerguntasGerais/ScreenExpli4";
 import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
+import SplashScreen from "./Session_2/SplashScreen";
+import TelaInicial from "./Session_2/TelaInicial";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -67,6 +69,9 @@ export default function App() {
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />
+
+            <Stack.Screen name="SplachScreen" component={SplashScreen} />
+            <Stack.Screen name="TelaInicial" component={TelaInicial} />
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
