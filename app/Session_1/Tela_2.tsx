@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Checkbox from "expo-checkbox";
 import CustomStepper from "../Components/CustomStepper";
-import Button from "../Components/Button";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 import styles from "../../styles/Tela_2";
 import getIp from "../getIp";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Tela2 = ({ route }) => {
+
+  const navigation = useNavigation();
+
   console.log("route.params:", route.params);
-  const { id_questao } = route.params || {}; 
+  const { id_questao } = route.params || {};
+  const { id_usuario } = route.params || {};
   console.log("Recebido id_questao:", id_questao);
   const [questao, setQuestao] = useState(null);
   const [isChecked, setChecked] = useState(false);
@@ -18,6 +24,7 @@ const Tela2 = ({ route }) => {
   const activeStep = 0;
 
   useEffect(() => {
+
     const fetchQuestao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
@@ -37,16 +44,20 @@ const Tela2 = ({ route }) => {
     fetchQuestao();
   }, []);
 
-  const handleSaveResposta = async () => {
+  const handleSaveResposta = async () => { //aparentemente não está funcionando
     try {
-      const ip = "192.168.1.231"; // Endereço IP da sua máquina
+
+      const ip =  getIp(); // Endereço IP da sua máquina
       const url = `http://${ip}:8080/responde`;
       await axios.post(url, {
-        fk_Usuario_id_usuario: 1, // Substitua pelo ID do usuário real
+        fk_Usuario_id_usuario: id_usuario, // Substitua pelo ID do usuário real - isso faz parte de carregar o usuario por todo app?
         fk_Questao_id_questao: id_questao,
         resposta: isChecked ? 'SIM' : 'NÃO',
+
       });
+
       Alert.alert("Resposta salva com sucesso!");
+
     } catch (error) {
       console.error("Erro ao salvar resposta:", error);
       Alert.alert("Erro ao salvar resposta!");
@@ -87,7 +98,14 @@ const Tela2 = ({ route }) => {
           {" "}
           <Text style={styles.nao}>pelo menos 10 MINUTOS CONTÍNUOS:</Text>
         </Text>
-        <Button onPress={handleSaveResposta} />
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Splash2")}
+        >
+          <Icon name="chevron-right" size={30} color="#032D45" />
+        </TouchableOpacity>
+
       </ScrollView>
     </LinearGradient>
   );

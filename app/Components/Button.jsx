@@ -4,12 +4,13 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { useNavigation } from '@react-navigation/native';
 
 const Button = ({ icon, onPress }) => {
+
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => navigation.navigate("Tela2")}
+      onPress={() => navigation.navigate("Tela2")} //esse onpress precisa sair para que ele possa ser utilizado em outros lugares
     >
       <Icon name="chevron-right" size={30} color="#032D45" />
     </TouchableOpacity>

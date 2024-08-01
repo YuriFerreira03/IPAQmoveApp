@@ -36,12 +36,12 @@ const GeneralQuestionsScreen = () => {
       extraScrollHeight={20}
     >
       <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-      
-      <TextInput style={styles.textbox} placeholder="Nome:" placeholderTextColor="#b3b3b3" />
-      <TextInput style={styles.textboxI} placeholder="Idade:" placeholderTextColor="#b3b3b3" />
-      <TextInput style={styles.textboxII} placeholder="Sexo: " placeholderTextColor="#b3b3b3" />
-      <TextInput style={styles.textboxIII} placeholder="Estatura: " placeholderTextColor="#b3b3b3" />
-      <TextInput style={styles.textboxIV} placeholder="Peso: " placeholderTextColor="#b3b3b3" />
+
+        <TextInput style={styles.textbox} placeholder="Nome:" placeholderTextColor="#b3b3b3" />
+        <TextInput style={styles.textboxI} placeholder="Idade:" placeholderTextColor="#b3b3b3" />
+        <TextInput style={styles.textboxII} placeholder="Sexo: " placeholderTextColor="#b3b3b3" />
+        <TextInput style={styles.textboxIII} placeholder="Estatura: " placeholderTextColor="#b3b3b3" />
+        <TextInput style={styles.textboxIV} placeholder="Peso: " placeholderTextColor="#b3b3b3" />
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>
@@ -77,11 +77,11 @@ const GeneralQuestionsScreen = () => {
           <TextInput style={styles.textboxV} placeholder="Digite aqui:" placeholderTextColor="#b3b3b3" />
         </View>
         <TouchableOpacity
-                style={styles.button3}
-                onPress={() => navigation.navigate("Splach")}
-            >
-                <Icon name="chevron-right" size={30} color="#032D45" />
-            </TouchableOpacity>
+          style={styles.button3}
+          onPress={() => navigation.navigate("Splach")}
+        >
+          <Icon name="chevron-right" size={30} color="#032D45" />
+        </TouchableOpacity>
       </LinearGradient>
     </KeyboardAwareScrollView>
   );

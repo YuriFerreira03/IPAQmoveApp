@@ -60,7 +60,7 @@ const LoginScreen = () => {
       console.log("Enviando dados para o backend:", {
         name,
         type: "user",
-        locality //mexer aqui
+        locality //pegando localização
       });
 
       const response = await axios.post(

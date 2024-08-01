@@ -7,9 +7,11 @@ import LoginScreen from "./LoginScreen";
 import SearchScreen from "./SearchScreen"; //importando a tela
 import HomePageVisitante from "./HomePageVisitante"; //importando a home page sem possibilidade de cadastrar uma pesquisa
 import SplachScreen from "./Session_1/SplachScreen";
+import SplashScreen2 from "./Session_2/SplashScreen2";
 import Tela1 from "./Session_1/Tela_1";
+import Tela1_2 from "./Session_2/Tela1_2";
+import Tela2_2 from "./Session_2/Tela2_2";
 import Tela2 from "./Session_1/Tela_2";
-import Tela1S2 from "./Session_2/Tela1S2";
 import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais";
 import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
 import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
@@ -68,7 +70,11 @@ export default function App() {
             <Stack.Screen name="Splach" component={SplachScreen} />
             <Stack.Screen name="Tela1" component={Tela1} />
             <Stack.Screen name="Tela2" component={Tela2} />
-            <Stack.Screen name="Tela1S2" component={Tela1S2} />
+
+            <Stack.Screen name="Splash2" component={SplashScreen2} />
+            <Stack.Screen name="Tela1_2" component={Tela1_2} />
+            <Stack.Screen name="Tela2_2" component={Tela2_2} />
+      
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>

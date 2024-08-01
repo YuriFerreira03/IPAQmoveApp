@@ -40,7 +40,7 @@ const SearchScreen: React.FC<{ route: SearchScreenRouteProp }> = ({ route }) => 
         {
           nome_pesquisa: searchName,
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questionario_id_quest: 1, // Substitua pelo ID do questionário correto
+          fk_Questionario_id_quest: 1, // Substitua pelo ID do questionário correto - é aqui que se "carrega o ip"?
           localizacao: location,
           instituicao: institution // Utilize o valor do campo instituição
         },

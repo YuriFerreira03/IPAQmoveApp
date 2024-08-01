@@ -58,6 +58,18 @@ const styles = StyleSheet.create({
     fontFamily: "inter-regular",
     flexDirection: "row",
   },
+  
+  button: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -4, 
+    marginBottom: 30, 
+    marginLeft: 300, 
+  },
 
 });
 

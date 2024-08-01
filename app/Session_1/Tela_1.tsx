@@ -1,16 +1,16 @@
 // src/screens/Tela1.js
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, Alert, ScrollView } from "react-native";
+import { View, Text, ActivityIndicator, Alert, ScrollView, TouchableOpacity} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import CustomStepper from "../Components/CustomStepper";
-import Button from "../Components/Button";
 import axios from "axios";
 import styles from "../../styles/Tela_1";
 import getIp from "../getIp";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Tela1 = () => {
-  const [secao, setSecao] = useState({descricao: '' });
+  const [secao, setSecao] = useState({ descricao: '' });
   const [loading, setLoading] = useState(true);
   const steps = ["1", "2", "3", "4", "5"];
   const activeStep = 0;
@@ -50,7 +50,14 @@ const Tela1 = () => {
           <Text style={styles.title}>SEÇÃO 1</Text>
           <CustomStepper steps={steps} activeStep={activeStep} />
           <Text style={styles.body}>{secao.descricao}</Text>
-          <Button />
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Tela2")}
+          >
+            <Icon name="chevron-right" size={30} color="#032D45" />
+          </TouchableOpacity>
+
         </ScrollView>
       )}
     </LinearGradient>
@@ -58,3 +65,5 @@ const Tela1 = () => {
 };
 
 export default Tela1;
+
+
