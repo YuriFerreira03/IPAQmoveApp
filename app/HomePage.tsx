@@ -15,16 +15,14 @@ type HomePageProps = {
 const HomePage: React.FC<HomePageProps> = ({ route }) => {
   
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { userName } = route.params; // Recebe o parâmetro userName
-  const { userLocality } = route.params; // Recebe o parâmetro userLocality
+  const { userName, userLocality } = route.params; // Recebe o parâmetro userName
 
   const handleAccessPress = () => {
     navigation.navigate('InicioPerguntasGerais'); 
   };
 
   const handleSearchPress = () => { //adicionando uma constante para conectar à tela de Pesquisa
-    navigation.navigate('Search', { userName }); // Passa o userName como parâmetro
-    navigation.navigate('Search', { userLocality }); 
+    navigation.navigate('Search', { userName, userLocality }); // Passa o userName como parâmetro
   };
 
 

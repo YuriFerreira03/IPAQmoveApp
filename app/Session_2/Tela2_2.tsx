@@ -11,42 +11,38 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 
-const Tela2 = ({ route }) => {
+const Tela2 = () => {
 
   const navigation = useNavigation();
-
-  console.log("route.params:", route.params);
-  const { id_usuario } = route.params || {};
-  const id_questao = 9; // Mantido o ID da questão como 9
-  const secao = 2; // Mantida a seção como 2
-
-  console.log("Recebido id_questao:", id_questao);
+  const [loading, setLoading] = useState(true);
   const [questao, setQuestao] = useState(null);
   const [isChecked, setChecked] = useState(false);
   const steps = ["1", "2", "3", "4", "5"];
   const activeStep = 1;
 
-  useEffect(() => {
 
     const fetchQuestao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/questao/:id_secao`;
+        const url = `http://${ip}:8080/questao/9`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
         console.log("URL de requisição:", url);
-
+    
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
         console.log("Dados da seção recebidos:", response.data);
-
+    
         setQuestao(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados da seção:", error);
         Alert.alert("Erro ao buscar dados da seção!");
+        setLoading(false);
       }
     };
-
-
-    fetchQuestao();
-  }, []);
+    
+    useEffect(() => {
+      fetchQuestao();
+    }, []); // Adicione id_questao como dependência se necessário
+    
 
   const handleSaveResposta = async () => {
     try {
@@ -75,8 +71,7 @@ const Tela2 = ({ route }) => {
 
         <Text style={styles.body}>
         Estas questões se referem à forma típica como você se desloca de um 
-        lugar para outro, incluindo seu trabalho, escola, cinema, lojas e outros por 
-          {"          "}
+        lugar para outro, incluindo seu trabalho, escola, cinema, lojas e outros por
           <Text style={styles.nao}>pelo menos 10 MINUTOS CONTÍNUOS.</Text>
         </Text>
 

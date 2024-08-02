@@ -1,5 +1,5 @@
 const config = {
-  ip: "200.18.141.227" // Endereço IP da sua máquina
+  ip: "192.168.1.231" // Endereço IP da sua máquina
 };
 
 export default config;

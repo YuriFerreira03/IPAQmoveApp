@@ -17,33 +17,36 @@ const Tela2 = ({ route }) => {
   console.log("route.params:", route.params);
   const { id_questao } = route.params || {};
   const { id_usuario } = route.params || {};
+  const [loading, setLoading] = useState(true);
   console.log("Recebido id_questao:", id_questao);
   const [questao, setQuestao] = useState(null);
   const [isChecked, setChecked] = useState(false);
   const steps = ["1", "2", "3", "4", "5"];
   const activeStep = 0;
 
-  useEffect(() => {
 
     const fetchQuestao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/questao/:id_secao`;
+        const url = `http://${ip}:8080/questao/1`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
         console.log("URL de requisição:", url);
-
+    
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
         console.log("Dados da seção recebidos:", response.data);
-
+    
         setQuestao(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar dados da seção:", error);
         Alert.alert("Erro ao buscar dados da seção!");
+        setLoading(false);
       }
     };
-
-    fetchQuestao();
-  }, []);
-
+    
+    useEffect(() => {
+      fetchQuestao();
+    }, []); // Adicione id_questao como dependência se necessário
+    
   const handleSaveResposta = async () => { //aparentemente não está funcionando
     try {
 

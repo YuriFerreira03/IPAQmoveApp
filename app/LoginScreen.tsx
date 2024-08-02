@@ -72,7 +72,7 @@ const LoginScreen = () => {
       console.log("Resposta do backend:", response.data);
       Alert.alert("Usuário Salvo!");
       const userId = response.data.userId; // backend retorna o userId
-      navigation.navigate("Home", { userName: name, userId }); // userId como parâmetro
+      navigation.navigate("Home", { userName: name, userId, userLocality: locality });
     } catch (error) {
       console.error("Erro ao salvar o usuário:", error);
       Alert.alert("Erro ao salvar o usuário!");

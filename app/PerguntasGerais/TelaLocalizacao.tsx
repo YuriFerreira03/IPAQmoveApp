@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Adicionado useEffect
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Checkbox from "expo-checkbox";
 import { useNavigation } from "@react-navigation/native";
@@ -9,8 +9,31 @@ import getIp from '../getIp';
 
 const TelaLocalizacao = () => {
   const [localizacao, setLocalizacao] = useState('');
+  const [initialLocalizacao, setInitialLocalizacao] = useState(''); // Estado para armazenar a localização inicial
   const [isChecked, setChecked] = useState(false);
   const navigation = useNavigation();
+
+
+  useEffect(() => {
+    const fetchInitialLocalizacao = async () => {
+      try {
+        const ip = getIp(); // Endereço IP da sua máquina
+        const url = `http://${ip}:8080/getLocalizacao`;
+        console.log("URL de requisição:", url);
+
+        const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
+        console.log("Dados da localização recebidos:", response.data);
+
+        setInitialLocalizacao(response.data.localizacao);
+        setLocalizacao(response.data.localizacao);
+      } catch (error) {
+        console.error("Erro ao buscar dados da localização:", error);
+        Alert.alert("Erro ao buscar dados da localização!");
+      }
+    };
+
+    fetchInitialLocalizacao();
+  }, []);
 
   const handleSaveLocation = async () => {
     try {
