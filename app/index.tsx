@@ -25,6 +25,7 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   SearchScreen: undefined;
+  TelaLocalizacao: undefined;
 };
 
 const Stack = createStackNavigator();

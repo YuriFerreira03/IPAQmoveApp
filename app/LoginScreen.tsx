@@ -14,7 +14,8 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
 import Dialog from "react-native-dialog";
 import axios from "axios";
-import getIp from '../app/getIp';
+import getIp from "../app/getIp";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -60,19 +61,24 @@ const LoginScreen = () => {
       console.log("Enviando dados para o backend:", {
         name,
         type: "user",
-        locality //pegando localização
+        locality, //pegando localização
       });
 
       const response = await axios.post(
         url,
-        { name, type: "user", locality }, 
+        { name, type: "user", locality },
         { timeout: 20000 } // 20 segundos de tempo limite
       );
 
       console.log("Resposta do backend:", response.data);
       Alert.alert("Usuário Salvo!");
       const userId = response.data.userId; // backend retorna o userId
-      navigation.navigate("Home", { userName: name, userId, userLocality: locality });
+      //await AsyncStorage.setItem("userId", userId); //salvar o userId no AsyncStorage (celular)
+      await AsyncStorage.setItem("userId", userId.toString());
+      await AsyncStorage.setItem("name", name);
+      await AsyncStorage.setItem("locality", locality);
+
+      navigation.navigate("Home");
     } catch (error) {
       console.error("Erro ao salvar o usuário:", error);
       Alert.alert("Erro ao salvar o usuário!");
@@ -158,12 +164,19 @@ const LoginScreen = () => {
       </LinearGradient>
       <Dialog.Container visible={visible}>
         <Dialog.Title> Realizar login </Dialog.Title>
-        <Dialog.Input label="Digite seu nome:" value={name} onChangeText={setName} />
-        <Dialog.Input label="Digite sua localização:" value={locality} onChangeText={setLocality} />
+        <Dialog.Input
+          label="Digite seu nome:"
+          value={name}
+          onChangeText={setName}
+        />
+        <Dialog.Input
+          label="Digite sua localização:"
+          value={locality}
+          onChangeText={setLocality}
+        />
         <Dialog.Button label="Cancelar" onPress={handleCancel} />
         <Dialog.Button label="Entrar" onPress={handleSubmit} />
       </Dialog.Container>
-      
     </View>
   );
 };
