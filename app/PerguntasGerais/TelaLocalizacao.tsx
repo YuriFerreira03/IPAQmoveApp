@@ -30,7 +30,6 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
 }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { userLocality } = route.params; // Recebe o parâmetro userName e userId
-
   const [searchName, setSearchName] = React.useState("");
   const [initialLocalizacao, setInitialLocalizacao] = useState(""); // Estado para armazenar a localização inicial
   const [isChecked, setChecked] = useState(false);
@@ -38,7 +37,6 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
   const [respostas_fechadas, setrespostas_fechadas] = useState("");
   const [datahora, setrdatahora] = React.useState("");
   const [resposta, setresposta] = useState<string | null>("");
-
   const [userId, setUserId] = useState<string | null>("");
   const [localizacao, setLocalizacao] = useState<string | null>("");
 
@@ -49,27 +47,6 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
 
   useEffect(() => {
     getDataFromStorage();
-  }, []);
-
-  useEffect(() => {
-    const fetchInitialLocalizacao = async () => {
-      try {
-        const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/getLocalizacao`;
-        console.log("URL de requisição:", url);
-
-        const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
-        console.log("Dados da localização recebidos:", response.data);
-
-        setInitialLocalizacao(response.data.localizacao);
-        setLocalizacao(response.data.localizacao);
-      } catch (error) {
-        console.error("Erro ao buscar dados da localização:", error);
-        Alert.alert("Erro ao buscar dados da localização!");
-      }
-    };
-
-    fetchInitialLocalizacao();
   }, []);
 
   const handleRegister = async () => {
@@ -105,6 +82,8 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
       console.log("Resposta do backend:", response.data);
       Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
       setSearchName("");
+      navigation.navigate("Tela2");
+
     } catch (error) {
       console.error("Erro ao cadastrar respsota:", error);
       Alert.alert("Erro", "Não foi possível cadastrar a respsota.");

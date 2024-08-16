@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
   textboxV: {
     backgroundColor: "transparent",
     borderColor: "transparent",
+    color: 'white',
   },
   button3: {
   width: 50,
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: "#fffff",
+    color: 'white',
     marginBottom: 20,
     backgroundColor: 'transparent'
   },

@@ -1,22 +1,27 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import getIp from '../getIp';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InformacoesProjeto: React.FC = () => {
   const navigation = useNavigation();
   const [nomePesquisa, setNomePesquisa] = useState('');
   const [nomePesquisador, setNomePesquisador] = useState('');
   const [pesquisas, setPesquisas] = useState([]);
-  const [pesquisadores, setPesquisadores] = useState([]);
+  const [userId, setUserId] = useState<string | null>("");
 
 
-  const handleScreenExpli1Press = () => {
-    navigation.navigate('ScreenExpli1');
-  };
+  async function getDataFromStorage() {
+    setUserId(await AsyncStorage.getItem("userId"));
+  }
+
+  useEffect(() => {
+    getDataFromStorage();
+  }, []);
 
   useEffect(() => {
     const fetchPesquisas = async () => {
@@ -36,6 +41,41 @@ const InformacoesProjeto: React.FC = () => {
     };
     fetchPesquisas();
   }, [nomePesquisa]);
+
+  const handleRegister = async () => {
+    if (!nomePesquisa || !nomePesquisador) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return;
+    }
+  
+    try {
+      const ip = getIp(); // Supondo que você tenha uma função para obter o IP
+      const url = `http://${ip}:8080/Vincular_projeto`;
+  
+      const response = await axios.post(
+        url,
+        {
+          fk_Usuario_id_usuario: userId,
+          nome_pesq: nomePesquisa,
+          nome_pesquisador: nomePesquisador,
+        },
+        {
+          timeout: 10000, // 10 segundos de tempo limite
+        }
+      );
+  
+      console.log("Resposta do backend:", response.data);
+      Alert.alert("Sucesso", "Pesquisa vinculada com sucesso!");
+      await AsyncStorage.multiSet([
+        ["Nome Pesquisa: ", nomePesquisa],
+        ["Nome Pesquisador", nomePesquisador],
+      ]);
+      navigation.navigate('ScreenExpli1');
+    } catch (error) {
+      console.error("Erro ao cadastrar pesquisa:", error.message || error);
+      Alert.alert("Erro", "Não foi possível cadastrar a pesquisa.");
+    }
+  };
 
   return (
     <LinearGradient
@@ -70,14 +110,16 @@ const InformacoesProjeto: React.FC = () => {
                 <Text style={styles.suggestionText}>{pesquisa.nome_pesq}</Text>
               </TouchableOpacity>
             ))}
-            </ScrollView>
+          </ScrollView>
         )}
         <TextInput
           style={styles.input}
           placeholder="Nome do Pesquisador"
           placeholderTextColor="#b3b3b3"
+          value={nomePesquisador}
+          onChangeText={setNomePesquisador}
         />
-        <TouchableOpacity onPress={handleScreenExpli1Press} style={styles.button}>
+        <TouchableOpacity onPress={handleRegister} style={styles.button}>
           <Text style={styles.buttonText}>ACESSAR</Text>
         </TouchableOpacity>
       </View>

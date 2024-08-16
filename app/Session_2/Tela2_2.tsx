@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 
-const Tela2 = () => {
+const Tela2_2 = () => {
 
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const Tela2 = () => {
     const fetchQuestao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/questao/9`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+        const url = `http://${ip}:8080/questao/8`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
         console.log("URL de requisição:", url);
     
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -67,12 +67,12 @@ const Tela2 = () => {
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <Text style={styles.title}>SEÇÃO 2</Text>
-        <CustomStepper steps={steps} activeStep={activeStep} />
+        <Text style={styles.steps}><CustomStepper steps={steps} activeStep={activeStep} /></Text>
 
         <Text style={styles.body}>
         Estas questões se referem à forma típica como você se desloca de um 
         lugar para outro, incluindo seu trabalho, escola, cinema, lojas e outros por
-          <Text style={styles.nao}>pelo menos 10 MINUTOS CONTÍNUOS.</Text>
+          <Text style={styles.nao}> pelo menos 10 MINUTOS CONTÍNUOS.</Text>
         </Text>
 
         {questao && (
@@ -98,7 +98,7 @@ const Tela2 = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Splash2")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Icon name="chevron-right" size={30} color="#032D45" />
         </TouchableOpacity>
@@ -142,4 +142,4 @@ const styles1 = StyleSheet.create({
 });
 
 
-export default Tela2;
+export default Tela2_2;

@@ -14,7 +14,7 @@ export default StyleSheet.create({
     width: '110%',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 70,
+    paddingTop: 90,
   },
   imageStyle: {
     width: 150,
