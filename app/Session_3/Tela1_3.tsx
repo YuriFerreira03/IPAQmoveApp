@@ -11,20 +11,20 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 
-const Tela2_2 = () => {
+const Tela1_3 = () => {
 
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const [questao, setQuestao] = useState(null);
   const [isChecked, setChecked] = useState(false);
   const steps = ["1", "2", "3", "4", "5"];
-  const activeStep = 1;
+  const activeStep = 2;
 
 
     const fetchQuestao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/questao/8`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+        const url = `http://${ip}:8080/questao/14`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
         console.log("URL de requisição:", url);
     
         const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -66,39 +66,20 @@ const Tela2_2 = () => {
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>SEÇÃO 2</Text>
+        <Text style={styles.title}>SEÇÃO 3</Text>
         <Text style={styles.steps}><CustomStepper steps={steps} activeStep={activeStep} /></Text>
 
         <Text style={styles.body}>
-        Estas questões se referem à forma típica como você se desloca de um 
-        lugar para outro, incluindo seu trabalho, escola, cinema, lojas e outros por
+        Esta parte inclui as atividades físicas que você fez na ultima semana na sua casa e ao redor da sua casa, 
+        por exemplo, trabalho em casa, cuidar do jardim, cuidar do quintal, trabalho de manutenção da casa ou para
+        cuidar da sua família.
+        Novamente pense <Text style={styles.nao}> somente </Text>naquelas atividades físicas que você faz por
           <Text style={styles.nao}> pelo menos 10 MINUTOS CONTÍNUOS.</Text>
         </Text>
 
-        {questao && (
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
-            <View style={styles.checkboxContainer}>
-              
-            <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
-
-              <Text style={styles1.label3}>dias por SEMANA</Text>
-              <Checkbox
-                value={!isChecked}
-                onValueChange={() => setChecked(!isChecked)}
-                color={!isChecked ? "#14E2C3" : undefined}
-                style={styles1.label}
-              />
-            </View>
-
-            <Text style={styles1.label2}>nenhum</Text>
-
-          </View>
-        )}
-
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Tela3_2")}
+          onPress={() => navigation.navigate("Tela2_3")}
         >
           <Icon name="chevron-right" size={30} color="#032D45" />
         </TouchableOpacity>
@@ -142,4 +123,4 @@ const styles1 = StyleSheet.create({
 });
 
 
-export default Tela2_2;
+export default Tela1_3;

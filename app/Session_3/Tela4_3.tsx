@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 
-const Tela4_2 = () => {
+const Tela4_3 = () => {
 
     const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
@@ -19,19 +19,27 @@ const Tela4_2 = () => {
     const [questao1, setQuestao1] = useState(null);
     const [isChecked, setChecked] = useState(false);
     const steps = ["1", "2", "3", "4", "5"];
-    const activeStep = 1;
+    const activeStep = 2;
 
 
     const fetchQuestao = async () => {
         try {
             const ip = getIp(); // Endereço IP da sua máquina
-            const url = `http://${ip}:8080/questao/10`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+            const url = `http://${ip}:8080/questao/18`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
             console.log("URL de requisição:", url);
 
             const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
             console.log("Dados da seção recebidos:", response.data);
 
             setQuestao(response.data);
+
+            const url1 = `http://${ip}:8080/questao/19`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+            console.log("URL de requisição:", url1);
+
+            const response1 = await axios.get(url1, { timeout: 10000 }); // 10 segundos de tempo limite
+            console.log("Dados da seção recebidos:", response1.data);
+
+            setQuestao1(response1.data);
             setLoading(false);
         } catch (error) {
             console.error("Erro ao buscar dados da seção:", error);
@@ -67,7 +75,7 @@ const Tela4_2 = () => {
     return (
         <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                <Text style={styles.title}>SEÇÃO 2</Text>
+                <Text style={styles.title}>SEÇÃO 3</Text>
                 <Text style={styles.steps}><CustomStepper steps={steps} activeStep={activeStep} /></Text>
 
                 {questao && (
@@ -84,7 +92,6 @@ const Tela4_2 = () => {
                                 color={!isChecked ? "#14E2C3" : undefined}
                                 style={styles1.label}
                             />
-
                         </View>
 
                         <Text style={styles1.label2}>nenhum</Text>
@@ -92,16 +99,32 @@ const Tela4_2 = () => {
                     </View>
                 )}
 
+                {questao1 && (
+                    <View style={styles.card}>
+                        <Text style={styles.cardTitle}>{questao1.texto_pergunta}</Text>
+                        <View style={styles.checkboxContainer}>
+
+                            <TextInput style={styles1.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
+
+                            <Text style={styles1.label3}>horas</Text>
+
+                            <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
+
+                            <Text style={styles1.label3}>minutos</Text>
+
+                        </View>
+                    </View>
+                )}
+
                 <TouchableOpacity
                     style={styles.button}
-                onPress={() => navigation.navigate("Tela5_2")}
+                    //onPress={() => navigation.navigate("Tela3_2")}
                 >
                     <Icon name="chevron-right" size={30} color="#032D45" />
                 </TouchableOpacity>
 
             </ScrollView>
         </LinearGradient>
-
     );
 };
 
@@ -127,7 +150,6 @@ const styles1 = StyleSheet.create({
         marginTop: -30
 
     },
-
     label3: {
         fontSize: 26,
         color: 'white',
@@ -135,7 +157,6 @@ const styles1 = StyleSheet.create({
         lineHeight: 45,
 
     },
-
     textboxV: {
         backgroundColor: "transparent",
         borderColor: "transparent",
@@ -145,4 +166,4 @@ const styles1 = StyleSheet.create({
 });
 
 
-export default Tela4_2;
+export default Tela4_3;

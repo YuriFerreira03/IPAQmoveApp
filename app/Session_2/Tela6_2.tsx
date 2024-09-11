@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
 
-const Tela4_2 = () => {
+const Tela6_2 = () => {
 
     const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ const Tela4_2 = () => {
     const fetchQuestao = async () => {
         try {
             const ip = getIp(); // Endereço IP da sua máquina
-            const url = `http://${ip}:8080/questao/10`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+            const url = `http://${ip}:8080/questao/13`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
             console.log("URL de requisição:", url);
 
             const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -49,7 +49,7 @@ const Tela4_2 = () => {
         try {
 
             const ip = getIp(); // Endereço IP da sua máquina
-            const url = `http://${ip}:8080/responde`;
+            const url = `http://${ip}:8080/responde`; //fazer modificações para a outra questao
             await axios.post(url, {
                 fk_Usuario_id_usuario: id_usuario, // Substitua pelo ID do usuário real
                 fk_Questao_id_questao: id_questao,
@@ -75,26 +75,21 @@ const Tela4_2 = () => {
                         <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
                         <View style={styles.checkboxContainer}>
 
+                            <TextInput style={styles1.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
+
+                            <Text style={styles1.label3}>horas</Text>
+
                             <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
 
-                            <Text style={styles1.label3}>dias por SEMANA</Text>
-                            <Checkbox
-                                value={!isChecked}
-                                onValueChange={() => setChecked(!isChecked)}
-                                color={!isChecked ? "#14E2C3" : undefined}
-                                style={styles1.label}
-                            />
+                            <Text style={styles1.label3}>minutos</Text>
 
                         </View>
-
-                        <Text style={styles1.label2}>nenhum</Text>
-
                     </View>
                 )}
 
                 <TouchableOpacity
-                    style={styles.button}
-                onPress={() => navigation.navigate("Tela5_2")}
+                    style={styles1.button}
+                    onPress={() => navigation.navigate("Splash3")}
                 >
                     <Icon name="chevron-right" size={30} color="#032D45" />
                 </TouchableOpacity>
@@ -127,7 +122,6 @@ const styles1 = StyleSheet.create({
         marginTop: -30
 
     },
-
     label3: {
         fontSize: 26,
         color: 'white',
@@ -135,14 +129,24 @@ const styles1 = StyleSheet.create({
         lineHeight: 45,
 
     },
-
     textboxV: {
         backgroundColor: "transparent",
         borderColor: "transparent",
         marginHorizontal: -10,
     },
+    button: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 105, 
+        marginBottom: 30, 
+        marginLeft: 300, 
+      },
 
 });
 
 
-export default Tela4_2;
+export default Tela6_2;

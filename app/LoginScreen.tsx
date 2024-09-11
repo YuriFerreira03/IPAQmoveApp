@@ -18,7 +18,8 @@ import getIp from "../app/getIp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+  const [isSwitchOn, setIsSwitchOn] = useState(true); //ligado, por padrão, no visitante
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
   const [locality, setLocality] = useState("");
@@ -29,12 +30,12 @@ const LoginScreen = () => {
     setIsSwitchOn((previousState) => !previousState);
   };
 
-  const handleLoginPress = () => {
-    setVisible(true);
+  const handleLoginPress1 = () => {
+    navigation.navigate("Login1");
   };
 
-  const handleHomeVPress = () => {
-    navigation.navigate("HomeVisitante");
+  const handleLoginPress2 = () => {
+    navigation.navigate("Login2");
   };
 
   const handleCancel = () => {
@@ -100,24 +101,22 @@ const LoginScreen = () => {
           <Text style={{ color: "#082D47" }}>IPAQ</Text>
           <Text style={{ color: "#15E2C3" }}>move</Text>
         </Text>
-        <Text style={styles.textStyleIII}>Use sua Conta Google para</Text>
+        <Text style={styles.textStyleIII}>Crie sua conta para</Text>
         <Text style={styles.textStyleIII}>acessar o nosso app</Text>
 
         {isSwitchOn ? (
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={handleHomeVPress}
+            onPress={handleLoginPress2} //visitante
           >
-            <AntDesign name="google" size={24} color="white" />
-            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+            <Text style={styles.googleButtonText}>Entrar</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={handleLoginPress}
+            onPress={handleLoginPress1} //pesquisador
           >
-            <AntDesign name="google" size={24} color="white" />
-            <Text style={styles.googleButtonText}>Entrar com o Google</Text>
+            <Text style={styles.googleButtonText}>Entrar</Text> 
           </TouchableOpacity>
         )}
 
@@ -146,10 +145,11 @@ const LoginScreen = () => {
             Visitante
           </Text>
         </View>
+        
         <TouchableOpacity style={styles.termsContainer}>
           <FontAwesome
             name="file-text-o"
-            size={40}
+            size={30}
             color={isSwitchOn ? "#00263E" : "#fff"}
           />
           <Text
@@ -162,21 +162,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </LinearGradient>
-      <Dialog.Container visible={visible}>
-        <Dialog.Title> Realizar login </Dialog.Title>
-        <Dialog.Input
-          label="Digite seu nome:"
-          value={name}
-          onChangeText={setName}
-        />
-        <Dialog.Input
-          label="Digite sua localização:"
-          value={locality}
-          onChangeText={setLocality}
-        />
-        <Dialog.Button label="Cancelar" onPress={handleCancel} />
-        <Dialog.Button label="Entrar" onPress={handleSubmit} />
-      </Dialog.Container>
+    
     </View>
   );
 };

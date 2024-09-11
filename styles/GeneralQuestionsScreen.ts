@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     justifyContent: 'center',
     backgroundColor: "transparent",
-    color: "#FFFFF",
+    color: "#FFFFFF",
     borderColor: "#FFFFFF",
     borderWidth: 1,
     borderRadius: 5,

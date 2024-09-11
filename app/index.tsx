@@ -6,12 +6,28 @@ import HomePage from "./HomePage";
 import LoginScreen from "./LoginScreen";
 import SearchScreen from "./SearchScreen"; //importando a tela
 import HomePageVisitante from "./HomePageVisitante"; //importando a home page sem possibilidade de cadastrar uma pesquisa
+import Login1 from "./LoginPesquisador";
+import Login2 from "./LoginVisitante";
+
 import SplachScreen from "./Session_1/SplachScreen";
 import SplashScreen2 from "./Session_2/SplashScreen2";
+import SplashScreen3 from "./Session_3/SplashScreen3";
+
 import Tela1 from "./Session_1/Tela_1";
+import Tela2 from "./Session_1/Tela_2";
+
 import Tela1_2 from "./Session_2/Tela1_2";
 import Tela2_2 from "./Session_2/Tela2_2";
-import Tela2 from "./Session_1/Tela_2";
+import Tela3_2 from "./Session_2/Tela3_2";
+import Tela4_2 from "./Session_2/Tela4_2";
+import Tela5_2 from "./Session_2/Tela5_2";
+import Tela6_2 from "./Session_2/Tela6_2";
+
+import Tela1_3 from "./Session_3/Tela1_3";
+import Tela2_3 from "./Session_3/Tela2_3";
+import Tela3_3 from "./Session_3/Tela3_3";
+import Tela4_3 from "./Session_3/Tela4_3";
+
 import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais";
 import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
 import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
@@ -48,6 +64,8 @@ export default function App() {
             }}
           >
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Login1" component={Login1} />
+            <Stack.Screen name="Login2" component={Login2} />
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
@@ -75,6 +93,16 @@ export default function App() {
             <Stack.Screen name="Splash2" component={SplashScreen2} />
             <Stack.Screen name="Tela1_2" component={Tela1_2} />
             <Stack.Screen name="Tela2_2" component={Tela2_2} />
+            <Stack.Screen name="Tela3_2" component={Tela3_2} />
+            <Stack.Screen name="Tela4_2" component={Tela4_2} />
+            <Stack.Screen name="Tela5_2" component={Tela5_2} />
+            <Stack.Screen name="Tela6_2" component={Tela6_2} />
+
+            <Stack.Screen name="Splash3" component={SplashScreen3} />
+            <Stack.Screen name="Tela1_3" component={Tela1_3} />
+            <Stack.Screen name="Tela2_3" component={Tela2_3} />
+            <Stack.Screen name="Tela3_3" component={Tela3_3} />
+            <Stack.Screen name="Tela4_3" component={Tela4_3} />
       
           </Stack.Navigator>
         </SafeAreaView>
