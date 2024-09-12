@@ -1,30 +1,27 @@
-
 import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
-  Switch,
   Alert,
-  Button
+  TextInput,  // Agora usando TextInput nativo do React Native
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-import Dialog from "react-native-dialog";
 import axios from "axios";
 import getIp from "./getIp";
 import styles from "../styles/LoginUsu";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { TextInput } from "react-native-paper";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importar o ícone
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const LoginPesquisador = () => {
+const LoginVisitante = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // Controle de visibilidade da senha
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -34,32 +31,35 @@ const LoginPesquisador = () => {
     setIsLoading(true);
 
     try {
-      const ip = await getIp(); // Supondo que getIp seja assíncrono
+      const ip = await getIp(); 
       const url = `http://${ip}:8080/login`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
 
-      let data;
-      try {
-        data = await response.json();
-      } catch (err) {
-        throw new Error('Resposta da API não é JSON válido.');
-      }
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", { email, password, type: "user" });
 
-      if (response.ok) {
-        Alert.alert('Login bem-sucedido', `Bem-vindo(a) ao IPAQmove`);
-        navigation.navigate("HomeVisitante");
-      } else {
-        Alert.alert('Erro no Login', data.message || 'Erro desconhecido');
+      const response = await axios.post(
+        url,
+        { email, password, type: "user" },
+        { timeout: 20000 }
+      );
+      
+      const { userId, name, locality } = response.data;
+
+      if (userId && name && locality) {
+        await AsyncStorage.setItem("userId", userId.toString());
+        await AsyncStorage.setItem("name", name);
+        await AsyncStorage.setItem("locality", locality);
+      
+        console.log("Nome armazenado:", name);
+        console.log("Localidade armazenada:", locality);
       }
+      
+      Alert.alert("Usuário entrou!");
+      navigation.navigate("HomeVisitante");
+      
     } catch (error) {
-      Alert.alert('Erro', 'Erro ao tentar fazer login. Tente novamente.');
-      console.error('Erro:', error);
+      console.error("Erro ao entrar:", error);
+      Alert.alert("Erro ao entrar!");
     } finally {
       setIsLoading(false);
     }
@@ -76,7 +76,6 @@ const LoginPesquisador = () => {
           colors={["#032D45", "#14E2C3"]}
           style={styles.gradient}
         >
-
           <View style={styles.containerLog}>
             <Image
               source={require("../images/logo.png")}
@@ -85,32 +84,40 @@ const LoginPesquisador = () => {
 
             <Text style={styles.textLog}>Login</Text>
 
+            {/* Campo de e-mail */}
             <TextInput
               style={styles.input}
               placeholder="Email:"
               placeholderTextColor="#b3b3b3"
-              textColor="#FFFFFF"
               value={email}
               onChangeText={setEmail}
             />
 
-            <TextInput
-              style={styles.inputultimo}
-              placeholder="Senha:"
-              placeholderTextColor="#b3b3b3"
-              textColor="#FFFFFF"
-              value={password}
-              onChangeText={setPassword}
-            />
-
+            {/* Campo de senha com funcionalidade de mostrar/ocultar */}
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.inputultimo}
+                placeholder="Senha:"
+                placeholderTextColor="#b3b3b3"
+                value={password}
+                secureTextEntry={!isPasswordVisible}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                style={styles.icon}
+              >
+                <Icon
+                  name={isPasswordVisible ? "eye-off" : "eye"}
+                  size={24}
+                  color={"#FFFFFF"} // Cor branca para o ícone
+                />
+              </TouchableOpacity>
+            </View>
           </View>
 
-          {/* <Button
-                        title={isLoading ? 'Carregando...' : 'Login'}
-                        onPress={handleLogin}
-                        disabled={isLoading}
-                      /> */}
-
+          
+          {/* Botão de Login */}
           <TouchableOpacity
             style={styles.buttonlog}
             onPress={handleLogin}
@@ -118,13 +125,10 @@ const LoginPesquisador = () => {
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
           </TouchableOpacity>
-
         </LinearGradient>
       </View>
     </KeyboardAwareScrollView>
   );
 };
 
-export default LoginPesquisador;
-
-
+export default LoginVisitante;

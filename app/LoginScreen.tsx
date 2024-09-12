@@ -42,50 +42,6 @@ const LoginScreen = () => {
     setVisible(false);
   };
 
-  const handleSubmit = async () => {
-    setVisible(false);
-    try {
-      const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/Usuario`;
-
-      // Verifique se o nome não está vazio
-      if (!name) {
-        Alert.alert("Erro", "O nome do usuário não pode estar vazio!");
-        return;
-      }
-      if (!locality) {
-        Alert.alert("Erro", "A localização do usuário não pode estar vazia!");
-        return;
-      }
-
-      console.log("URL de requisição:", url);
-      console.log("Enviando dados para o backend:", {
-        name,
-        type: "user",
-        locality, //pegando localização
-      });
-
-      const response = await axios.post(
-        url,
-        { name, type: "user", locality },
-        { timeout: 20000 } // 20 segundos de tempo limite
-      );
-
-      console.log("Resposta do backend:", response.data);
-      Alert.alert("Usuário Salvo!");
-      const userId = response.data.userId; // backend retorna o userId
-      //await AsyncStorage.setItem("userId", userId); //salvar o userId no AsyncStorage (celular)
-      await AsyncStorage.setItem("userId", userId.toString());
-      await AsyncStorage.setItem("name", name);
-      await AsyncStorage.setItem("locality", locality);
-
-      navigation.navigate("Home");
-    } catch (error) {
-      console.error("Erro ao salvar o usuário:", error);
-      Alert.alert("Erro ao salvar o usuário!");
-    }
-  };
-
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -101,9 +57,7 @@ const LoginScreen = () => {
           <Text style={{ color: "#082D47" }}>IPAQ</Text>
           <Text style={{ color: "#15E2C3" }}>move</Text>
         </Text>
-        <Text style={styles.textStyleIII}>Crie sua conta para</Text>
-        <Text style={styles.textStyleIII}>acessar o nosso app</Text>
-
+        
         {isSwitchOn ? (
           <TouchableOpacity
             style={styles.googleButton}
@@ -119,6 +73,11 @@ const LoginScreen = () => {
             <Text style={styles.googleButtonText}>Entrar</Text> 
           </TouchableOpacity>
         )}
+          <TouchableOpacity
+            style={styles.googleButton}
+          >
+            <Text style={styles.googleButtonText1}>Cadastrar</Text> 
+          </TouchableOpacity>
 
         <View style={styles.switchContainer}>
           <Text

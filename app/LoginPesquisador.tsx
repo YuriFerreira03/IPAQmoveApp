@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   View,
@@ -20,10 +21,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const LoginPesquisador = () => {
+const LoginVisitante = () => {
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [locality, setLocality] = useState("");
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -35,32 +38,40 @@ const LoginPesquisador = () => {
     try {
       const ip = await getIp(); // Supondo que getIp seja assíncrono
       const url = `http://${ip}:8080/login`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", {
+        name,
+        type: "user",
+        locality, //pegando localização
       });
 
-      let data;
-      try {
-        data = await response.json();
-      } catch (err) {
-        throw new Error('Resposta da API não é JSON válido.');
-      }
 
-      if (response.ok) {
-        Alert.alert('Login bem-sucedido', `Bem-vindo(a) ao IPAQmove`);
-        navigation.navigate("Home");
-      } else {
-        Alert.alert('Erro no Login', data.message || 'Erro desconhecido');
+      const response = await axios.post(
+        url,
+        { email, password, type: "user" },
+        { timeout: 20000 }
+      );
+      
+      console.log("Resposta do backend:", response.data);
+      const { userId, name, locality } = response.data; // Recupera nome e localidade do backend
+      
+      // Verifica se os dados foram recebidos corretamente antes de armazenar
+      if (userId && name && locality) {
+        await AsyncStorage.setItem("userId", userId.toString());
+        await AsyncStorage.setItem("name", name);
+        await AsyncStorage.setItem("locality", locality);
+      
+        console.log("Nome armazenado:", name);
+        console.log("Localidade armazenada:", locality);
       }
+      
+      Alert.alert("Usuário entrou!");
+      navigation.navigate("HomeVisitante");
+      
     } catch (error) {
-      Alert.alert('Erro', 'Erro ao tentar fazer login. Tente novamente.');
-      console.error('Erro:', error);
-    } finally {
-      setIsLoading(false);
+      console.error("Erro ao entrar:", error);
+      Alert.alert("Erro ao entrar!");
     }
   };
 
@@ -72,7 +83,7 @@ const LoginPesquisador = () => {
     >
       <View style={styles.container}>
         <LinearGradient
-          colors={["#14E2C3", "#032D45"]}
+          colors={["#032D45", "#14E2C3"]}
           style={styles.gradient}
         >
 
@@ -105,10 +116,10 @@ const LoginPesquisador = () => {
           </View>
 
           {/* <Button
-            title={isLoading ? 'Carregando...' : 'Login'}
-            onPress={handleLogin}
-            disabled={isLoading}
-          /> */}
+                        title={isLoading ? 'Carregando...' : 'Login'}
+                        onPress={handleLogin}
+                        disabled={isLoading}
+                      /> */}
 
           <TouchableOpacity
             style={styles.buttonlog}
@@ -124,6 +135,6 @@ const LoginPesquisador = () => {
   );
 };
 
-export default LoginPesquisador;
+export default LoginVisitante;
 
 

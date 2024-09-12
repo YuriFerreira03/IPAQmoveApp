@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: -4,
-    marginTop: -30,
+    marginTop: -70,
     width: '100%',
   },
   gradient: {
@@ -53,7 +53,13 @@ export default StyleSheet.create({
     fontFamily: 'inter-regular',
     color: 'white',
     fontSize: 23,
-    marginHorizontal: 10
+    marginHorizontal: 40,
+  },
+  googleButtonText1: {
+    fontFamily: 'inter-regular',
+    color: 'white',
+    fontSize: 23,
+    marginHorizontal: 20,
   },
   switchContainer: {
     flexDirection: 'row',

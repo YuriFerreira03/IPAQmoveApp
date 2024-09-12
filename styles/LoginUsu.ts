@@ -75,6 +75,34 @@ export default StyleSheet.create({
     marginTop: 65,
     marginHorizontal: 30,
   },
+  passwordContainer: {
+    flexDirection: "row",  // Alinha o TextInput e o ícone lado a lado
+    alignItems: "center",  // Alinha verticalmente o ícone e o campo de senha
+    width: "75%",
+    height: 60,
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 35,
+    marginBottom: 60,
+    paddingHorizontal: 20,
+    color: "#fff",
+    backgroundColor: "transparent",
+  },
+  
+  inputultimo: {
+    flex: 1, // O TextInput ocupa o espaço disponível ao lado do ícone
+    color: "#FFFFFF", // Cor do texto no campo de senha
+    paddingHorizontal: 10, // Ajustar espaçamento interno do campo de texto
+  },
+  
+  icon: {
+    paddingHorizontal: 10,  // Espaçamento entre o ícone e a borda do campo
+    justifyContent: "center",  // Garante que o ícone fique no meio
+    alignItems: "center",  // Centraliza o ícone verticalmente
+    height: "100%",  // Garante que o ícone ocupe a altura completa do contêiner
+  },
+  
   switchStyle: {
     marginTop: 50,
     transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
@@ -99,6 +127,8 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   input: {
+    flexDirection: "row",
+    alignItems: "center", 
     width: "75%",
     height: 60,
     borderColor: "#fff",
@@ -106,18 +136,6 @@ export default StyleSheet.create({
     borderRadius: 5,
     marginTop: 35,
     marginBottom: 5,
-    paddingHorizontal: 20,
-    color: "#fff",
-    backgroundColor: "transparent",
-  },
-  inputultimo: {
-    width: "75%",
-    height: 60,
-    borderColor: "#fff",
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: 35,
-    marginBottom: 40,
     paddingHorizontal: 20,
     color: "#fff",
     backgroundColor: "transparent",

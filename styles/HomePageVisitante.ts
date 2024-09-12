@@ -48,8 +48,9 @@ export default StyleSheet.create({
   card: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 10,
-    padding: 12,
-    marginTop: 80,
+    padding: 33,
+    marginTop: 50,
+    //marginBottom: 18,
     alignSelf: 'center',
     width: '90%',
     borderColor: 'rgba(255, 255, 255, 0.2)',
