@@ -14,7 +14,7 @@ import {
   NavigationProp,
   RouteProp,
 } from "@react-navigation/native";
-import { RootStackParamList } from "../app";
+import { RootStackParamList } from ".";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type HomePageRouteProp = RouteProp<RootStackParamList, "Home">;
@@ -79,7 +79,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
           </View>
           <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
         </LinearGradient>
-        <View style={styles.card}>
+        {/* <View style={styles.card}>
           <Icon
             name="favorite"
             size={24}
@@ -94,7 +94,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
           <TouchableOpacity style={styles.button} onPress={handleSearchPress1}>
             <Text style={styles.buttonText}>ACESSAR</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={styles.card}>
           <Icon
             name="assessment"

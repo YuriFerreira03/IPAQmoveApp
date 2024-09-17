@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 16,
+    padding: 26,
   },
   header: {
     flexDirection: 'row',
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginTop: 30,
+    marginTop: 20,
   },
   greeting: {
     fontSize: 24,
@@ -55,8 +55,8 @@ export default StyleSheet.create({
   card: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 10,
-    padding: 12,
-    marginTop: 20,
+    padding: 33,
+    marginTop: 50,
     //marginBottom: 18,
     alignSelf: 'center',
     width: '90%',

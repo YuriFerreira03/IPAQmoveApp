@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
-import HomePage from "./HomePage";
+import HomePage from "./HomePagePesquisador";
 import LoginScreen from "./LoginScreen";
 import SearchScreen from "./SearchScreen"; //importando a tela
 import HomePageVisitante from "./HomePageVisitante"; //importando a home page sem possibilidade de cadastrar uma pesquisa
@@ -69,10 +69,7 @@ export default function App() {
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
-            <Stack.Screen
-              name="InicioPerguntasGerais"
-              component={InicioPerguntasGerais}
-            />
+            <Stack.Screen name="InicioPerguntasGerais" component={InicioPerguntasGerais} />
             <Stack.Screen name="TelaLocalizacao" component={TelaLocalizacao} />
             <Stack.Screen
               name="InformacoesProjeto"
