@@ -1,32 +1,27 @@
-
 import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
-  Switch,
   Alert,
-  Button
+  TextInput,  // Agora usando TextInput nativo do React Native
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-import Dialog from "react-native-dialog";
 import axios from "axios";
 import getIp from "./getIp";
 import styles from "../styles/LoginUsu";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { TextInput } from "react-native-paper";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importar o ícone
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginVisitante = () => {
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [locality, setLocality] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // Controle de visibilidade da senha
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -36,16 +31,11 @@ const LoginVisitante = () => {
     setIsLoading(true);
 
     try {
-      const ip = await getIp(); // Supondo que getIp seja assíncrono
+      const ip = await getIp(); 
       const url = `http://${ip}:8080/login`;
 
       console.log("URL de requisição:", url);
-      console.log("Enviando dados para o backend:", {
-        name,
-        type: "user",
-        locality, //pegando localização
-      });
-
+      console.log("Enviando dados para o backend:", { email, password, type: "user" });
 
       const response = await axios.post(
         url,
@@ -53,10 +43,8 @@ const LoginVisitante = () => {
         { timeout: 20000 }
       );
       
-      console.log("Resposta do backend:", response.data);
-      const { userId, name, locality } = response.data; // Recupera nome e localidade do backend
-      
-      // Verifica se os dados foram recebidos corretamente antes de armazenar
+      const { userId, name, locality } = response.data;
+
       if (userId && name && locality) {
         await AsyncStorage.setItem("userId", userId.toString());
         await AsyncStorage.setItem("name", name);
@@ -67,11 +55,13 @@ const LoginVisitante = () => {
       }
       
       Alert.alert("Usuário entrou!");
-      navigation.navigate("HomeVisitante");
+      navigation.navigate("Home");
       
     } catch (error) {
       console.error("Erro ao entrar:", error);
       Alert.alert("Erro ao entrar!");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,7 +76,6 @@ const LoginVisitante = () => {
           colors={["#032D45", "#14E2C3"]}
           style={styles.gradient}
         >
-
           <View style={styles.containerLog}>
             <Image
               source={require("../images/logo.png")}
@@ -95,32 +84,40 @@ const LoginVisitante = () => {
 
             <Text style={styles.textLog}>Login</Text>
 
+            {/* Campo de e-mail */}
             <TextInput
               style={styles.input}
               placeholder="Email:"
               placeholderTextColor="#b3b3b3"
-              textColor="#FFFFFF"
               value={email}
               onChangeText={setEmail}
             />
 
-            <TextInput
-              style={styles.inputultimo}
-              placeholder="Senha:"
-              placeholderTextColor="#b3b3b3"
-              textColor="#FFFFFF"
-              value={password}
-              onChangeText={setPassword}
-            />
-
+            {/* Campo de senha com funcionalidade de mostrar/ocultar */}
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.inputultimo}
+                placeholder="Senha:"
+                placeholderTextColor="#b3b3b3"
+                value={password}
+                secureTextEntry={!isPasswordVisible}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity
+                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                style={styles.icon}
+              >
+                <Icon
+                  name={isPasswordVisible ? "eye-off" : "eye"}
+                  size={24}
+                  color={"#FFFFFF"} // Cor branca para o ícone
+                />
+              </TouchableOpacity>
+            </View>
           </View>
 
-          {/* <Button
-                        title={isLoading ? 'Carregando...' : 'Login'}
-                        onPress={handleLogin}
-                        disabled={isLoading}
-                      /> */}
-
+          
+          {/* Botão de Login */}
           <TouchableOpacity
             style={styles.buttonlog}
             onPress={handleLogin}
@@ -128,7 +125,6 @@ const LoginVisitante = () => {
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
           </TouchableOpacity>
-
         </LinearGradient>
       </View>
     </KeyboardAwareScrollView>
@@ -136,5 +132,3 @@ const LoginVisitante = () => {
 };
 
 export default LoginVisitante;
-
-
