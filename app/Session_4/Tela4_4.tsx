@@ -3,6 +3,7 @@ import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Checkbox from "expo-checkbox";
 import CustomStepper from "../Components/CustomStepper";
+import { TextInput } from "react-native-paper";
 import axios from "axios";
 import styles from "../../styles/Tela_2";
 import getIp from "../getIp";
@@ -13,12 +14,11 @@ import {
   RouteProp,
 } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela_2">;
+type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela4_4">;
 
-const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
+const tela4_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [searchName, setSearchName] = React.useState("");
@@ -30,6 +30,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const [resposta, setresposta] = useState<string | null>("");
   const [userId, setUserId] = useState<string | null>("");
   const [localizacao, setLocalizacao] = useState<string | null>("");
+  const [horaeminuto, sethoraeminuto] = useState<string>("");
 
   async function getDataFromStorage() {
     setUserId(await AsyncStorage.getItem("userId"));
@@ -47,12 +48,46 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   console.log("Recebido id_questao:", id_questao);
   const [questao, setQuestao] = useState(null);
   const steps = ["1", "2", "3", "4", "5"];
-  const activeStep = 0;
+  const activeStep = 3;
+
+  const handleTextInputChange = (text: string) => {
+    // Permite que o usuário apague o texto completamente
+    if (text === "") {
+      sethoraeminuto(""); // Se o campo estiver vazio, atualiza o estado e retorna
+      return;
+    }
+
+    // Remove qualquer caractere que não seja número
+    const cleanText = text.replace(/[^0-9]/g, "");
+
+    // Se o usuário digitou 3 ou mais caracteres, inserimos o ":"
+    if (cleanText.length > 2) {
+      const hours = cleanText.substring(0, 2);
+      const minutes = cleanText.substring(2, 4);
+      const formattedTime = `${hours}:${minutes}`;
+      sethoraeminuto(formattedTime);
+
+      // Validação para o formato HH:MM completo (exibe alerta só após 5 caracteres, que inclui ":")
+      if (text.length === 5) {
+        const regexFinal = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
+
+        // Se o formato estiver errado, exibe o alerta
+        if (!regexFinal.test(formattedTime)) {
+          Alert.alert(
+            "Formato inválido",
+            "Por favor, insira um horário válido no formato HH:MM."
+          );
+        }
+      }
+    } else {
+      sethoraeminuto(cleanText); // Mantém apenas os números digitados antes dos dois pontos
+    }
+  };
 
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/1`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `http://${ip}:8080/questao/23`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
       const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -79,7 +114,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 1, // Substitua pelo ID da questão correta
+        fk_Questionario_id_questao: 23, // Substitua pelo ID da questão correta
         respostas_abertas: respostas_abertas,
         respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -88,8 +123,8 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
       const dadosParaEnvio = {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 1, // Sempre define como 1
-        respostas_abertas: respostas_abertas,
+        fk_Questionario_id_questao: 23, // Sempre define com o id da questao
+        respostas_abertas: horaeminuto,
         respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
         datahora: datahora,
         resposta: resposta,
@@ -105,8 +140,8 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 1,
-          respostas_abertas: respostas_abertas,
+          fk_Questao_id_questao: 23,
+          respostas_abertas: horaeminuto,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,
           resposta: resposta,
@@ -120,16 +155,10 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
       setSearchName("");
 
-      // Navegação após o envio bem-sucedido
-      if (isChecked) {
-        // Se "SIM" estiver marcado
-        console.log("Navegando para TelaSim");
-        navigation.navigate("Tela2"); // Substitua "TelaSim" pela tela correta para "SIM"
-      } else {
-        // Se "NÃO" estiver marcado
-        console.log("Navegando para Splash2");
-        navigation.navigate("Splash2"); // Substitua por sua tela correta para "NÃO"
-      }
+      // Adicione um log antes da navegação
+      console.log("Navegando para Tela_2");
+      setSearchName("");
+      navigation.navigate("Tela5_4");
     } catch (error) {
       console.error("Erro ao cadastrar resposta:", error);
       Alert.alert("Erro", "Não foi possível cadastrar a resposta.");
@@ -139,37 +168,25 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>SEÇÃO 1</Text>
+        <Text style={styles.title}>SEÇÃO 4</Text>
         <CustomStepper steps={steps} activeStep={activeStep} />
-
-        <Text style={styles.body}>
-          Esta seção inclui as atividades que você faz no seu serviço, que
-          incluem trabalho remunerado ou voluntário, as atividades na escola ou
-          faculdade e outro tipo de trabalho não remunerado fora da sua casa.
-          <Text style={styles.nao}> NÃO</Text> incluir trabalho não remunerado
-          que você faz na sua casa como tarefas domésticas, cuidar do jardim e
-          da casa ou tomar conta da sua família. Estas serão incluídas na seção
-          3.
-          {"           "}
-        </Text>
-
         {questao && (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
 
+            {/* Campo de texto para dias por semana */}
             <View style={styles.checkboxWrapper}>
-              <Checkbox
-                value={isChecked}
-                onValueChange={setChecked}
-                color={isChecked ? "#14E2C3" : undefined}
+              <TextInput
+                style={styles.textboxV}
+                textColor="#FFFFFF"
+                placeholderTextColor="#b3b3b3"
+                keyboardType="numeric"
+                value={horaeminuto}
+                onChangeText={handleTextInputChange}
+                underlineColor="white" // Cor da barra de texto em estado inativo
+                activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
               />
-              <Text style={styles.label}>SIM</Text>
-              <Checkbox
-                value={!isChecked}
-                onValueChange={() => setChecked(!isChecked)}
-                color={!isChecked ? "#14E2C3" : undefined}
-              />
-              <Text style={styles.label}>NÃO</Text>
+              <Text style={styles.label}>Horas e Minutos</Text>
             </View>
           </View>
         )}
@@ -185,4 +202,4 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   );
 };
 
-export default Tela_2;
+export default tela4_4;
