@@ -68,6 +68,10 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
     navigation.navigate("InicioPerguntasGerais"); // Passa o userName como parâmetro
   };
 
+  const handleResultsPress = () => {
+    navigation.navigate("Resultados"); // Navega para a página de resultados
+  };  
+
   const handleProfilePress = () => {
     // Lógica para o perfil
   };
@@ -120,7 +124,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
             Acompanhe seu progresso na jornada para um estilo de vida mais
             ativo. Veja seus resultados.
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleResultsPress}>
             <Text style={styles.buttonText}>ACESSAR</Text>
           </TouchableOpacity>
         </View>

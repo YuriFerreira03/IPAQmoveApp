@@ -118,7 +118,7 @@ const Tela4_3 = () => {
 
                 <TouchableOpacity
                     style={styles.button}
-                    //onPress={() => navigation.navigate("Tela3_2")}
+                    onPress={() => navigation.navigate("Splach4")}
                 >
                     <Icon name="chevron-right" size={30} color="#032D45" />
                 </TouchableOpacity>

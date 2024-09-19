@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     padding: 23,
     marginVertical: 30,
     width: '92%',
+    flexDirection: 'column',
     alignItems: 'flex-start',
   },
   cardTitle: {
@@ -46,22 +47,27 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: "inter-light",
   },
-  checkboxContainer: {
-    flexDirection: 'row',
+  checkboxWrapper: {
+    flexDirection: 'row', // Checkbox e "nenhum" em uma linha
     alignItems: 'center',
-    color: 'white',
+    marginBottom: 15
   },
   checkbox: {
-    width: 24,
-    height: 24,
-    borderWidth:1,
-    borderColor: '#fff',
-    left: 10,
+    marginRight: 5, // Espaço entre o checkbox e o texto "nenhum"
+
   },
   label: {
     fontSize: 26,
     color: 'white',
     marginHorizontal: 20,
+    fontFamily: "inter-light",
+    lineHeight: 45,
+
+  },
+  label2: {
+    fontSize: 26,
+    color: 'white',
+    marginHorizontal: 0,
     fontFamily: "inter-light",
     lineHeight: 45,
 
@@ -77,9 +83,23 @@ const styles = StyleSheet.create({
     marginBottom: 30, 
     marginLeft: 300, 
   },
+  label3: {
+    fontSize: 26,
+    color: 'white',
+    marginHorizontal: 20,
+    fontFamily: "inter-light",
+    lineHeight: 45,
+
+  },
   textboxV: {
     backgroundColor: "transparent",
     borderColor: "transparent",
+    fontSize: 20,
+  },
+  atividadesWrapper: {
+    marginTop: 10,  // Espaço entre o campo anterior
+    alignItems: 'flex-start',  // Alinha o texto e o campo à esquerda
+    marginBottom: 30,
   },
 });
 

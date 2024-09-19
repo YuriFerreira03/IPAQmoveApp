@@ -81,7 +81,6 @@ const Tela2_2 = () => {
             <View style={styles.checkboxContainer}>
               
             <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
-
               <Text style={styles1.label3}>dias por SEMANA</Text>
               <Checkbox
                 value={!isChecked}
