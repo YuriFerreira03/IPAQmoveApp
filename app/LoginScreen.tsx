@@ -73,11 +73,6 @@ const LoginScreen = () => {
             <Text style={styles.googleButtonText}>Entrar</Text> 
           </TouchableOpacity>
         )}
-          <TouchableOpacity
-            style={styles.googleButton}
-          >
-            <Text style={styles.googleButtonText1}>Cadastrar</Text> 
-          </TouchableOpacity>
 
         <View style={styles.switchContainer}>
           <Text

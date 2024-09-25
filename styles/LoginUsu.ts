@@ -59,6 +59,7 @@ export default StyleSheet.create({
     marginHorizontal: 10
   },
   textbuttonlog1: {
+    marginTop: 10,
     fontFamily: 'inter-regular',
     color: 'white',
     fontSize: 18,

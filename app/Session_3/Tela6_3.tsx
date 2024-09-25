@@ -17,9 +17,9 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela3_2">;
+type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "Tela6_3">;
 
-const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
+const Tela6_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [searchName, setSearchName] = React.useState("");
@@ -31,7 +31,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const [resposta, setresposta] = useState<string | null>("");
   const [userId, setUserId] = useState<string | null>("");
   const [localizacao, setLocalizacao] = useState<string | null>("");
-  const [horaeminuto, sethoraeminuto] = useState<string>("");
+  const [diasSemana, setDiasSemana] = useState<string>("");
 
   async function getDataFromStorage() {
     setUserId(await AsyncStorage.getItem("userId"));
@@ -49,46 +49,42 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   console.log("Recebido id_questao:", id_questao);
   const [questao, setQuestao] = useState(null);
   const steps = ["1", "2", "3", "4", "5"];
-  const activeStep = 1;
+  const activeStep = 2;
 
   const handleTextInputChange = (text: string) => {
-    // Permite que o usuário apague o texto completamente
     if (text === "") {
-      sethoraeminuto(""); // Se o campo estiver vazio, atualiza o estado e retorna
-      return;
-    }
-
-    // Remove qualquer caractere que não seja número
-    const cleanText = text.replace(/[^0-9]/g, "");
-
-    // Se o usuário digitou 3 ou mais caracteres, inserimos o ":"
-    if (cleanText.length > 2) {
-      const hours = cleanText.substring(0, 2);
-      const minutes = cleanText.substring(2, 4);
-      const formattedTime = `${hours}:${minutes}`;
-      sethoraeminuto(formattedTime);
-
-      // Validação para o formato HH:MM completo (exibe alerta só após 5 caracteres, que inclui ":")
-      if (text.length === 5) {
-        const regexFinal = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
-
-        // Se o formato estiver errado, exibe o alerta
-        if (!regexFinal.test(formattedTime)) {
-          Alert.alert(
-            "Formato inválido",
-            "Por favor, insira um horário válido no formato HH:MM."
-          );
+      setDiasSemana(""); // Permite que o usuário apague o texto
+    } else {
+      const valor = parseInt(text);
+      if (isNaN(valor) || valor < 0 || valor > 7) {
+        Alert.alert(
+          "Entrada inválida",
+          "Por favor, insira um número entre 0 e 7"
+        );
+      } else {
+        setDiasSemana(text); // Define o número
+        if (isChecked) {
+          setChecked(false); // Desmarca o checkbox se o texto foi modificado
         }
       }
-    } else {
-      sethoraeminuto(cleanText); // Mantém apenas os números digitados antes dos dois pontos
     }
+  };
+
+  // Checkbox change handler
+  const handleCheckboxChange = () => {
+    setChecked((prevChecked) => {
+      const newCheckedState = !prevChecked;
+      if (newCheckedState) {
+        setDiasSemana(""); // Limpa o campo de texto ao marcar o checkbox
+      }
+      return newCheckedState;
+    });
   };
 
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/9`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `http://${ip}:8080/questao/18`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
       const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -109,13 +105,18 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
   const handleRegister = async () => {
     try {
+      if (isChecked) {
+        console.log("Checkbox marcado, navegando para Splash4");
+        navigation.navigate("Splach4"); // Navega para Tela3_2 se o checkbox estiver marcado
+        return; // Para a execução do restante da função
+      }
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina
       const url = `http://${ip}:8080/Resposta`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 9, // Substitua pelo ID da questão correta
+        fk_Questionario_id_questao: 18, // Substitua pelo ID da questão correta
         respostas_abertas: respostas_abertas,
         respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -124,8 +125,8 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
       const dadosParaEnvio = {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 9, // Sempre define com o id da questao
-        respostas_abertas: horaeminuto,
+        fk_Questionario_id_questao: 18, // Sempre define com o id da questao
+        respostas_abertas: diasSemana,
         respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
         datahora: datahora,
         resposta: resposta,
@@ -141,8 +142,8 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 9,
-          respostas_abertas: horaeminuto,
+          fk_Questao_id_questao: 18,
+          respostas_abertas: diasSemana,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,
           resposta: resposta,
@@ -157,9 +158,9 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       setSearchName("");
 
       // Adicione um log antes da navegação
-      console.log("Navegando para Tela4_2");
+      console.log("Navegando para Tela7_3");
       setSearchName("");
-      navigation.navigate("Tela4_2");
+      navigation.navigate("Tela7_3");
     } catch (error) {
       console.error("Erro ao cadastrar resposta:", error);
       Alert.alert("Erro", "Não foi possível cadastrar a resposta.");
@@ -167,49 +168,60 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   };
 
   return (
+
     <KeyboardAwareScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       enableOnAndroid={true}
       extraScrollHeight={20}
     >
-      <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          <Text style={styles.title}>SEÇÃO 2</Text>
-          <CustomStepper steps={steps} activeStep={activeStep} />
-          {questao && (
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
+    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <Text style={styles.title}>SEÇÃO 3</Text>
+        <CustomStepper steps={steps} activeStep={activeStep} />
 
-              {/* Campo de texto para dias por semana */}
-              <View style={styles.checkboxWrapper}>
-                <TextInput
-                  style={styles.textboxV}
-                  textColor="#FFFFFF"
-                  placeholderTextColor="#b3b3b3"
-                  keyboardType="numeric"
-                  value={horaeminuto}
-                  onChangeText={handleTextInputChange}
-                  underlineColor="white" // Cor da barra de texto em estado inativo
-                  activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
-                />
-                <Text style={styles.label}>Horas e Minutos</Text>
-              </View>
+        {questao && (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
+
+            {/* Campo de texto para dias por semana */}
+            <View style={styles.checkboxWrapper}>
+              <TextInput
+                style={styles.textboxV}
+                placeholderTextColor="#b3b3b3"
+                textColor="white"
+                keyboardType="numeric"
+                value={diasSemana}
+                onChangeText={handleTextInputChange}
+                editable={!isChecked} // Desabilita o campo se o checkbox estiver marcado
+                underlineColor="white" // Cor da barra de texto em estado inativo
+                activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
+              />
+              <Text style={styles.label}>dias por SEMANA</Text>
             </View>
-          )}
 
-          <Text style={styles.body}>
-            Agora pense <Text style={styles.nao}>somente</Text> em relação a caminhar ou pedalar para ir de um lugar a outro na ultima semana.
-          </Text>
+            {/* Checkbox para "nenhum" */}
+            <View style={styles.checkboxWrapper}>
+              <Checkbox
+                value={isChecked} // Usar o valor correto do estado
+                onValueChange={handleCheckboxChange}
+                color={isChecked ? "#18E2C3" : undefined} // Cor quando marcado
+                style={styles.checkbox}
+              />
+              <Text style={styles.label}>nenhum</Text>
+            </View>
+          </View>
+        )}
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
-          >
-            <Icon name="chevron-right" size={30} color="#032D45" />
-          </TouchableOpacity>
-        </ScrollView>
-      </LinearGradient>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
+        >
+          <Icon name="chevron-right" size={30} color="#032D45" />
+        </TouchableOpacity>
+      </ScrollView>
+    </LinearGradient>
     </KeyboardAwareScrollView>
   );
 };
-export default Tela3_2;
+
+export default Tela6_3;

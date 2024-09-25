@@ -125,6 +125,11 @@ const LoginVisitante = () => {
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={styles.textbuttonlog1}>Não tenho conta</Text>
+          </TouchableOpacity>
+
         </LinearGradient>
       </View>
     </KeyboardAwareScrollView>

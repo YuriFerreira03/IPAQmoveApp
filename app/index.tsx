@@ -25,18 +25,20 @@ import Tela5 from "./Session_1/Tela_5";
 import Tela6 from "./Session_1/Tela_6";
 import Tela7 from "./Session_1/Tela_7";
 
-
-import Tela1_2 from "./Session_2/Tela1_2";
 import Tela2_2 from "./Session_2/Tela2_2";
 import Tela3_2 from "./Session_2/Tela3_2";
 import Tela4_2 from "./Session_2/Tela4_2";
 import Tela5_2 from "./Session_2/Tela5_2";
 import Tela6_2 from "./Session_2/Tela6_2";
+import Tela7_2 from "./Session_2/Tela7_2";
 
 import Tela1_3 from "./Session_3/Tela1_3";
 import Tela2_3 from "./Session_3/Tela2_3";
 import Tela3_3 from "./Session_3/Tela3_3";
 import Tela4_3 from "./Session_3/Tela4_3";
+import Tela5_3 from "./Session_3/Tela5_3";
+import Tela6_3 from "./Session_3/Tela6_3";
+import Tela7_3 from "./Session_3/Tela7_3";
 
 import Tela1_4 from "./Session_4/Tela1_4";
 import Tela2_4 from "./Session_4/Tela2_4";
@@ -120,18 +122,22 @@ export default function App() {
             <Stack.Screen name="Tela7" component={Tela7} />
 
             <Stack.Screen name="Splash2" component={SplashScreen2} />
-            <Stack.Screen name="Tela1_2" component={Tela1_2} />
             <Stack.Screen name="Tela2_2" component={Tela2_2} />
             <Stack.Screen name="Tela3_2" component={Tela3_2} />
             <Stack.Screen name="Tela4_2" component={Tela4_2} />
             <Stack.Screen name="Tela5_2" component={Tela5_2} />
             <Stack.Screen name="Tela6_2" component={Tela6_2} />
+            <Stack.Screen name="Tela7_2" component={Tela7_2} />
 
             <Stack.Screen name="Splash3" component={SplashScreen3} />
             <Stack.Screen name="Tela1_3" component={Tela1_3} />
             <Stack.Screen name="Tela2_3" component={Tela2_3} />
             <Stack.Screen name="Tela3_3" component={Tela3_3} />
             <Stack.Screen name="Tela4_3" component={Tela4_3} />
+            <Stack.Screen name="Tela5_3" component={Tela5_3} />
+            <Stack.Screen name="Tela6_3" component={Tela6_3} />
+            <Stack.Screen name="Tela7_3" component={Tela7_3} />
+            
 
             <Stack.Screen name="Splach4" component={SplashScreen4} />
             <Stack.Screen name="Tela1_4" component={Tela1_4} />

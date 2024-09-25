@@ -31,7 +31,7 @@ const LoginVisitante = () => {
     setIsLoading(true);
 
     try {
-      const ip = await getIp(); 
+      const ip = await getIp();
       const url = `http://${ip}:8080/login`;
 
       console.log("URL de requisição:", url);
@@ -42,21 +42,21 @@ const LoginVisitante = () => {
         { email, password, type: "user" },
         { timeout: 20000 }
       );
-      
+
       const { userId, name, locality } = response.data;
 
       if (userId && name && locality) {
         await AsyncStorage.setItem("userId", userId.toString());
         await AsyncStorage.setItem("name", name);
         await AsyncStorage.setItem("locality", locality);
-      
+
         console.log("Nome armazenado:", name);
         console.log("Localidade armazenada:", locality);
       }
-      
+
       Alert.alert("Usuário entrou!");
       navigation.navigate("Home");
-      
+
     } catch (error) {
       console.error("Erro ao entrar:", error);
       Alert.alert("Erro ao entrar!");
@@ -116,7 +116,7 @@ const LoginVisitante = () => {
             </View>
           </View>
 
-          
+
           {/* Botão de Login */}
           <TouchableOpacity
             style={styles.buttonlog}
@@ -124,6 +124,9 @@ const LoginVisitante = () => {
             disabled={isLoading}
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.textbuttonlog1}>Não tenho conta</Text>
           </TouchableOpacity>
         </LinearGradient>
       </View>

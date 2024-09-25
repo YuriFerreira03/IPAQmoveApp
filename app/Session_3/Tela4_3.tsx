@@ -3,167 +3,225 @@ import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Checkbox from "expo-checkbox";
 import CustomStepper from "../Components/CustomStepper";
+import { TextInput } from "react-native-paper";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
 import styles from "../../styles/Tela_2";
 import getIp from "../getIp";
+import { RootStackParamList } from "../../app";
+import {
+  useNavigation,
+  NavigationProp,
+  RouteProp,
+} from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { TextInput } from "react-native-paper";
 
-const Tela4_3 = () => {
+type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela4_3">;
 
-    const navigation = useNavigation();
-    const [loading, setLoading] = useState(true);
-    const [questao, setQuestao] = useState(null);
-    const [questao1, setQuestao1] = useState(null);
-    const [isChecked, setChecked] = useState(false);
-    const steps = ["1", "2", "3", "4", "5"];
-    const activeStep = 2;
+const Tela4_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
+  const [searchName, setSearchName] = React.useState("");
+  const [initialLocalizacao, setInitialLocalizacao] = useState(""); // Estado para armazenar a localização inicial
+  const [isChecked, setChecked] = useState(false);
+  const [respostas_abertas, setrespostas_abertas] = React.useState("");
+  const [respostas_fechadas, setrespostas_fechadas] = useState("");
+  const [datahora, setrdatahora] = React.useState("");
+  const [resposta, setresposta] = useState<string | null>("");
+  const [userId, setUserId] = useState<string | null>("");
+  const [localizacao, setLocalizacao] = useState<string | null>("");
+  const [diasSemana, setDiasSemana] = useState<string>("");
 
-    const fetchQuestao = async () => {
-        try {
-            const ip = getIp(); // Endereço IP da sua máquina
-            const url = `http://${ip}:8080/questao/18`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
-            console.log("URL de requisição:", url);
+  async function getDataFromStorage() {
+    setUserId(await AsyncStorage.getItem("userId"));
+    setresposta(await AsyncStorage.getItem("locality"));
+  }
 
-            const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
-            console.log("Dados da seção recebidos:", response.data);
+  useEffect(() => {
+    getDataFromStorage();
+  }, []);
 
-            setQuestao(response.data);
+  console.log("route.params:", route.params);
+  const { id_questao } = route.params || {};
+  const { id_usuario } = route.params || {};
+  const [loading, setLoading] = useState(true);
+  console.log("Recebido id_questao:", id_questao);
+  const [questao, setQuestao] = useState(null);
+  const steps = ["1", "2", "3", "4", "5"];
+  const activeStep = 2;
 
-            const url1 = `http://${ip}:8080/questao/19`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
-            console.log("URL de requisição:", url1);
-
-            const response1 = await axios.get(url1, { timeout: 10000 }); // 10 segundos de tempo limite
-            console.log("Dados da seção recebidos:", response1.data);
-
-            setQuestao1(response1.data);
-            setLoading(false);
-        } catch (error) {
-            console.error("Erro ao buscar dados da seção:", error);
-            Alert.alert("Erro ao buscar dados da seção!");
-            setLoading(false);
+  const handleTextInputChange = (text: string) => {
+    if (text === "") {
+      setDiasSemana(""); // Permite que o usuário apague o texto
+    } else {
+      const valor = parseInt(text);
+      if (isNaN(valor) || valor < 0 || valor > 7) {
+        Alert.alert(
+          "Entrada inválida",
+          "Por favor, insira um número entre 0 e 7"
+        );
+      } else {
+        setDiasSemana(text); // Define o número
+        if (isChecked) {
+          setChecked(false); // Desmarca o checkbox se o texto foi modificado
         }
-    };
+      }
+    }
+  };
 
-    useEffect(() => {
-        fetchQuestao();
-    }, []); // Adicione id_questao como dependência se necessário
+  // Checkbox change handler
+  const handleCheckboxChange = () => {
+    setChecked((prevChecked) => {
+      const newCheckedState = !prevChecked;
+      if (newCheckedState) {
+        setDiasSemana(""); // Limpa o campo de texto ao marcar o checkbox
+      }
+      return newCheckedState;
+    });
+  };
 
+  const fetchQuestao = async () => {
+    try {
+      const ip = getIp(); // Endereço IP da sua máquina
+      const url = `http://${ip}:8080/questao/16`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      console.log("URL de requisição:", url);
 
-    const handleSaveResposta = async () => {
-        try {
+      const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
+      console.log("Dados da seção recebidos:", response.data);
 
-            const ip = getIp(); // Endereço IP da sua máquina
-            const url = `http://${ip}:8080/responde`;
-            await axios.post(url, {
-                fk_Usuario_id_usuario: id_usuario, // Substitua pelo ID do usuário real
-                fk_Questao_id_questao: id_questao,
-                resposta: isChecked ? 'SIM' : 'NÃO',
-            });
+      setQuestao(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Erro ao buscar dados da seção:", error);
+      Alert.alert("Erro ao buscar dados da seção!");
+      setLoading(false);
+    }
+  };
 
-            Alert.alert("Resposta salva com sucesso!");
+  useEffect(() => {
+    fetchQuestao();
+  }, []);
 
-        } catch (error) {
-            console.error("Erro ao salvar resposta:", error);
-            Alert.alert("Erro ao salvar resposta!");
+  const handleRegister = async () => {
+    try {
+      if (isChecked) {
+        console.log("Checkbox marcado, navegando para Tela6_3");
+        navigation.navigate("Tela6_3"); // Navega para Tela3_2 se o checkbox estiver marcado
+        return; // Para a execução do restante da função
+      }
+      console.log("Iniciando cadastro de resposta...");
+      const ip = getIp(); // Endereço IP da sua máquina
+      const url = `http://${ip}:8080/Resposta`;
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", {
+        fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
+        fk_Questionario_id_questao: 16, // Substitua pelo ID da questão correta
+        respostas_abertas: respostas_abertas,
+        respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
+        datahora: datahora,
+        resposta: resposta,
+      });
+
+      const dadosParaEnvio = {
+        fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
+        fk_Questionario_id_questao: 16, // Sempre define com o id da questao
+        respostas_abertas: diasSemana,
+        respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
+        datahora: datahora,
+        resposta: resposta,
+      };
+
+      // Exibe os dados que serão enviados para o backend
+      console.log(
+        "Dados enviados para o backend:",
+        JSON.stringify(dadosParaEnvio, null, 2)
+      );
+
+      const response = await axios.post(
+        url,
+        {
+          fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
+          fk_Questao_id_questao: 16,
+          respostas_abertas: diasSemana,
+          respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
+          datahora: datahora,
+          resposta: resposta,
+        },
+        {
+          timeout: 10000, // 10 segundos de tempo limite
         }
-    };
+      );
 
-    return (
-        <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollView}>
-                <Text style={styles.title}>SEÇÃO 3</Text>
-                <Text style={styles.steps}><CustomStepper steps={steps} activeStep={activeStep} /></Text>
+      console.log("Resposta do backend:", response.data);
+      Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
+      setSearchName("");
 
-                {questao && (
-                    <View style={styles.card}>
-                        <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
-                        <View style={styles.checkboxContainer}>
+      // Adicione um log antes da navegação
+      console.log("Navegando para Tela5_3");
+      setSearchName("");
+      navigation.navigate("Tela5_3");
+    } catch (error) {
+      console.error("Erro ao cadastrar resposta:", error);
+      Alert.alert("Erro", "Não foi possível cadastrar a resposta.");
+    }
+  };
 
-                            <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
+  return (
 
-                            <Text style={styles1.label3}>dias por SEMANA</Text>
-                            <Checkbox
-                                value={!isChecked}
-                                onValueChange={() => setChecked(!isChecked)}
-                                color={!isChecked ? "#14E2C3" : undefined}
-                                style={styles1.label}
-                            />
-                        </View>
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraScrollHeight={20}
+    >
+    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <Text style={styles.title}>SEÇÃO 3</Text>
+        <CustomStepper steps={steps} activeStep={activeStep} />
 
-                        <Text style={styles1.label2}>nenhum</Text>
+        {questao && (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
 
-                    </View>
-                )}
+            {/* Campo de texto para dias por semana */}
+            <View style={styles.checkboxWrapper}>
+              <TextInput
+                style={styles.textboxV}
+                placeholderTextColor="#b3b3b3"
+                textColor="white"
+                keyboardType="numeric"
+                value={diasSemana}
+                onChangeText={handleTextInputChange}
+                editable={!isChecked} // Desabilita o campo se o checkbox estiver marcado
+                underlineColor="white" // Cor da barra de texto em estado inativo
+                activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
+              />
+              <Text style={styles.label}>dias por SEMANA</Text>
+            </View>
 
-                {questao1 && (
-                    <View style={styles.card}>
-                        <Text style={styles.cardTitle}>{questao1.texto_pergunta}</Text>
-                        <View style={styles.checkboxContainer}>
+            {/* Checkbox para "nenhum" */}
+            <View style={styles.checkboxWrapper}>
+              <Checkbox
+                value={isChecked} // Usar o valor correto do estado
+                onValueChange={handleCheckboxChange}
+                color={isChecked ? "#16E2C3" : undefined} // Cor quando marcado
+                style={styles.checkbox}
+              />
+              <Text style={styles.label}>nenhum</Text>
+            </View>
+          </View>
+        )}
 
-                            <TextInput style={styles1.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
-
-                            <Text style={styles1.label3}>horas</Text>
-
-                            <TextInput style={styles.textboxV} placeholder="..." placeholderTextColor="#b3b3b3" />
-
-                            <Text style={styles1.label3}>minutos</Text>
-
-                        </View>
-                    </View>
-                )}
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("Splach4")}
-                >
-                    <Icon name="chevron-right" size={30} color="#032D45" />
-                </TouchableOpacity>
-
-            </ScrollView>
-        </LinearGradient>
-    );
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
+        >
+          <Icon name="chevron-right" size={30} color="#032D45" />
+        </TouchableOpacity>
+      </ScrollView>
+    </LinearGradient>
+    </KeyboardAwareScrollView>
+  );
 };
-
-import { StyleSheet } from 'react-native';
-
-const styles1 = StyleSheet.create({
-
-    label: {
-        fontSize: 26,
-        color: 'white',
-        marginHorizontal: -265,
-        fontFamily: "inter-light",
-        lineHeight: 45,
-        marginTop: 100
-
-    },
-    label2: {
-        fontSize: 26,
-        color: 'white',
-        marginHorizontal: 50,
-        fontFamily: "inter-light",
-        lineHeight: 45,
-        marginTop: -30
-
-    },
-    label3: {
-        fontSize: 26,
-        color: 'white',
-        fontFamily: "inter-light",
-        lineHeight: 45,
-
-    },
-    textboxV: {
-        backgroundColor: "transparent",
-        borderColor: "transparent",
-        marginHorizontal: -10,
-    },
-
-});
-
 
 export default Tela4_3;

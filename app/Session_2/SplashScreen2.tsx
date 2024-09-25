@@ -39,7 +39,7 @@ const SplashScreen2 = () => {
         fetchSecao();
 
         const timer = setTimeout(() => {
-            navigation.navigate("Tela1_2"); 
+            navigation.navigate("Tela2_2"); 
         }, 2000);
 
         return () => clearTimeout(timer);

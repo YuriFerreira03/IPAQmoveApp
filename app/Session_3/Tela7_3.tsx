@@ -17,9 +17,9 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela3_2">;
+type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "Tela7_3">;
 
-const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
+const Tela7_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [searchName, setSearchName] = React.useState("");
@@ -49,7 +49,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   console.log("Recebido id_questao:", id_questao);
   const [questao, setQuestao] = useState(null);
   const steps = ["1", "2", "3", "4", "5"];
-  const activeStep = 1;
+  const activeStep = 2;
 
   const handleTextInputChange = (text: string) => {
     // Permite que o usuário apague o texto completamente
@@ -88,7 +88,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/9`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `http://${ip}:8080/questao/19`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
       const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -115,7 +115,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 9, // Substitua pelo ID da questão correta
+        fk_Questionario_id_questao: 19, // Substitua pelo ID da questão correta
         respostas_abertas: respostas_abertas,
         respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -124,7 +124,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
       const dadosParaEnvio = {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 9, // Sempre define com o id da questao
+        fk_Questionario_id_questao: 19, // Sempre define com o id da questao
         respostas_abertas: horaeminuto,
         respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -141,7 +141,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 9,
+          fk_Questao_id_questao: 19,
           respostas_abertas: horaeminuto,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,
@@ -157,9 +157,9 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       setSearchName("");
 
       // Adicione um log antes da navegação
-      console.log("Navegando para Tela4_2");
+      console.log("Navegando para Splash4");
       setSearchName("");
-      navigation.navigate("Tela4_2");
+      navigation.navigate("Splach4");
     } catch (error) {
       console.error("Erro ao cadastrar resposta:", error);
       Alert.alert("Erro", "Não foi possível cadastrar a resposta.");
@@ -174,7 +174,7 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     >
       <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Text style={styles.title}>SEÇÃO 2</Text>
+          <Text style={styles.title}>SEÇÃO 3</Text>
           <CustomStepper steps={steps} activeStep={activeStep} />
           {questao && (
             <View style={styles.card}>
@@ -197,10 +197,6 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
             </View>
           )}
 
-          <Text style={styles.body}>
-            Agora pense <Text style={styles.nao}>somente</Text> em relação a caminhar ou pedalar para ir de um lugar a outro na ultima semana.
-          </Text>
-
           <TouchableOpacity
             style={styles.button}
             onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
@@ -212,4 +208,4 @@ const Tela3_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     </KeyboardAwareScrollView>
   );
 };
-export default Tela3_2;
+export default Tela7_3;
