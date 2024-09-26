@@ -65,6 +65,10 @@ const LoginVisitante = () => {
     }
   };
 
+  const Cadastro = () => {
+    navigation.navigate("CadastroPesquisador");
+  };
+
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{ flexGrow: 1 }}
@@ -125,7 +129,7 @@ const LoginVisitante = () => {
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={Cadastro}>
             <Text style={styles.textbuttonlog1}>Não tenho conta</Text>
           </TouchableOpacity>
         </LinearGradient>

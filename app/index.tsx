@@ -9,13 +9,22 @@ import HomePageVisitante from "./HomePageVisitante"; //importando a home page se
 import Login1 from "./LoginPesquisador";
 import Login2 from "./LoginVisitante";
 import Resultados from "./Resultados";
+import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais";
+import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
+import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
+import ScreenExpli1 from "./PerguntasGerais/ScreenExpli1";
+import ScreenExpli2 from "./PerguntasGerais/ScreenExpli2";
+import ScreenExpli3 from "./PerguntasGerais/ScreenExpli3";
+import ScreenExpli4 from "./PerguntasGerais/ScreenExpli4";
+import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
+import SignUpPesquisador from "./SignUpPesquisador";
+import SignUpVisitante from "./SignUpVisitante";
 
 import SplachScreen from "./Session_1/SplachScreen";
 import SplashScreen2 from "./Session_2/SplashScreen2";
 import SplashScreen3 from "./Session_3/SplashScreen3";
 import SplashScreen4 from "./Session_4/SplachScreen4";
 import SplashScreen5 from "./Session_5/SplachScreen5";
-
 
 import Tela1 from "./Session_1/Tela_1";
 import Tela2 from "./Session_1/Tela_2";
@@ -50,18 +59,6 @@ import Tela6_4 from "./Session_4/Tela6_4";
 import Tela1_5 from "./Session_5/Tela1_5";
 import Tela2_5 from "./Session_5/Tela2_5";
 
-
-
-
-import InicioPerguntasGerais from "./PerguntasGerais/InicioPerguntasGerais";
-import TelaLocalizacao from "./PerguntasGerais/TelaLocalizacao";
-import InformacoesProjeto from "./PerguntasGerais/InformacoesProjeto";
-import ScreenExpli1 from "./PerguntasGerais/ScreenExpli1";
-import ScreenExpli2 from "./PerguntasGerais/ScreenExpli2";
-import ScreenExpli3 from "./PerguntasGerais/ScreenExpli3";
-import ScreenExpli4 from "./PerguntasGerais/ScreenExpli4";
-import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
-
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
@@ -91,6 +88,9 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Login1" component={Login1} />
             <Stack.Screen name="Login2" component={Login2} />
+            <Stack.Screen name="CadastroPesquisador" component={SignUpPesquisador} />
+            <Stack.Screen name="CadastroVisitante" component={SignUpVisitante} />
+  
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
