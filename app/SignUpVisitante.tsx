@@ -80,7 +80,7 @@ const SignUpPesquisador = () => {
       }
       
       Alert.alert("Usuário cadastrado com sucesso!");
-      navigation.navigate("Home"); // Navegar para a tela inicial após cadastro
+      navigation.navigate("HomeVisitante"); // Navegar para a tela inicial após cadastro
 
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
