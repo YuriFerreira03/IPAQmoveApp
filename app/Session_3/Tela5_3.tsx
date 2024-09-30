@@ -107,7 +107,19 @@ const Tela5_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!horaeminuto) {
+      Alert.alert("Erro", "Preencha o campo de Horas e Minutos");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina
@@ -141,7 +153,7 @@ const Tela5_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 15,
+          fk_Questao_id_questao: 17,
           respostas_abertas: horaeminuto,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 17,
     marginVertical: -200,
-    paddingVertical: 200
+    paddingVertical: 200,
   },
   title: {
     fontSize: 30,
@@ -29,50 +29,47 @@ const styles = StyleSheet.create({
     lineHeight: 45,
   },
   nao: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   card: {
-    backgroundColor: 'transparent', // Mudei para transparente para se misturar com o fundo gradiente
+    backgroundColor: "transparent", // Mudei para transparente para se misturar com o fundo gradiente
     borderRadius: 10,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff",
     padding: 23,
     marginVertical: 30,
-    width: '92%',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    width: "92%",
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   cardTitle: {
     fontSize: 25,
-    marginBottom:40,
-    color: 'white',
+    marginBottom: 40,
+    color: "white",
     fontFamily: "inter-light",
   },
   checkboxWrapper: {
-    flexDirection: 'row', // Checkbox e "nenhum" em uma linha
-    alignItems: 'center',
-    marginBottom: 15
+    flexDirection: "row", // Checkbox e "nenhum" em uma linha
+    alignItems: "center",
+    marginBottom: 15,
   },
   checkbox: {
     marginRight: 5, // Espaço entre o checkbox e o texto "nenhum"
-
   },
   label: {
     fontSize: 26,
-    color: 'white',
+    color: "white",
     marginHorizontal: 20,
     fontFamily: "inter-light",
     lineHeight: 45,
-
   },
   label2: {
     fontSize: 26,
-    color: 'white',
+    color: "white",
     marginHorizontal: 0,
     fontFamily: "inter-light",
     lineHeight: 45,
-
   },
   button: {
     width: 50,
@@ -81,17 +78,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -4, 
-    marginBottom: 30, 
-    marginLeft: 300, 
+    marginTop: -4,
+    marginBottom: 30,
+    marginLeft: 300,
   },
   label3: {
     fontSize: 26,
-    color: 'white',
+    color: "white",
     marginHorizontal: 20,
     fontFamily: "inter-light",
     lineHeight: 45,
-
   },
   textboxV: {
     backgroundColor: "transparent",
@@ -99,8 +95,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   atividadesWrapper: {
-    marginTop: 10,  // Espaço entre o campo anterior
-    alignItems: 'flex-start',  // Alinha o texto e o campo à esquerda
+    marginTop: 10, // Espaço entre o campo anterior
+    alignItems: "flex-start", // Alinha o texto e o campo à esquerda
     marginBottom: 30,
   },
 });

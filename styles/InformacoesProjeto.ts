@@ -1,26 +1,26 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   gradient: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   container: {
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
   },
   textVII: {
-    fontFamily: 'inter-bold',
-    color: '#ffff',
-    textAlign: 'center',
+    fontFamily: "inter-bold",
+    color: "#ffff",
+    textAlign: "center",
     fontSize: 24,
     marginBottom: 10,
   },
   textVIII: {
-    fontFamily: 'inter-bold',
-    color: '#032D45',
+    fontFamily: "inter-bold",
+    color: "#032D45",
   },
   textIX: {
     fontSize: 20,
@@ -34,31 +34,31 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '100%',
+    width: "100%",
     height: 40,
-    borderColor: '#fff',
+    borderColor: "#fff",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#14E2C3',
-    alignItems: 'center',
+    backgroundColor: "#14E2C3",
+    alignItems: "center",
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 50,
-    width: '60%',
+    width: "60%",
     marginBottom: 20,
   },
   buttonText: {
-    fontFamily: 'inter-bold',
-    color: '#032D45',
+    fontFamily: "inter-bold",
+    color: "#032D45",
     fontSize: 18,
   },
   icon: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
   },

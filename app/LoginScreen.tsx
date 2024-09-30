@@ -18,7 +18,6 @@ import getIp from "../app/getIp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
-
   const [isSwitchOn, setIsSwitchOn] = useState(true); //ligado, por padrão, no visitante
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("");
@@ -57,7 +56,7 @@ const LoginScreen = () => {
           <Text style={{ color: "#082D47" }}>IPAQ</Text>
           <Text style={{ color: "#15E2C3" }}>move</Text>
         </Text>
-        
+
         {isSwitchOn ? (
           <TouchableOpacity
             style={styles.googleButton}
@@ -70,7 +69,7 @@ const LoginScreen = () => {
             style={styles.googleButton}
             onPress={handleLoginPress1} //pesquisador
           >
-            <Text style={styles.googleButtonText}>Entrar</Text> 
+            <Text style={styles.googleButtonText}>Entrar</Text>
           </TouchableOpacity>
         )}
 
@@ -99,7 +98,7 @@ const LoginScreen = () => {
             Visitante
           </Text>
         </View>
-        
+
         <TouchableOpacity style={styles.termsContainer}>
           <FontAwesome
             name="file-text-o"
@@ -116,7 +115,6 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </LinearGradient>
-    
     </View>
   );
 };

@@ -16,9 +16,9 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela4_4">;
+type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "Tela4_4">;
 
-const tela4_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
+const Tela4_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [searchName, setSearchName] = React.useState("");
@@ -106,7 +106,19 @@ const tela4_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!horaeminuto) {
+      Alert.alert("Erro", "Preencha o campo de Horas e Minutos");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina
@@ -202,4 +214,4 @@ const tela4_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   );
 };
 
-export default tela4_4;
+export default Tela4_4;

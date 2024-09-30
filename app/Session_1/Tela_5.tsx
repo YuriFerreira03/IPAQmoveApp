@@ -87,7 +87,7 @@ const Tela_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/0`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `http://${ip}:8080/questao/5`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
       const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -106,7 +106,19 @@ const Tela_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!horaeminuto) {
+      Alert.alert("Erro", "Preencha o campo de Horas e Minutos");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina
@@ -114,7 +126,7 @@ const Tela_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 0, // Substitua pelo ID da questão correta
+        fk_Questionario_id_questao: 5, // Substitua pelo ID da questão correta
         respostas_abertas: respostas_abertas,
         respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -123,7 +135,7 @@ const Tela_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
       const dadosParaEnvio = {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 0, // Sempre define com o id da questao
+        fk_Questionario_id_questao: 5, // Sempre define com o id da questao
         respostas_abertas: horaeminuto,
         respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -140,7 +152,7 @@ const Tela_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 0,
+          fk_Questao_id_questao: 5,
           respostas_abertas: horaeminuto,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,

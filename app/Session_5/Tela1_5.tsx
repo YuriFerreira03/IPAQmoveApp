@@ -106,7 +106,19 @@ const Tela1_5: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!horaeminuto) {
+      Alert.alert("Erro", "Preencha o campo de Horas e Minutos");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina

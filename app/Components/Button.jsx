@@ -1,10 +1,9 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const Button = ({ icon, onPress }) => {
-
   const navigation = useNavigation();
 
   return (
@@ -25,9 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -4, 
-    marginBottom: 30, 
-    marginLeft: 300, 
+    marginTop: -4,
+    marginBottom: 30,
+    marginLeft: 300,
   },
 });
 

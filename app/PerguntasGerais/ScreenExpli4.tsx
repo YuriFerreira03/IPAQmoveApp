@@ -20,7 +20,7 @@ const ScreenExpli4 = () => {
       <View style={styles.lineContainer}>
         <Text style={styles.section}>PERGUNTAS</Text>
         <View style={styles.viewI}>
-        <Text style={styles.sectionI}> GERAIS </Text>
+          <Text style={styles.sectionI}> GERAIS </Text>
         </View>
         <View style={styles.line} />
       </View>

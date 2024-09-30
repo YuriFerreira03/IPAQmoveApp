@@ -14,11 +14,10 @@ import axios from "axios";
 import getIp from "./getIp";
 import styles from "../styles/SignUp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Ícones de senha visível/invisível
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Ícones de senha visível/invisível
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const SignUpPesquisador = () => { 
-
+const SignUpPesquisador = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [locality, setLocality] = useState("");
@@ -52,20 +51,31 @@ const SignUpPesquisador = () => {
     setIsLoading(true); // Mostrar o indicador de carregamento
 
     try {
-      const ip = await getIp(); 
+      const ip = await getIp();
       const url = `http://${ip}:8080/Usuario`;
 
       console.log("URL de requisição:", url);
-      console.log("Enviando dados para o backend:", { name, email, locality, password, type: "user" });
+      console.log("Enviando dados para o backend:", {
+        name,
+        email,
+        locality,
+        password,
+        type: "user",
+      });
 
       const response = await axios.post(
         url,
         { name, email, locality, password, type: "user" }, // Enviar dados de cadastro
         { timeout: 20000 }
       );
-      
+
       // Resposta do backend
-      const { userId, name: responseName, email: responseEmail, locality: responseLocality } = response.data;
+      const {
+        userId,
+        name: responseName,
+        email: responseEmail,
+        locality: responseLocality,
+      } = response.data;
 
       // Armazenar os dados no AsyncStorage para futura autenticação ou uso
       if (userId && responseName && responseEmail && responseLocality) {
@@ -73,15 +83,14 @@ const SignUpPesquisador = () => {
         await AsyncStorage.setItem("name", responseName);
         await AsyncStorage.setItem("email", responseEmail);
         await AsyncStorage.setItem("locality", responseLocality);
-      
+
         console.log("Nome armazenado:", responseName);
         console.log("Email armazenado:", responseEmail);
         console.log("Localidade armazenada:", responseLocality);
       }
-      
+
       Alert.alert("Usuário cadastrado com sucesso!");
       navigation.navigate("Home"); // Navegar para a tela inicial após cadastro
-
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
       Alert.alert("Erro ao cadastrar!"); // Mostrar erro caso falhe
@@ -97,10 +106,7 @@ const SignUpPesquisador = () => {
       extraScrollHeight={20}
     >
       <View style={styles.container}>
-        <LinearGradient
-          colors={["#032D45", "#14E2C3"]}
-          style={styles.gradient}
-        >
+        <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.gradient}>
           <View style={styles.containerLog}>
             <Image
               source={require("../images/logo.png")}

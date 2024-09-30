@@ -1,20 +1,20 @@
 // Arquivo: styles/InicioPerguntasGerais.js
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   imageStyle: {
-    alignItems: 'center',
+    alignItems: "center",
     width: 150,
     height: 200,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: -150,
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#14E2C3',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#14E2C3",
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 50,
@@ -22,37 +22,37 @@ export default StyleSheet.create({
   },
   buttonText: {
     width: 130,
-    textAlign: 'center',
-    fontFamily: 'inter-bold',
-    color: '#032D45',
+    textAlign: "center",
+    fontFamily: "inter-bold",
+    color: "#032D45",
     fontSize: 18,
   },
   textIPAQ: {
-    fontFamily: 'inter-bold',
-    color: '#FFFFFF',
+    fontFamily: "inter-bold",
+    color: "#FFFFFF",
     fontSize: 60,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 10,
   },
   underline: {
-    width: '60%',
+    width: "60%",
     height: 4,
-    backgroundColor: '#14E2C3',
-    alignSelf: 'center',
+    backgroundColor: "#14E2C3",
+    alignSelf: "center",
     marginBottom: 20,
   },
   textSubtitle: {
-    color: '#ffffff',
-    fontFamily: 'inter-light',
+    color: "#ffffff",
+    fontFamily: "inter-light",
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 40,
   },
   gradient: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 70,
-  }
+  },
 });

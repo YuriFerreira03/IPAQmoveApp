@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     fontFamily: "inter-regular",
     flexDirection: "row",
   },
-  
+
   button: {
     width: 50,
     height: 50,
@@ -66,11 +66,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -4, 
-    marginBottom: 30, 
-    marginLeft: 300, 
+    marginTop: -4,
+    marginBottom: 30,
+    marginLeft: 300,
   },
-
 });
 
 export default styles;
