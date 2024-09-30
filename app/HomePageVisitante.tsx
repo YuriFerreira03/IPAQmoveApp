@@ -36,12 +36,12 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
       const userId = await AsyncStorage.getItem("userId");
       const userName = await AsyncStorage.getItem("name");
       const userLocality = await AsyncStorage.getItem("locality");
-  
+
       // Logs para depuração
       console.log("UserId recuperado:", userId);
       console.log("Nome recuperado:", userName);
       console.log("Localidade recuperada:", userLocality);
-  
+
       setUserId(userId);
       setName(userName);
       setLocality(userLocality);
@@ -49,11 +49,11 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
       console.error("Erro ao recuperar dados do AsyncStorage:", error);
     }
   }
-  
+
   useEffect(() => {
     getDataFromStorage();
   }, []);
-  
+
   const handleAccessPress = () => {
     navigation.navigate("InicioPerguntasGerais");
   };
@@ -70,7 +70,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
 
   const handleResultsPress = () => {
     navigation.navigate("Resultados"); // Navega para a página de resultados
-  };  
+  };
 
   const handleProfilePress = () => {
     // Lógica para o perfil

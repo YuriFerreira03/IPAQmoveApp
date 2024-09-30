@@ -102,11 +102,23 @@ const Tela_6: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!diasSemana && !isChecked) {
+      Alert.alert("Erro", "Preencha pelo menos um campo ou marque o checkbox.");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       if (isChecked) {
         console.log("Checkbox marcado, navegando para Splach2");
-        navigation.navigate("Splash2"); // Navega para Tela 
+        navigation.navigate("Splash2"); // Navega para Tela
         return; // Para a execução do restante da função
       }
       console.log("Iniciando cadastro de resposta...");

@@ -79,7 +79,7 @@ export default function App() {
       <NavigationContainer independent>
         <SafeAreaView style={styles.safeArea}>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="Tela6_4"
             screenOptions={{
               headerShown: false,
               cardStyle: { backgroundColor: "transparent" },
@@ -88,9 +88,15 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Login1" component={Login1} />
             <Stack.Screen name="Login2" component={Login2} />
-            <Stack.Screen name="CadastroPesquisador" component={SignUpPesquisador} />
-            <Stack.Screen name="CadastroVisitante" component={SignUpVisitante} />
-  
+            <Stack.Screen
+              name="CadastroPesquisador"
+              component={SignUpPesquisador}
+            />
+            <Stack.Screen
+              name="CadastroVisitante"
+              component={SignUpVisitante}
+            />
+
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
@@ -137,7 +143,6 @@ export default function App() {
             <Stack.Screen name="Tela5_3" component={Tela5_3} />
             <Stack.Screen name="Tela6_3" component={Tela6_3} />
             <Stack.Screen name="Tela7_3" component={Tela7_3} />
-            
 
             <Stack.Screen name="Splach4" component={SplashScreen4} />
             <Stack.Screen name="Tela1_4" component={Tela1_4} />
@@ -150,7 +155,6 @@ export default function App() {
             <Stack.Screen name="Splach5" component={SplashScreen5} />
             <Stack.Screen name="Tela1_5" component={Tela1_5} />
             <Stack.Screen name="Tela2_5" component={Tela2_5} />
-
           </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
@@ -167,8 +171,8 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     margin: 0,
-    padding: 100,
-    marginTop: -48,
+    paddingTop: 100,
+    marginTop: -62,
     marginBottom: -40,
   },
 });

@@ -32,7 +32,9 @@ const Resultado: React.FC = () => {
             onPress={handleDownloadPDF}
           >
             <Icon name="picture-as-pdf" size={24} color="#FFFFFF" />
-            <Text style={styles.pdfButtonText}>VISUALIZAR RESULTADOS EM PDF</Text>
+            <Text style={styles.pdfButtonText}>
+              VISUALIZAR RESULTADOS EM PDF
+            </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -103,7 +103,19 @@ const Tela4_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!diasSemana && !isChecked) {
+      Alert.alert("Erro", "Preencha pelo menos um campo ou marque o checkbox.");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       if (isChecked) {
         console.log("Checkbox marcado, navegando para Tela6_3");
@@ -168,58 +180,57 @@ const Tela4_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   };
 
   return (
-
     <KeyboardAwareScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       enableOnAndroid={true}
       extraScrollHeight={20}
     >
-    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>SEÇÃO 3</Text>
-        <CustomStepper steps={steps} activeStep={activeStep} />
+      <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Text style={styles.title}>SEÇÃO 3</Text>
+          <CustomStepper steps={steps} activeStep={activeStep} />
 
-        {questao && (
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
+          {questao && (
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
 
-            {/* Campo de texto para dias por semana */}
-            <View style={styles.checkboxWrapper}>
-              <TextInput
-                style={styles.textboxV}
-                placeholderTextColor="#b3b3b3"
-                textColor="white"
-                keyboardType="numeric"
-                value={diasSemana}
-                onChangeText={handleTextInputChange}
-                editable={!isChecked} // Desabilita o campo se o checkbox estiver marcado
-                underlineColor="white" // Cor da barra de texto em estado inativo
-                activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
-              />
-              <Text style={styles.label}>dias por SEMANA</Text>
+              {/* Campo de texto para dias por semana */}
+              <View style={styles.checkboxWrapper}>
+                <TextInput
+                  style={styles.textboxV}
+                  placeholderTextColor="#b3b3b3"
+                  textColor="white"
+                  keyboardType="numeric"
+                  value={diasSemana}
+                  onChangeText={handleTextInputChange}
+                  editable={!isChecked} // Desabilita o campo se o checkbox estiver marcado
+                  underlineColor="white" // Cor da barra de texto em estado inativo
+                  activeUnderlineColor="white" // Cor da barra de texto quando ativo/focado
+                />
+                <Text style={styles.label}>dias por SEMANA</Text>
+              </View>
+
+              {/* Checkbox para "nenhum" */}
+              <View style={styles.checkboxWrapper}>
+                <Checkbox
+                  value={isChecked} // Usar o valor correto do estado
+                  onValueChange={handleCheckboxChange}
+                  color={isChecked ? "#16E2C3" : undefined} // Cor quando marcado
+                  style={styles.checkbox}
+                />
+                <Text style={styles.label}>nenhum</Text>
+              </View>
             </View>
+          )}
 
-            {/* Checkbox para "nenhum" */}
-            <View style={styles.checkboxWrapper}>
-              <Checkbox
-                value={isChecked} // Usar o valor correto do estado
-                onValueChange={handleCheckboxChange}
-                color={isChecked ? "#16E2C3" : undefined} // Cor quando marcado
-                style={styles.checkbox}
-              />
-              <Text style={styles.label}>nenhum</Text>
-            </View>
-          </View>
-        )}
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
-        >
-          <Icon name="chevron-right" size={30} color="#032D45" />
-        </TouchableOpacity>
-      </ScrollView>
-    </LinearGradient>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
+          >
+            <Icon name="chevron-right" size={30} color="#032D45" />
+          </TouchableOpacity>
+        </ScrollView>
+      </LinearGradient>
     </KeyboardAwareScrollView>
   );
 };

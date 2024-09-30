@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Alert,
-} from "react-native";
+import { View, Text, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Checkbox from "expo-checkbox";
 import styles from "../../styles/GeneralQuestionsScreen";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInput } from "react-native-paper";
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getIp from "../getIp";
@@ -27,7 +23,6 @@ const GeneralQuestionsScreen = () => {
   const [horasSono, setHorasSono] = useState("");
   const navigation = useNavigation();
   const [userId, setUserId] = useState<string | null>("");
-
 
   async function getDataFromStorage() {
     setUserId(await AsyncStorage.getItem("userId"));
@@ -55,14 +50,22 @@ const GeneralQuestionsScreen = () => {
       if (storedPeso) setPeso(storedPeso);
       if (storedHorasTrabalho) setHorasTrabalho(storedHorasTrabalho);
       if (storedHorasSono) setHorasSono(storedHorasSono);
-      if (storedIsChecked) setChecked(storedIsChecked === 'true');
+      if (storedIsChecked) setChecked(storedIsChecked === "true");
     }
 
     loadData();
   }, []);
 
   const validateForm = () => {
-    if (!name || !age || !gender || !estatura || !peso || !horasTrabalho || !horasSono) {
+    if (
+      !name ||
+      !age ||
+      !gender ||
+      !estatura ||
+      !peso ||
+      !horasTrabalho ||
+      !horasSono
+    ) {
       Alert.alert("Erro", "Todos os campos devem ser preenchidos.");
       return false;
     }
@@ -75,7 +78,7 @@ const GeneralQuestionsScreen = () => {
     }
 
     try {
-      const ip = getIp(); // Supondo que você tenha uma função para obter o IP
+      const ip = getIp();
       const url = `http://${ip}:8080/perguntas_gerais`;
 
       const response = await axios.post(
@@ -88,7 +91,7 @@ const GeneralQuestionsScreen = () => {
           estatura: parseFloat(estatura),
           peso: parseFloat(peso),
           trabalha_remunerado: isChecked ? 1 : 0,
-          horas_trabalho_dia: parseInt(horasTrabalho, 10),
+          horas_trabalha_dia: parseInt(horasTrabalho, 10),
           horas_sono_dia: parseInt(horasSono, 10),
         },
         {
@@ -125,37 +128,111 @@ const GeneralQuestionsScreen = () => {
         <TextInput
           style={styles.textbox}
           placeholder="Nome:"
-          placeholderTextColor="#b3b3b3"
+          placeholderTextColor="white"
+          textColor="white"
           value={name}
           onChangeText={setName}
         />
         <TextInput
           style={styles.textboxI}
           placeholder="Idade:"
-          placeholderTextColor="#b3b3b3"
+          placeholderTextColor="white"
+          textColor="white"
           value={age}
-          onChangeText={setAge}
+          keyboardType="numeric"
+          maxLength={3} // Limita a 2 dígitos
+          onChangeText={(text) => {
+            // Remova qualquer caractere que não seja número
+            let formattedText = text.replace(/[^0-9]/g, "");
+
+            setAge(formattedText); // Atualiza o valor com até 2 dígitos
+          }}
         />
+
         <TextInput
           style={styles.textboxII}
           placeholder="Sexo: "
-          placeholderTextColor="#b3b3b3"
+          placeholderTextColor="white"
+          textColor="white"
           value={gender}
           onChangeText={setGender}
+          onEndEditing={() => {
+            const formattedText = gender.trim().toLowerCase();
+            if (formattedText === "masculino" || formattedText === "feminino") {
+              setGender(
+                formattedText.charAt(0).toUpperCase() + formattedText.slice(1)
+              );
+            } else {
+              Alert.alert(
+                "Erro",
+                "O campo Sexo aceita apenas 'Masculino' ou 'Feminino'"
+              );
+              setGender(""); // Limpa o campo se for inválido
+            }
+          }}
         />
+
         <TextInput
           style={styles.textboxIII}
           placeholder="Estatura: "
-          placeholderTextColor="#b3b3b3"
+          placeholderTextColor="white"
+          textColor="white"
           value={estatura}
-          onChangeText={setEstatura}
+          keyboardType="numeric"
+          onChangeText={(text) => {
+            // Remover qualquer caractere que não seja número ou ponto
+            let formattedText = text.replace(/[^0-9.]/g, "");
+
+            // Verificar se o primeiro número é maior que 2
+            if (
+              formattedText.length > 0 &&
+              parseInt(formattedText[0], 10) > 2
+            ) {
+              return; // Se o primeiro número for maior que 2, não atualize o valor
+            }
+
+            // Limitar a no máximo um ponto decimal
+            const decimalCount = (formattedText.match(/\./g) || []).length;
+            if (decimalCount > 1) {
+              return; // Impede múltiplos pontos decimais
+            }
+
+            // Adicionar ponto automaticamente após o primeiro dígito
+            if (formattedText.length > 1 && !formattedText.includes(".")) {
+              formattedText =
+                formattedText.slice(0, 1) + "." + formattedText.slice(1);
+            }
+
+            // Limitar a dois dígitos após o ponto
+            if (formattedText.includes(".")) {
+              const parts = formattedText.split(".");
+              if (parts[1].length > 2) {
+                formattedText = parts[0] + "." + parts[1].substring(0, 2);
+              }
+              // Verificar se os últimos dois dígitos não excedem 99
+              if (parseInt(parts[1], 10) > 99) {
+                return; // Se o valor após o ponto for maior que 99, não atualize o valor
+              }
+            }
+
+            setEstatura(formattedText); // Atualiza o valor final se passar em todas as validações
+          }}
         />
+
         <TextInput
           style={styles.textboxIV}
           placeholder="Peso: "
-          placeholderTextColor="#b3b3b3"
+          placeholderTextColor="white"
+          textColor="white"
           value={peso}
-          onChangeText={setPeso}
+          keyboardType="numeric"
+          maxLength={3} // Limita a 3 dígitos
+          onChangeText={(text) => {
+            // Remova qualquer caractere que não seja número
+            let formattedText = text.replace(/[^0-9]/g, "");
+
+            setPeso(formattedText); // Atualiza o valor com até 3 dígitos
+          }}
         />
 
         <View style={styles.card}>
@@ -182,12 +259,25 @@ const GeneralQuestionsScreen = () => {
           <Text style={styles.cardTitle}>
             Quantas horas você trabalha por dia:
           </Text>
+
           <TextInput
             style={styles.textboxV}
             placeholder="Digite aqui:"
-            placeholderTextColor="#b3b3b3"
+            placeholderTextColor="white"
+            textColor="white"
             value={horasTrabalho}
-            onChangeText={setHorasTrabalho}
+            keyboardType="numeric"
+            onChangeText={(text) => {
+              // Remover qualquer caractere que não seja número
+              let formattedText = text.replace(/[^0-9]/g, "");
+
+              // Converter o texto para número e verificar se excede 24
+              if (formattedText !== "" && parseInt(formattedText, 10) > 24) {
+                formattedText = ""; // Limita o valor e apaga se for maior que 24
+              }
+
+              setHorasTrabalho(formattedText); // Atualiza o valor com no máximo 24
+            }}
           />
         </View>
 
@@ -195,19 +285,29 @@ const GeneralQuestionsScreen = () => {
           <Text style={styles.cardTitle}>
             Quantas horas você dorme por dia:
           </Text>
+
           <TextInput
             style={styles.textboxV}
             placeholder="Digite aqui:"
-            placeholderTextColor="#b3b3b3"
+            placeholderTextColor="white"
+            textColor="white"
             value={horasSono}
-            onChangeText={setHorasSono}
+            keyboardType="numeric"
+            onChangeText={(text) => {
+              // Remover qualquer caractere que não seja número
+              let formattedText = text.replace(/[^0-9]/g, "");
+
+              // Converter o texto para número e verificar se excede 24
+              if (formattedText !== "" && parseInt(formattedText, 10) > 24) {
+                formattedText = ""; // Limita o valor e apaga se for maior que 24
+              }
+
+              setHorasSono(formattedText); // Atualiza o valor com no máximo 24
+            }}
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.button3}
-          onPress={handleRegister}
-        >
+        <TouchableOpacity style={styles.button3} onPress={handleRegister}>
           <Icon name="chevron-right" size={30} color="#032D45" />
         </TouchableOpacity>
       </LinearGradient>

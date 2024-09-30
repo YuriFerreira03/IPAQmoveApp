@@ -32,9 +32,17 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   const [userLocality, setLocality] = useState<string | null>("");
 
   async function getDataFromStorage() {
-    setUserId(await AsyncStorage.getItem("userId"));
-    setName(await AsyncStorage.getItem("name"));
-    setLocality(await AsyncStorage.getItem("locality"));
+    const storedUserId = await AsyncStorage.getItem("userId");
+    const storedName = await AsyncStorage.getItem("name");
+    const storedLocality = await AsyncStorage.getItem("locality");
+
+    console.log("UserId recuperado:", storedUserId);
+    console.log("Nome recuperado:", storedName);
+    console.log("Localidade recuperada:", storedLocality);
+
+    setUserId(storedUserId);
+    setName(storedName);
+    setLocality(storedLocality);
   }
 
   useEffect(() => {
@@ -46,8 +54,13 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   };
 
   const handleSearchPress = () => {
-    //adicionando uma constante para conectar à tela de Pesquisa
-    navigation.navigate("Search", { userName, userLocality }); // Passa o userName como parâmetro
+    if (userName && userLocality) {
+      console.log("Navegando para Search com:", { userName, userLocality });
+      navigation.navigate("Search", { userName, userLocality }); // Passa userName e userLocality como parâmetros
+    } else {
+      console.log("Dados do usuário não carregados.");
+      Alert.alert("Erro", "Dados do usuário não carregados.");
+    }
   };
 
   const handleSearchPress1 = () => {

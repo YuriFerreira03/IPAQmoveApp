@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../../styles/InicioPerguntasGerais";
-import { useNavigation, NavigationProp, RouteProp } from "@react-navigation/native";
+import {
+  useNavigation,
+  NavigationProp,
+  RouteProp,
+} from "@react-navigation/native";
 import { RootStackParamList } from ".";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -35,10 +39,15 @@ const InicioPerguntasGerais: React.FC<HomePageProps> = ({ route }) => {
 
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
-      <Image source={require("../../images/logo.png")} style={styles.imageStyle} />
+      <Image
+        source={require("../../images/logo.png")}
+        style={styles.imageStyle}
+      />
       <Text style={styles.textIPAQ}>IPAQ</Text>
       <View style={styles.underline} />
-      <Text style={styles.textSubtitle}>Questionário Internacional de Atividade Física</Text>
+      <Text style={styles.textSubtitle}>
+        Questionário Internacional de Atividade Física
+      </Text>
       <TouchableOpacity onPress={handlePress} style={styles.button}>
         <Text style={styles.buttonText}>COMEÇAR</Text>
       </TouchableOpacity>

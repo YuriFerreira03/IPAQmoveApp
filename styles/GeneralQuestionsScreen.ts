@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,8 +7,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 17,
     marginVertical: -200,
-    paddingVertical: 200
-    
+    paddingVertical: 200,
   },
   body: {
     fontSize: 32,
@@ -21,53 +20,52 @@ const styles = StyleSheet.create({
     lineHeight: 45,
   },
   card: {
-    backgroundColor: 'transparent', // Mudei para transparente para se misturar com o fundo gradiente
+    backgroundColor: "transparent", // Mudei para transparente para se misturar com o fundo gradiente
     borderRadius: 10,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: "#fff",
     padding: 23,
     marginVertical: 30,
-    width: '92%',
-    alignItems: 'flex-start',
+    width: "92%",
+    alignItems: "flex-start",
   },
   cardTitle: {
     fontSize: 25,
     marginBottom: 40,
-    color: 'white',
+    color: "white",
     fontFamily: "inter-light",
   },
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    color: 'white',
+    flexDirection: "row",
+    alignItems: "center",
+    color: "white",
   },
   checkbox: {
     width: 24,
     height: 24,
-    borderWidth:1,
-    borderColor: '#fff',
+    borderWidth: 1,
+    borderColor: "#fff",
     left: 10,
   },
   label: {
     fontSize: 26,
-    color: 'white',
+    color: "white",
     marginHorizontal: 20,
     fontFamily: "inter-light",
     lineHeight: 45,
-
   },
   safeArea: {
     flex: 1,
   },
   scrollView: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 1,
     paddingVertical: 26,
     paddingHorizontal: 20,
@@ -75,23 +73,23 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     marginTop: 30,
   },
   greeting: {
     fontSize: 24,
-    color: '#ffff',
-    fontFamily: 'inter-medium',
+    color: "#ffff",
+    fontFamily: "inter-medium",
   },
   userName: {
     fontSize: 24,
-    color: '#FFFFF',
-    fontFamily: 'inter-bold',
+    color: "#FFFFF",
+    fontFamily: "inter-bold",
   },
   location: {
     fontSize: 18,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     marginTop: 5,
   },
   icon: {
@@ -102,7 +100,7 @@ const styles = StyleSheet.create({
   texthead: {
     marginTop: 40,
     fontSize: 23,
-    fontFamily: 'inter-bold',
+    fontFamily: "inter-bold",
     color: "#FFFFF",
   },
   textbox: {
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 100,
     marginVertical: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "transparent",
     color: "#FFFFFF",
     borderColor: "#FFFFFF",
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 1,
     marginVertical: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: "transparent",
     color: "#FFFFF",
     borderColor: "#FFFFFF",
@@ -134,10 +132,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   textboxII: {
-    width: 80,
+    width: 300,
     height: 60,
-    marginTop: 5,
-    marginLeft: -220,
+    marginTop: 1,
+    marginVertical: 20,
+    justifyContent: "center",
     backgroundColor: "transparent",
     color: "#FFFFF",
     borderColor: "#FFFFFF",
@@ -172,23 +171,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-
   },
   textboxV: {
     backgroundColor: "transparent",
     borderColor: "transparent",
-    color: 'white',
+    color: "white",
   },
   button3: {
-  width: 50,
-  height: 50,
-  borderRadius: 25,
-  backgroundColor: "white",
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: 5, 
-  marginBottom: 30, 
-  marginLeft: 300, 
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
+    marginBottom: 30,
+    marginLeft: 300,
   },
   input: {
     width: "100%",
@@ -197,9 +195,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: 'white',
+    color: "white",
     marginBottom: 20,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent",
   },
 });
 

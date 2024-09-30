@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  TextInput,  // Agora usando TextInput nativo do React Native
+  TextInput, // Agora usando TextInput nativo do React Native
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
@@ -14,11 +14,10 @@ import axios from "axios";
 import getIp from "./getIp";
 import styles from "../styles/LoginUsu";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importar o ícone
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Importar o ícone
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const LoginVisitante = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // Controle de visibilidade da senha
@@ -31,32 +30,35 @@ const LoginVisitante = () => {
     setIsLoading(true);
 
     try {
-      const ip = await getIp(); 
+      const ip = await getIp();
       const url = `http://${ip}:8080/login`;
 
       console.log("URL de requisição:", url);
-      console.log("Enviando dados para o backend:", { email, password, type: "user" });
+      console.log("Enviando dados para o backend:", {
+        email,
+        password,
+        type: "user",
+      });
 
       const response = await axios.post(
         url,
         { email, password, type: "user" },
         { timeout: 20000 }
       );
-      
+
       const { userId, name, locality } = response.data;
 
       if (userId && name && locality) {
         await AsyncStorage.setItem("userId", userId.toString());
         await AsyncStorage.setItem("name", name);
         await AsyncStorage.setItem("locality", locality);
-      
+
         console.log("Nome armazenado:", name);
         console.log("Localidade armazenada:", locality);
       }
-      
+
       Alert.alert("Usuário entrou!");
       navigation.navigate("HomeVisitante");
-      
     } catch (error) {
       console.error("Erro ao entrar:", error);
       Alert.alert("Erro ao entrar!");
@@ -76,10 +78,7 @@ const LoginVisitante = () => {
       extraScrollHeight={20}
     >
       <View style={styles.container}>
-        <LinearGradient
-          colors={["#032D45", "#14E2C3"]}
-          style={styles.gradient}
-        >
+        <LinearGradient colors={["#032D45", "#14E2C3"]} style={styles.gradient}>
           <View style={styles.containerLog}>
             <Image
               source={require("../images/logo.png")}
@@ -120,7 +119,6 @@ const LoginVisitante = () => {
             </View>
           </View>
 
-          
           {/* Botão de Login */}
           <TouchableOpacity
             style={styles.buttonlog}
@@ -133,7 +131,6 @@ const LoginVisitante = () => {
           <TouchableOpacity onPress={Cadastro}>
             <Text style={styles.textbuttonlog1}>Não tenho conta</Text>
           </TouchableOpacity>
-
         </LinearGradient>
       </View>
     </KeyboardAwareScrollView>

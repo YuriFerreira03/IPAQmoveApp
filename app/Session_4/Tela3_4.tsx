@@ -102,7 +102,19 @@ const Tela1_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     fetchQuestao();
   }, []);
 
+  const validateForm = () => {
+    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
+    if (!diasEAtividades && !isChecked) {
+      Alert.alert("Erro", "Preencha pelo menos um campo ou marque o checkbox.");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       if (isChecked) {
         console.log("Checkbox marcado, navegando para Tela3_4");

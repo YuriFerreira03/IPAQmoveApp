@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
   pdfButtonText: {
     color: "#FFFFFF",
-    fontSize:20,
+    fontSize: 20,
     marginLeft: 10,
   },
 });

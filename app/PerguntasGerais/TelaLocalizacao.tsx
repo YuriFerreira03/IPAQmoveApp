@@ -1,12 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState, useEffect } from "react"; // Adicionado useEffect
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   Alert,
+  FlatList,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import axios from "axios";
@@ -29,9 +29,9 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
   route,
 }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { userLocality } = route.params; // Recebe o parâmetro userName e userId
+  const { userLocality } = route.params ?? {};
   const [searchName, setSearchName] = React.useState("");
-  const [initialLocalizacao, setInitialLocalizacao] = useState(""); // Estado para armazenar a localização inicial
+  const [initialLocalizacao, setInitialLocalizacao] = useState("");
   const [isChecked, setChecked] = useState(false);
   const [respostas_abertas, setrespostas_abertas] = React.useState("");
   const [respostas_fechadas, setrespostas_fechadas] = useState("");
@@ -39,6 +39,11 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
   const [resposta, setresposta] = useState<string | null>("");
   const [userId, setUserId] = useState<string | null>("");
   const [localizacao, setLocalizacao] = useState<string | null>("");
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(null);
+
+  // Estados para cidades e filtragem
+  const [cidades, setCidades] = useState([]);
+  const [filteredCidades, setFilteredCidades] = useState([]);
 
   async function getDataFromStorage() {
     setUserId(await AsyncStorage.getItem("userId"));
@@ -49,53 +54,70 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
     getDataFromStorage();
   }, []);
 
+  // Buscar cidades na API do IBGE
+  useEffect(() => {
+    const fetchCidades = async () => {
+      try {
+        const response = await axios.get(
+          "https://servicodados.ibge.gov.br/api/v1/localidades/municipios"
+        );
+        setCidades(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar cidades:", error);
+      }
+    };
+
+    fetchCidades();
+  }, []);
+
+  // Filtrar cidades com base na entrada do usuário
+  useEffect(() => {
+    if (resposta.length > 1) {
+      const filtro = cidades.filter((cidade) =>
+        cidade.nome.toLowerCase().includes(resposta.toLowerCase())
+      );
+      setFilteredCidades(filtro);
+    } else {
+      setFilteredCidades([]);
+    }
+  }, [resposta, cidades]);
+
   const handleRegister = async () => {
     try {
-      console.log("Iniciando cadastro de resposta...");
-      const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/Resposta`;
-      console.log("URL de requisição:", url);
-      console.log("Enviando dados para o backend:", {
-        fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 1, // Substitua pelo ID da questão correta
+      const data = {
+        fk_Usuario_id_usuario: userId,
+        fk_Questao_id_questao: 1,
         respostas_abertas: respostas_abertas,
         respostas_fechadas: respostas_fechadas,
         datahora: datahora,
         resposta: resposta,
-      });
+      };
+      console.log("Iniciando cadastro de resposta...");
+      const ip = getIp();
+      const url = `http://${ip}:8080/Resposta`;
+      console.log("URL de requisição:", url);
+      console.log("Enviando dados para o backend:", data);
 
-      const response = await axios.post(
-        url,
-        {
-          fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questionario_id_questao: 1, // Substitua pelo ID da questão correta
-          respostas_abertas: respostas_abertas,
-          respostas_fechadas: respostas_fechadas,
-          datahora: datahora,
-          resposta: resposta,
-        },
-        {
-          timeout: 10000, // 10 segundos de tempo limite
-        }
-      );
-
+      const response = await axios.post(url, data);
       console.log("Resposta do backend:", response.data);
       Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
       setSearchName("");
       navigation.navigate("Tela2");
-
     } catch (error) {
-      console.error("Erro ao cadastrar respsota:", error);
-      Alert.alert("Erro", "Não foi possível cadastrar a respsota.");
+      console.error("Erro ao cadastrar resposta:", error);
+      Alert.alert("Erro", "Não foi possível cadastrar a resposta.");
     }
   };
 
-  const handlePress = async (destination) => {
-    if (userLocality && isChecked) {
+  const handlePress = async (Tela2) => {
+    // Verifica se uma cidade foi selecionada (armazenada no estado cidadeSelecionada)
+    if (resposta && isChecked) {
       await handleRegister();
-      navigation.navigate(destination);
-    } else {
-      Alert.alert("Aviso", "Preencha a localização e aceite os termos de uso.");
+      navigation.navigate(Tela2);
+    } else if (!resposta) {
+      Alert.alert("Aviso", "Selecione uma cidade válida da lista.");
+    } else if (!isChecked) {
+      Alert.alert("Aviso", "Aceite os termos de uso para continuar.");
     }
   };
 
@@ -117,6 +139,27 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
           value={resposta}
           onChangeText={setresposta}
         />
+
+        {/* Lista de Sugestões de Cidades */}
+        {filteredCidades.length > 0 && (
+          <FlatList
+            data={filteredCidades}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  setresposta(item.nome); // Definir a cidade selecionada no input
+                  setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
+                  setFilteredCidades([]);
+                }}
+              >
+                <Text style={styles.suggestionText}>{item.nome}</Text>
+              </TouchableOpacity>
+            )}
+            style={styles.suggestionsContainer}
+          />
+        )}
+
         <View style={styles.checkboxContainer}>
           <Checkbox
             value={isChecked}

@@ -20,7 +20,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     fontFamily: "inter-regular",
     lineHeight: 50,
-    marginTop: 40
+    marginTop: 40,
   },
   textII: {
     fontSize: 20,
@@ -86,5 +86,21 @@ export default StyleSheet.create({
     fontSize: 18,
     color: "#032D45",
     fontFamily: "inter-bold",
+  },
+  suggestionsContainer: {
+    maxHeight: 150,
+    backgroundColor: "#fff",
+    borderColor: "#fff", // Mesma cor da borda do input
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: -20, // Ajusta a margem para aparecer logo abaixo do input
+    width: "100%", // Mesma largura do input
+    zIndex: 1,
+  },
+  suggestionText: {
+    padding: 15, // Ajuste de padding para combinar com o input
+    color: "#fff", // Mesma cor do texto do input
+    fontSize: 16, // Mesmo tamanho de fonte
+    backgroundColor: "#032D45", // Cor de fundo combinando com o gradiente da tela
   },
 });
