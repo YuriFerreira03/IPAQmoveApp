@@ -144,4 +144,20 @@ export default StyleSheet.create({
     fontFamily: "inter-bold",
     fontSize: 26,
   },
+  suggestionsContainer: {
+    maxHeight: 100,
+    backgroundColor: "#fff",
+    borderColor: "#fff", // Mesma cor da borda do input
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: -5, // Ajusta a margem para aparecer logo abaixo do input
+    width: "75%", // Mesma largura do input
+    zIndex: 1,
+  },
+  suggestionText: {
+    padding: 15, // Ajuste de padding para combinar com o input
+    color: "#fff", // Mesma cor do texto do input
+    fontSize: 16, // Mesmo tamanho de fonte
+    backgroundColor: "#032D45", // Cor de fundo combinando com o gradiente da tela
+  },
 });

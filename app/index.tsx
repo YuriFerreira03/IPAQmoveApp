@@ -60,7 +60,8 @@ import Tela1_5 from "./Session_5/Tela1_5";
 import Tela2_5 from "./Session_5/Tela2_5";
 
 export type RootStackParamList = {
-  Login: undefined;
+  Login1: { userType: string };
+  Login2: { userType: string };
   Home: undefined;
   SearchScreen: undefined;
   TelaLocalizacao: undefined;
@@ -79,7 +80,7 @@ export default function App() {
       <NavigationContainer independent>
         <SafeAreaView style={styles.safeArea}>
           <Stack.Navigator
-            initialRouteName="Tela6_4"
+            initialRouteName="login"
             screenOptions={{
               headerShown: false,
               cardStyle: { backgroundColor: "transparent" },
