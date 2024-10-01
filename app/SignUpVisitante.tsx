@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   Alert,
   TextInput,
+  FlatList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import getIp from "./getIp";
 import styles from "../styles/SignUp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,10 +24,17 @@ const SignUpPesquisador = () => {
   const [locality, setLocality] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // Controle de visibilidade da senha
-
+  // Estados para cidades e filtragem
+  const [cidades, setCidades] = useState([]);
+  const [filteredCidades, setFilteredCidades] = useState([]);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   // Função para validar a senha
   const validatePassword = (password: string) => {
@@ -38,8 +46,53 @@ const SignUpPesquisador = () => {
     return minLength && hasUpperCase && hasNumber && hasSpecialChar;
   };
 
+  // Buscar cidades na API do IBGE
+  useEffect(() => {
+    const fetchCidades = async () => {
+      try {
+        const response = await axios.get(
+          "https://servicodados.ibge.gov.br/api/v1/localidades/municipios"
+        );
+        setCidades(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar cidades:", error);
+      }
+    };
+
+    fetchCidades();
+  }, []);
+
+  // Filtrar cidades com base na entrada do usuário
+  useEffect(() => {
+    if (locality.length > 1) {
+      const filtro = cidades.filter((cidade) =>
+        cidade.nome.toLowerCase().includes(locality.toLowerCase())
+      );
+      setFilteredCidades(filtro);
+    } else {
+      setFilteredCidades([]);
+    }
+  }, [locality, cidades]);
+
   // Função para tratar o cadastro
   const handleCadastro = async () => {
+    if (!name || !email || !locality || !password) {
+      Alert.alert("Erro", "Todos os campos devem ser preenchidos.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      Alert.alert("Erro", "Por favor, insira um e-mail válido.");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      Alert.alert(
+        "Senha Inválida",
+        "A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, números e caracteres especiais."
+      );
+      return;
+    }
     if (!validatePassword(password)) {
       Alert.alert(
         "Senha Inválida",
@@ -48,7 +101,7 @@ const SignUpPesquisador = () => {
       return; // Não prosseguir com o cadastro se a senha for inválida
     }
 
-    setIsLoading(true); // Mostrar o indicador de carregamento
+    // setIsLoading(true); // Mostrar o indicador de carregamento
 
     try {
       const ip = await getIp();
@@ -60,12 +113,12 @@ const SignUpPesquisador = () => {
         email,
         locality,
         password,
-        type: "user",
+        type: "visitante",
       });
 
       const response = await axios.post(
         url,
-        { name, email, locality, password, type: "user" }, // Enviar dados de cadastro
+        { name, email, locality, password, type: "visitante" }, // Enviar dados de cadastro
         { timeout: 20000 }
       );
 
@@ -90,12 +143,23 @@ const SignUpPesquisador = () => {
       }
 
       Alert.alert("Usuário cadastrado com sucesso!");
-      navigation.navigate("Home"); // Navegar para a tela inicial após cadastro
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      Alert.alert("Erro ao cadastrar!"); // Mostrar erro caso falhe
+      navigation.navigate("Login2"); // Navegar para a tela inicial após cadastro
+    } catch (error: unknown) {
+      // Verifica se o erro é uma instância de AxiosError
+      if (error instanceof AxiosError) {
+        if (error.response && error.response.status === 400) {
+          Alert.alert("Erro", error.response.data.message); // Exibe a mensagem vinda do backend
+        } else {
+          Alert.alert("Erro", "Erro ao cadastrar! Tente novamente.");
+        }
+      } else {
+        // Para outros tipos de erro
+        Alert.alert("Erro", "Erro inesperado.");
+        console.error("Erro desconhecido:", error);
+      }
     } finally {
-      setIsLoading(false); // Remover o indicador de carregamento
+      // Garante que o carregamento é desativado, independentemente do sucesso ou erro
+      setIsLoading(false);
     }
   };
 
@@ -142,6 +206,30 @@ const SignUpPesquisador = () => {
               value={locality}
               onChangeText={setLocality}
             />
+
+            {/* Lista de Sugestões de Cidades */}
+            {filteredCidades.length > 0 && (
+              <FlatList
+                data={filteredCidades}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setLocality(
+                        `${item.nome}, ${item.microrregiao.mesorregiao.UF.nome}`
+                      );
+                      setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
+                      setFilteredCidades([]);
+                    }}
+                  >
+                    <Text style={styles.suggestionText}>
+                      {item.nome}, {item.microrregiao.mesorregiao.UF.sigla}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                style={styles.suggestionsContainer}
+              />
+            )}
 
             {/* Campo de senha com funcionalidade de mostrar/ocultar */}
             <View style={styles.passwordContainer}>

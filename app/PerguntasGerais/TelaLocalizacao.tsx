@@ -47,7 +47,7 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
 
   async function getDataFromStorage() {
     setUserId(await AsyncStorage.getItem("userId"));
-    setresposta(await AsyncStorage.getItem("locality"));
+    // setresposta(await AsyncStorage.getItem("locality")); comentei pq tava vindo com a localizacao
   }
 
   useEffect(() => {
@@ -148,12 +148,16 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  setresposta(item.nome); // Definir a cidade selecionada no input
+                  setresposta(
+                    `${item.nome}, ${item.microrregiao.mesorregiao.UF.nome}`
+                  );
                   setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
                   setFilteredCidades([]);
                 }}
               >
-                <Text style={styles.suggestionText}>{item.nome}</Text>
+                <Text style={styles.suggestionText}>
+                  {item.nome}, {item.microrregiao.mesorregiao.UF.sigla}
+                </Text>
               </TouchableOpacity>
             )}
             style={styles.suggestionsContainer}

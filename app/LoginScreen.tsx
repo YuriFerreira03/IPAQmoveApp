@@ -1,44 +1,37 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Switch,
-  Alert,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import styles from "../styles/LoginStyles";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "./index";
-import Dialog from "react-native-dialog";
-import axios from "axios";
-import getIp from "../app/getIp";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
-  const [isSwitchOn, setIsSwitchOn] = useState(true); //ligado, por padrão, no visitante
-  const [visible, setVisible] = useState(false);
-  const [name, setName] = useState("");
-  const [locality, setLocality] = useState("");
-
+  const [isSwitchOn, setIsSwitchOn] = useState(true); // ligado, por padrão, no visitante
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleToggleSwitch = () => {
     setIsSwitchOn((previousState) => !previousState);
   };
 
-  const handleLoginPress1 = () => {
-    navigation.navigate("Login1");
-  };
+  const handleLoginPress = () => {
+    const userType = isSwitchOn ? "visitante" : "pesquisador"; // Determina o tipo de usuário
 
-  const handleLoginPress2 = () => {
-    navigation.navigate("Login2");
-  };
+    if (userType === "pesquisador") {
+      navigation.navigate("Login1", {
+        userType: "pesquisador",
+      });
+    } else {
+      navigation.navigate("Login2", {
+        userType: "visitante",
+      });
+    }
 
-  const handleCancel = () => {
-    setVisible(false);
+    try {
+      console.log("Usuário está tentando entrar como:", userType); // Exibe o tipo de usuário
+    } catch (error) {
+      console.error("Erro ao verificar o tipo de usuário:", error);
+    }
   };
 
   return (
@@ -60,14 +53,14 @@ const LoginScreen = () => {
         {isSwitchOn ? (
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={handleLoginPress2} //visitante
+            onPress={handleLoginPress} //visitante
           >
             <Text style={styles.googleButtonText}>Entrar</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={handleLoginPress1} //pesquisador
+            onPress={handleLoginPress} //pesquisador
           >
             <Text style={styles.googleButtonText}>Entrar</Text>
           </TouchableOpacity>

@@ -165,12 +165,16 @@ const SearchScreen: React.FC = () => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  setLocation(item.nome); // Definir a cidade selecionada no input
+                  setLocation(
+                    `${item.nome}, ${item.microrregiao.mesorregiao.UF.nome}`
+                  ); // Definir a cidade selecionada no input
                   setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
                   setFilteredCidades([]);
                 }}
               >
-                <Text style={styles.suggestionText}>{item.nome}</Text>
+                <Text style={styles.suggestionText}>
+                  {item.nome}, {item.microrregiao.mesorregiao.UF.sigla}
+                </Text>
               </TouchableOpacity>
             )}
             style={styles.suggestionsContainer}

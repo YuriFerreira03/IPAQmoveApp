@@ -17,10 +17,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Importar o ícone
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const LoginVisitante = () => {
+const LoginPesquisador = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // Controle de visibilidade da senha
+  const [isSwitchOn, setIsSwitchOn] = useState(false); // ou true, dependendo do estado inicial
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -33,20 +34,32 @@ const LoginVisitante = () => {
       const ip = await getIp();
       const url = `http://${ip}:8080/login`;
 
+      const userType = "pesquisador";
+
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         email,
         password,
-        type: "user",
+        type: userType,
       });
 
       const response = await axios.post(
         url,
-        { email, password, type: "user" },
+        { email, password, type: userType },
         { timeout: 20000 }
       );
 
-      const { userId, name, locality } = response.data;
+      console.log("Dados recebidos do backend:", response.data);
+
+      const { userId, name, locality, type } = response.data;
+
+      if (type !== userType) {
+        Alert.alert(
+          "Erro",
+          `Você está tentando entrar como pesquisador, mas sua conta é de visitante.`
+        );
+        return;
+      }
 
       if (userId && name && locality) {
         await AsyncStorage.setItem("userId", userId.toString());
@@ -61,7 +74,18 @@ const LoginVisitante = () => {
       navigation.navigate("Home");
     } catch (error) {
       console.error("Erro ao entrar:", error);
-      Alert.alert("Erro ao entrar!");
+
+      // Verifica se há uma resposta do backend e exibe a mensagem de erro enviada
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        Alert.alert("Erro", error.response.data.message); // Exibe a mensagem enviada pelo backend
+      } else {
+        // Se não houver resposta do backend, exibe um erro genérico
+        Alert.alert("Erro", "Erro de rede ou timeout.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +109,7 @@ const LoginVisitante = () => {
               style={styles.imageStyle}
             />
 
-            <Text style={styles.textLog}>Login</Text>
+            <Text style={styles.textLog}>Login Pesquisador</Text>
 
             {/* Campo de e-mail */}
             <TextInput
@@ -127,13 +151,24 @@ const LoginVisitante = () => {
           >
             <Text style={styles.textbuttonlog}>Entrar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={Cadastro}>
-            <Text style={styles.textbuttonlog1}>Não tenho conta</Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 15,
+            }}
+          >
+            <Text style={[styles.textbuttonlog1, { marginRight: 2 }]}>
+              Não tem conta ?
+            </Text>
+            <TouchableOpacity onPress={Cadastro}>
+              <Text style={styles.textbuttonlog1}>Cadastre-se!</Text>
+            </TouchableOpacity>
+          </View>
         </LinearGradient>
       </View>
     </KeyboardAwareScrollView>
   );
 };
 
-export default LoginVisitante;
+export default LoginPesquisador;
