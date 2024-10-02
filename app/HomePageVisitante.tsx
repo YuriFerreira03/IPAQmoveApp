@@ -54,6 +54,25 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
     getDataFromStorage();
   }, []);
 
+  const handleLogoutPress = async () => {
+    try {
+      // Remover os dados armazenados no AsyncStorage
+      await AsyncStorage.removeItem("userId");
+      await AsyncStorage.removeItem("name");
+      await AsyncStorage.removeItem("locality");
+
+      // Navegar para a tela de Login (ou a tela inicial)
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }], // Substitua 'Login' pelo nome da sua tela de login
+      });
+
+      console.log("Logout realizado com sucesso");
+    } catch (error) {
+      console.error("Erro ao realizar logout:", error);
+    }
+  };
+
   const handleAccessPress = () => {
     navigation.navigate("InicioPerguntasGerais");
   };
@@ -69,7 +88,7 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
   };
 
   const handleResultsPress = () => {
-    navigation.navigate("Resultados"); // Navega para a página de resultados
+    navigation.navigate("PreResultado"); // Navega para a página de resultados
   };
 
   const handleProfilePress = () => {
@@ -78,10 +97,6 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
 
   const handleSettingsPress = () => {
     // Lógica para configurações
-  };
-
-  const handleLogoutPress = () => {
-    // Lógica para logout
   };
 
   return (
@@ -94,7 +109,9 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
             </Text>
             <Text style={styles.location}>{userLocality}</Text>
           </View>
-          <Icon name="person" size={60} color="#FFFFFF" style={styles.icon} />
+          <TouchableOpacity onPress={handleLogoutPress}>
+            <Icon name="logout" size={40} color="#FFFFFF" style={styles.icon} />
+          </TouchableOpacity>
         </LinearGradient>
         <View style={styles.card}>
           <Icon

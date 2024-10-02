@@ -71,7 +71,7 @@ const LoginVisitante = () => {
       }
 
       Alert.alert("Usuário entrou!");
-      navigation.navigate("Home");
+      navigation.navigate("HomeVisitante");
     } catch (error) {
       console.error("Erro ao entrar:", error);
 

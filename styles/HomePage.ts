@@ -21,7 +21,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 1,
+    marginTop: -3,
     paddingVertical: 26,
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    marginTop: 20,
+    marginTop: 30,
   },
   greeting: {
     fontSize: 24,
@@ -45,12 +45,17 @@ export default StyleSheet.create({
   location: {
     fontSize: 18,
     color: "#FFFFFF",
-    marginTop: 5,
+    marginTop: 15,
   },
   icon: {
     width: 60,
     height: 60,
-    marginTop: 35,
+    marginTop: 50,
+  },
+  icon2: {
+    width: 60,
+    height: 60,
+    marginTop: 50,
   },
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.1)",

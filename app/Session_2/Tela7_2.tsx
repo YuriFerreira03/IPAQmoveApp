@@ -127,7 +127,7 @@ const Tela7_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 11, // Substitua pelo ID da questão correta
+        fk_Questionario_id_questao: 13, // Substitua pelo ID da questão correta
         respostas_abertas: respostas_abertas,
         respostas_fechadas: isChecked ? "SIM" : "NÃO", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -136,7 +136,7 @@ const Tela7_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
 
       const dadosParaEnvio = {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-        fk_Questionario_id_questao: 11, // Sempre define com o id da questao
+        fk_Questionario_id_questao: 13, // Sempre define com o id da questao
         respostas_abertas: horaeminuto,
         respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
         datahora: datahora,
@@ -153,7 +153,7 @@ const Tela7_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
-          fk_Questao_id_questao: 10,
+          fk_Questao_id_questao: 13,
           respostas_abertas: horaeminuto,
           respostas_fechadas: isChecked ? "1" : "0", // Armazena a resposta do checkbox
           datahora: datahora,

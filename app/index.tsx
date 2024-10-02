@@ -19,6 +19,7 @@ import ScreenExpli4 from "./PerguntasGerais/ScreenExpli4";
 import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
 import SignUpPesquisador from "./SignUpPesquisador";
 import SignUpVisitante from "./SignUpVisitante";
+import PreResultado from "./PreResultado";
 
 import SplachScreen from "./Session_1/SplachScreen";
 import SplashScreen2 from "./Session_2/SplashScreen2";
@@ -80,7 +81,7 @@ export default function App() {
       <NavigationContainer independent>
         <SafeAreaView style={styles.safeArea}>
           <Stack.Navigator
-            initialRouteName="login"
+            initialRouteName="Login"
             screenOptions={{
               headerShown: false,
               cardStyle: { backgroundColor: "transparent" },
@@ -102,6 +103,7 @@ export default function App() {
             <Stack.Screen name="HomeVisitante" component={HomePageVisitante} />
             <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="Resultados" component={Resultados} />
+            <Stack.Screen name="PreResultado" component={PreResultado} />
             <Stack.Screen
               name="InicioPerguntasGerais"
               component={InicioPerguntasGerais}

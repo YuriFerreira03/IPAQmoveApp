@@ -86,7 +86,7 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
     try {
       const data = {
         fk_Usuario_id_usuario: userId,
-        fk_Questao_id_questao: 1,
+        fk_Questao_id_questao: 0,
         respostas_abertas: respostas_abertas,
         respostas_fechadas: respostas_fechadas,
         datahora: datahora,
