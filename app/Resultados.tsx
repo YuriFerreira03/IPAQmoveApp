@@ -52,14 +52,34 @@ const Resultados: React.FC = () => {
     try {
       const ip = getIp();
       const url = `http://${ip}:8080/Respostas/${userId}`;
+      const urlClassificacao = `http://${ip}:8080/classificacao`;
 
       const response = await axios.get(url);
+      const responseClassificacao = await axios.get(urlClassificacao);
+      console.log("Classificação recebida:", responseClassificacao.data); // Verifique os dados recebidos
 
-      // Certifique-se de acessar response.data.respostas e response.data.classificacao
+      // Encontre a classificação do usuário com base no id
+      const classificacaoUsuario = responseClassificacao.data.find(
+        (classif) => classif.id === parseInt(userId)
+      );
+
+      // Verifique se encontrou uma classificação correspondente ao usuário
+      if (classificacaoUsuario) {
+        setClassificacao(classificacaoUsuario.mensagem); // Armazena a classificação correta
+      } else {
+        setClassificacao("Não classificado");
+      }
+
+      console.log("Classificação do usuário:", classificacaoUsuario);
+
+      // Certifique-se de acessar response.data.respostas
       setRespostas(response.data.respostas); // Armazena as respostas
-      setClassificacao(response.data.classificacao); // Armazena a classificação
     } catch (error) {
-      console.error("Erro ao buscar respostas:", error); // Mostre o erro no console
+      console.error("Erro ao buscar pesquisas:", error);
+      console.log(
+        "Detalhes do erro:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 

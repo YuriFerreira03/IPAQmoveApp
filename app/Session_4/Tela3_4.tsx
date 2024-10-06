@@ -55,10 +55,10 @@ const Tela1_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       setdiasEAtividades(""); // Permite que o usuário apague o texto
     } else {
       const valor = parseInt(text);
-      if (isNaN(valor) || valor < 0 || valor > 7) {
+      if (isNaN(valor) || valor < 1 || valor > 7) {
         Alert.alert(
           "Entrada inválida",
-          "Por favor, insira um número entre 0 e 7."
+          "Por favor, insira um número entre 1 e 7."
         );
       } else {
         setdiasEAtividades(text); // Define o número
@@ -200,10 +200,10 @@ const Tela1_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
                     ); // Se vazio, mantém atividades
                   } else {
                     const valor = parseInt(text);
-                    if (isNaN(valor) || valor < 0 || valor > 7) {
+                    if (isNaN(valor) || valor < 1 || valor > 7) {
                       Alert.alert(
                         "Entrada inválida",
-                        "Por favor, insira um número entre 0 e 7."
+                        "Por favor, insira um número entre 1 e 7."
                       );
                     } else {
                       const [, atividades] = diasEAtividades.split(","); // Mantém o valor de atividades

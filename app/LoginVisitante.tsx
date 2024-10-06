@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Switch,
   TextInput, // Agora usando TextInput nativo do React Native
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,6 +27,18 @@ const LoginVisitante = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  React.useEffect(() => {
+    const loadCredentials = async () => {
+      const credentials = await AsyncStorage.getItem("userCredentials");
+      if (credentials) {
+        const { email, password } = JSON.parse(credentials);
+        setEmail(email);
+        setPassword(password);
+      }
+    };
+    loadCredentials();
+  }, []);
 
   const handleLogin = async () => {
     setIsLoading(true);
@@ -65,6 +78,14 @@ const LoginVisitante = () => {
         await AsyncStorage.setItem("userId", userId.toString());
         await AsyncStorage.setItem("name", name);
         await AsyncStorage.setItem("locality", locality);
+
+        // Salva credenciais somente se o "Lembrar-me" estiver ativado
+        if (isSwitchOn) {
+          await AsyncStorage.setItem(
+            "userCredentials",
+            JSON.stringify({ email, password })
+          );
+        }
 
         console.log("Nome armazenado:", name);
         console.log("Localidade armazenada:", locality);
@@ -140,6 +161,27 @@ const LoginVisitante = () => {
                   color={"#FFFFFF"} // Cor branca para o ícone
                 />
               </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginVertical: 10,
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: -30,
+                  marginBottom: 10,
+                }}
+              >
+                <Switch value={isSwitchOn} onValueChange={setIsSwitchOn} />
+                <Text style={{ color: "#fff", marginLeft: 10 }}>
+                  Lembrar-me
+                </Text>
+              </View>
             </View>
           </View>
 

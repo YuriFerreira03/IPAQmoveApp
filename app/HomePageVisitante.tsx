@@ -120,13 +120,12 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
             color="#FFFFFF"
             style={styles.cardIcon}
           />
-          <Text style={styles.cardTitle}>SAÚDE AO SEU ALCANCE</Text>
-          <Text style={styles.cardDescription}>
-            Descubra mais sobre seu bem-estar com o questionário IPAQ. Rápido,
-            fácil e adaptado para você.
+          <Text style={styles.cardTitle}>
+            DESCUBRA O SEU NÍVEL DE ATIVIDADE FÍSICA
           </Text>
+          <Text style={styles.cardDescription}>Simples e rápido.</Text>
           <TouchableOpacity style={styles.button} onPress={handleSearchPress1}>
-            <Text style={styles.buttonText}>ACESSAR</Text>
+            <Text style={styles.buttonText}>CLIQUE AQUI</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.card}>
@@ -136,13 +135,10 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
             color="#FFFFFF"
             style={styles.cardIcon}
           />
-          <Text style={styles.cardTitle}>VISUALIZAR RESULTADOS</Text>
-          <Text style={styles.cardDescription}>
-            Acompanhe seu progresso na jornada para um estilo de vida mais
-            ativo. Veja seus resultados.
-          </Text>
+          <Text style={styles.cardTitle}>VISUALIZAR RESULTADO</Text>
+          <Text style={styles.cardDescription}>Veja seu resultado.</Text>
           <TouchableOpacity style={styles.button} onPress={handleResultsPress}>
-            <Text style={styles.buttonText}>ACESSAR</Text>
+            <Text style={styles.buttonText}>CLIQUE AQUI</Text>
           </TouchableOpacity>
         </View>
         {/* <View style={styles.card}>

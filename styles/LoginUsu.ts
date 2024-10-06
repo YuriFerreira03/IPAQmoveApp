@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginBottom: -200,
-    marginTop: -200,
+    marginTop: -250,
     width: "100%",
   },
   gradient: {

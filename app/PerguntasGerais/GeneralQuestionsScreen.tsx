@@ -84,7 +84,7 @@ const GeneralQuestionsScreen = () => {
       const response = await axios.post(
         url,
         {
-          fk_Usuario_id_usuario: userId, // Substitua pelo ID do usuário correto
+          fk_Usuario_id_usuario: userId,
           nome: name,
           idade: parseInt(age, 10),
           sexo: gender,
@@ -95,22 +95,35 @@ const GeneralQuestionsScreen = () => {
           horas_sono_dia: parseInt(horasSono, 10),
         },
         {
-          timeout: 10000, // 10 segundos de tempo limite
+          timeout: 10000,
         }
       );
 
       console.log("Resposta do backend:", response.data);
       Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
-      await AsyncStorage.multiSet([
-        ["name", name],
-        ["age", age],
-        ["gender", gender],
-        ["estatura", estatura],
-        ["peso", peso],
-        ["horasTrabalho", horasTrabalho],
-        ["horasSono", horasSono],
-        ["isChecked", isChecked.toString()],
+
+      // Limpar os campos após o cadastro bem-sucedido
+      setName("");
+      setAge("");
+      setGender("");
+      setEstatura("");
+      setPeso("");
+      setHorasTrabalho("");
+      setHorasSono("");
+      setChecked(false);
+
+      // Limpar os dados no AsyncStorage
+      await AsyncStorage.multiRemove([
+        "name",
+        "age",
+        "gender",
+        "estatura",
+        "peso",
+        "horasTrabalho",
+        "horasSono",
+        "isChecked",
       ]);
+
       navigation.navigate("Splach");
     } catch (error) {
       console.error("Erro ao cadastrar resposta:", error.message || error);

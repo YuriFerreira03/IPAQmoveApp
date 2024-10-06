@@ -86,9 +86,9 @@ const InformacoesProjeto: React.FC = () => {
   return (
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <View style={styles.container}>
-        <Text style={styles.textVII}>
+        {/* <Text style={styles.textVII}>
           Olá, <Text style={styles.textVIII}></Text>!
-        </Text>
+        </Text> */}
         <Text style={styles.textIX}>
           Insira as informações do projeto do qual você deseja participar:
         </Text>
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "100%",
+    marginTop: 150,
     alignItems: "center",
   },
   textVII: {

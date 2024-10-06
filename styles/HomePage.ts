@@ -61,8 +61,8 @@ export default StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: 10,
     padding: 33,
-    marginTop: 50,
-    //marginBottom: 18,
+    marginTop: 80,
+    marginBottom: -5,
     alignSelf: "center",
     width: "90%",
     borderColor: "rgba(255, 255, 255, 0.2)",
@@ -72,15 +72,21 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   cardTitle: {
+    //alinhar o texto ao centro
+    textAlign: "center",
     fontSize: 18,
     color: "#FFFFFF",
+    marginTop: -33,
+    marginLeft: 10,
     fontFamily: "inter-black",
     marginBottom: 10,
   },
   cardDescription: {
     fontSize: 16,
+    marginTop: 10,
+    textAlign: "center",
     color: "#FFFFFF",
-    marginBottom: 20,
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#14E2C3",

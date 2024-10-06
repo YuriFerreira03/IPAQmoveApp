@@ -68,8 +68,9 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
     navigation.navigate("TelaLocalizacao", { userName, userLocality }); // Passa o userName como parâmetro
   };
 
-  const handleProfilePress = () => {
-    // Lógica para o perfil
+  const handleResultPress = () => {
+    // Lógica para o resultado
+    navigation.navigate("ResultadoPesquisador");
   };
 
   const handleSettingsPress = () => {
@@ -132,22 +133,6 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
         </View> */}
         <View style={styles.card}>
           <Icon
-            name="assessment"
-            size={24}
-            color="#FFFFFF"
-            style={styles.cardIcon}
-          />
-          <Text style={styles.cardTitle}>VISUALIZAR RESULTADOS</Text>
-          <Text style={styles.cardDescription}>
-            Acompanhe seu progresso na jornada para um estilo de vida mais
-            ativo. Veja seus resultados.
-          </Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>ACESSAR</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.card}>
-          <Icon
             name="search"
             size={24}
             color="#FFFFFF"
@@ -155,11 +140,26 @@ const HomePage: React.FC<HomePageProps> = ({ route }) => {
           />
           <Text style={styles.cardTitle}>CADASTRAR PESQUISA</Text>
           <Text style={styles.cardDescription}>
-            Cadastre seu projeto de pesquisa e consiga de uma forma simples ver
-            todos os dados dos usuários juntos.
+            Cadastre sua pesquisa, e visualize os resultados de forma
+            inteligente.
           </Text>
           <TouchableOpacity style={styles.button} onPress={handleSearchPress}>
-            <Text style={styles.buttonText}>ACESSAR</Text>
+            <Text style={styles.buttonText}>CLIQUE AQUI</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.card}>
+          <Icon
+            name="assessment"
+            size={24}
+            color="#FFFFFF"
+            style={styles.cardIcon}
+          />
+          <Text style={styles.cardTitle}>VISUALIZAR RESULTADOS</Text>
+          <Text style={styles.cardDescription}>
+            Acesse os resultados das suas pesquisas cadastradas.
+          </Text>
+          <TouchableOpacity style={styles.button} onPress={handleResultPress}>
+            <Text style={styles.buttonText}>CLIQUE AQUI</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -20,6 +20,8 @@ import GeneralQuestionsScreen from "./PerguntasGerais/GeneralQuestionsScreen";
 import SignUpPesquisador from "./SignUpPesquisador";
 import SignUpVisitante from "./SignUpVisitante";
 import PreResultado from "./PreResultado";
+import ResultadoPesquisador from "./ResultadoPesquisador";
+import UsuariosCadastrados from "./UsuariosCadastrados";
 
 import SplachScreen from "./Session_1/SplachScreen";
 import SplashScreen2 from "./Session_2/SplashScreen2";
@@ -104,6 +106,14 @@ export default function App() {
             <Stack.Screen name="Search" component={SearchScreen} />
             <Stack.Screen name="Resultados" component={Resultados} />
             <Stack.Screen name="PreResultado" component={PreResultado} />
+            <Stack.Screen
+              name="ResultadoPesquisador"
+              component={ResultadoPesquisador}
+            />
+            <Stack.Screen
+              name="UsuariosCadastrados"
+              component={UsuariosCadastrados}
+            />
             <Stack.Screen
               name="InicioPerguntasGerais"
               component={InicioPerguntasGerais}
