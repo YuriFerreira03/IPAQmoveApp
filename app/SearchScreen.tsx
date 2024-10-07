@@ -118,7 +118,11 @@ const SearchScreen: React.FC = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraScrollHeight={20}
+    >
       <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
         {/* <LinearGradient colors={["#0A4E66", "#14E2C3"]} style={styles.header}>
           <View style={styles.textContainer}>
@@ -194,14 +198,16 @@ const SearchScreen: React.FC = () => {
           <Text style={styles.textButtonSearch}>CADASTRAR</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.buttonSearch}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Icon name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
+        <View style={styles.space}>
+            <TouchableOpacity
+              style={styles.buttonSearch1}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Icon name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
       </LinearGradient>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 

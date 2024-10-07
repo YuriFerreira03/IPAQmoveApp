@@ -80,7 +80,7 @@ const PreResultado: React.FC = () => {
             </TouchableOpacity>
 
             {/* Botão para Visualizar Resultados em PDF */}
-            <TouchableOpacity style={styles.pdfButton} onPress={() => {}}>
+            <TouchableOpacity style={styles.pdfButton} onPress={() => { }}>
               <Icon name="picture-as-pdf" size={24} color="#FFFFFF" />
               <Text style={styles.pdfButtonText}>
                 VISUALIZAR RESULTADOS EM PDF
@@ -89,12 +89,14 @@ const PreResultado: React.FC = () => {
           </View>
 
           {/* Botão de Voltar */}
-          <TouchableOpacity
-            style={styles.buttonSearch}
-            onPress={() => navigation.navigate("HomeVisitante")}
-          >
-            <Icon name="arrow-back" size={24} color="black" />
-          </TouchableOpacity>
+          <View style={styles.space}>
+            <TouchableOpacity
+              style={styles.buttonSearch}
+              onPress={() => navigation.navigate("HomeVisitante")}
+            >
+              <Icon name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
     </LinearGradient>

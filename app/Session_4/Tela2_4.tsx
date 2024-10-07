@@ -15,6 +15,7 @@ import {
 } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela2_4">;
 
@@ -178,10 +179,15 @@ const Tela2_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   };
 
   return (
+
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>SEÇÃO 4</Text>
-        <CustomStepper steps={steps} activeStep={activeStep} />
+      <Text style={styles.title}>SEÇÃO 4</Text>
+      <CustomStepper steps={steps} activeStep={activeStep} />
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        enableOnAndroid={true}
+        extraScrollHeight={20}
+      >
         {questao && (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{questao.texto_pergunta}</Text>
@@ -202,14 +208,13 @@ const Tela2_4: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
             </View>
           </View>
         )}
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
-        >
-          <Icon name="chevron-right" size={30} color="#032D45" />
-        </TouchableOpacity>
-      </ScrollView>
+      </KeyboardAwareScrollView>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
+      >
+        <Icon name="chevron-right" size={30} color="#032D45" />
+      </TouchableOpacity>
     </LinearGradient>
   );
 };

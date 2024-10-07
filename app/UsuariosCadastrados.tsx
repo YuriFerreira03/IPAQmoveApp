@@ -157,7 +157,7 @@ const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Text style={styles.title}>Participantes do Projeto:</Text>
+      <Text style={styles.title}>PARTICIPANTES DO PROJETO</Text>
       {/* Botão para Visualizar Resultados em PDF */}
       <TouchableOpacity style={styles.pdfButton} onPress={() => {}}>
         <Icon name="picture-as-pdf" size={30} color="#FFFFFF" />

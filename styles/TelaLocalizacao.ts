@@ -8,6 +8,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
+    marginVertical: -200,
+    paddingVertical: 200,
   },
   container: {
     width: "100%",

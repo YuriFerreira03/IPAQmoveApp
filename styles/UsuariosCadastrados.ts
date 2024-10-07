@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   card: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#02405C",
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
     marginBottom: 17,
     //alinhar texto no centro
     textAlign: "center",
-    color: "#032D45",
+    color: "#14E2C3",
   },
   cardDescription: {
     fontSize: 17,
-    color: "#555",
+    color: "#D8EBF2",
     marginBottom: 20,
   },
   pdfButton: {

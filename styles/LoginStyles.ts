@@ -20,7 +20,7 @@ export default StyleSheet.create({
     width: 150,
     height: 200,
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 40,
     marginBottom: 20,
   },
   textStyle: {
@@ -47,7 +47,7 @@ export default StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 50,
-    marginTop: 30,
+    marginTop: 50,
   },
   googleButtonText: {
     fontFamily: "inter-regular",
@@ -69,17 +69,17 @@ export default StyleSheet.create({
     fontSize: 20,
     color: "#032D45",
     fontFamily: "inter-regular",
-    marginTop: 65,
+    marginTop: 100,
     marginHorizontal: 30,
   },
   switchStyle: {
-    marginTop: 50,
+    marginTop: 100,
     transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
   },
   termsContainer: {
     alignItems: "center",
     transform: [{ scaleX: 1.2 }, { scaleY: 1.3 }],
-    marginTop: 100,
+    marginTop: 120,
   },
   termsText: {
     marginTop: 10,

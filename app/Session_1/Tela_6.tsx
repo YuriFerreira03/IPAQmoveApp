@@ -15,6 +15,7 @@ import {
 } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "Tela_6">;
 
@@ -179,8 +180,12 @@ const Tela_6: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   };
 
   return (
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraScrollHeight={20}
+    >
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
         <Text style={styles.title}>SEÇÃO 1</Text>
         <CustomStepper steps={steps} activeStep={activeStep} />
 
@@ -223,8 +228,8 @@ const Tela_6: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         >
           <Icon name="chevron-right" size={30} color="#032D45" />
         </TouchableOpacity>
-      </ScrollView>
     </LinearGradient>
+    </KeyboardAwareScrollView>
   );
 };
 

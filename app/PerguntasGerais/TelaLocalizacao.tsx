@@ -19,6 +19,7 @@ import {
   RouteProp,
 } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type TelaLocalizacaoRouteProp = RouteProp<
   RootStackParamList,
@@ -122,6 +123,11 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
   };
 
   return (
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      enableOnAndroid={true}
+      extraScrollHeight={20}
+    >
     <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
       <View style={styles.container}>
         <Text style={styles.textI}>
@@ -192,6 +198,7 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
         </TouchableOpacity>
       </View>
     </LinearGradient>
+    </KeyboardAwareScrollView>
   );
 };
 

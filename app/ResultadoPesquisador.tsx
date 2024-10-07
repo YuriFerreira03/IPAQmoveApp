@@ -92,6 +92,14 @@ const ResultadoPesquisador: React.FC = () => {
             />
           )}
         </View>
+        <View style={styles.space}>
+          <TouchableOpacity
+            style={styles.buttonSearch}
+            onPress={() => navigation.navigate("PreResultado")}
+          >
+            <Icon name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );

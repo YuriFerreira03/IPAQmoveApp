@@ -16,10 +16,11 @@ export default StyleSheet.create({
     padding: 30,
   },
   title: {
-    fontSize: 30,
+    marginTop: 30,
+    fontSize: 24,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginBottom: 20, // Pequeno espaçamento abaixo do título
+    marginBottom: 10, // Pequeno espaçamento abaixo do título
     textAlign: "center", // Centralizar o título
   },
   resultContainer: {
@@ -77,7 +78,7 @@ export default StyleSheet.create({
     marginTop: 5,
   },
   respostaItem: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#032D45",
     padding: 10,
     marginBottom: 10,
     borderRadius: 8,
@@ -85,16 +86,19 @@ export default StyleSheet.create({
   respostaText: {
     fontSize: 20,
     marginTop: 15,
-    color: "#032D45",
+    color: "#D8EBF2",
   },
   noRespostas: {
-    color: "#FFFFFF",
+    color: "#D8EBF2",
     fontSize: 18,
     textAlign: "center",
   },
   labelText: {
-    color: "#0A4E66",
+    color: "#14E2C3",
     fontWeight: "bold",
+  },
+  text: {
+    color: "#FFFFF"
   },
   buttonSearch: {
     flexDirection: "row",
@@ -102,17 +106,20 @@ export default StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 15,
+    borderRadius: 200,
     marginTop: -10,
   },
+  space: {
+    marginRight: 260
+  },
   notice: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#032D45",
     padding: 5,
     borderRadius: 10,
     textAlign: "center",
     fontSize: 16,
     fontWeight: "bold",
-    color: "#032D45",
+    color: "#D8EBF2",
     marginBottom: 2,
     fontSize: 16,
   },

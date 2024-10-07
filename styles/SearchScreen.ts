@@ -6,6 +6,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
+    marginVertical: -200,
+    paddingVertical: 200,
   },
   safeArea: {
     flex: 1,
@@ -75,10 +77,22 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "transparent",
   },
+  space: {
+    marginRight: 260
+  },
   buttonSearch: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#14E2C3",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    marginTop: 40,
+  },
+  buttonSearch1: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 50,

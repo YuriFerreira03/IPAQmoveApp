@@ -4,7 +4,7 @@ export default StyleSheet.create({
   gradient: {
     flex: 1,
     marginBottom: -40,
-    marginTop: -50,
+    marginTop: -30,
   },
   safeArea: {
     flex: 1,

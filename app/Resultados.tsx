@@ -122,7 +122,7 @@ const Resultados: React.FC = () => {
                 <View key={index} style={styles.respostaItem}>
                   <Text style={styles.respostaText}>
                     <Text style={styles.labelText}>Pergunta: </Text>
-                    {resposta.questao}
+                    <Text style={styles.text}>{resposta.questao}</Text>
                   </Text>
                   {resposta.respostas_abertas ? (
                     <Text style={styles.respostaText}>
@@ -155,12 +155,14 @@ const Resultados: React.FC = () => {
             </Text>
           </TouchableOpacity> */}
         </View>
-        <TouchableOpacity
-          style={styles.buttonSearch}
-          onPress={() => navigation.navigate("PreResultado")}
-        >
-          <Icon name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
+        <View style={styles.space}>
+          <TouchableOpacity
+            style={styles.buttonSearch}
+            onPress={() => navigation.navigate("PreResultado")}
+          >
+            <Icon name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );

@@ -44,8 +44,9 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#032D45",
     paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     borderRadius: 50,
+    marginTop: 30
   },
   buttonlog1: {
     paddingVertical: 10,
@@ -55,7 +56,7 @@ export default StyleSheet.create({
     fontFamily: "inter-regular",
     color: "white",
     fontSize: 23,
-    marginHorizontal: 10,
+    marginHorizontal: 80,
   },
   textbuttonlog1: {
     fontFamily: "inter-regular",

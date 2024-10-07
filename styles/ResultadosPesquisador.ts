@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginTop: 40,
+    marginTop: 50,
     marginBottom: 60,
   },
   card: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#032D45",
     borderRadius: 10,
     padding: 16,
     marginBottom: 16,
@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     //alinhar texto no centro
     textAlign: "center",
-    color: "#032D45",
+    color: "#14E2C3",
   },
   cardDescription: {
     fontSize: 20,
-    color: "#555",
+    color: "#D8EBF2",
     marginBottom: 20,
   },
   cardButton: {
@@ -66,6 +66,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     marginTop: 20,
+  },
+  buttonSearch: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 200,
+    marginTop: -10,
+  },
+  space: {
+    marginRight: 310,
+    marginLeft: 10
   },
 });
 
