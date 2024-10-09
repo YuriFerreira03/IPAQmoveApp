@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import styles from "../../styles/SplachScreen";
 import getIp from "../getIp";
+import { api } from "@/api/api";
 
 const SplashScreen2 = () => {
   const [secao, setSecao] = useState({
@@ -23,10 +24,10 @@ const SplashScreen2 = () => {
     const fetchSecao = async () => {
       try {
         const ip = getIp(); // Endereço IP da sua máquina
-        const url = `http://${ip}:8080/secao/${secaoId}`; //pegando a seção 2 no banco de dados
+        const url = `/secao/${secaoId}`; //pegando a seção 2 no banco de dados
         console.log("URL de requisição:", url);
 
-        const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
+        const response = await api.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
         console.log("Dados da seção recebidos:", response.data);
 
         setSecao(response.data);

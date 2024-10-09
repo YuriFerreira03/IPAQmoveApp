@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles/ResultadosPesquisador";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import getIp from "./getIp";
+import { api } from "@/api/api";
 
 const ResultadoPesquisador: React.FC = () => {
   const [pesquisas, setPesquisas] = useState([]);
@@ -29,9 +30,9 @@ const ResultadoPesquisador: React.FC = () => {
   const fetchPesquisas = async () => {
     try {
       const ip = await getIp();
-      const url = `http://${ip}:8080/PesquisasAll?userId=${userId}`; // Enviando userId como query param
+      const url = `/PesquisasAll?userId=${userId}`; // Enviando userId como query param
 
-      const response = await axios.get(url);
+      const response = await api.get(url);
       console.log("Pesquisas recebidas:", response.data); // Verifique os dados recebidos
       setPesquisas(response.data); // Armazena as pesquisas filtradas
     } catch (error) {

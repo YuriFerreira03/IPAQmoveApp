@@ -5,6 +5,7 @@ import styles from "../styles/UsuariosCadastrados";
 import getIp from "./getIp";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { api } from "@/api/api";
 
 const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
   const { pesquisaNome } = route.params; // Use 'pesquisaNome' ao invés de 'nome_pesq'
@@ -14,14 +15,14 @@ const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
   const fetchProjetosVinculados = async () => {
     try {
       const ip = getIp();
-      const url = `http://${ip}:8080/usuarios-pesquisa/${pesquisaNome}`;
-      const urlIMC = `http://${ip}:8080/respostaIMC`;
-      const urlClassificacao = `http://${ip}:8080/classificacao`;
-      const urlDuracaoModerada = `http://${ip}:8080/respostaDuracaoModerada`;
-      const urlDuracaovigorosa = `http://${ip}:8080/respostaDuracaoVigorosa`;
-      const urlDuracaoCaminhada = `http://${ip}:8080/respostaDuracaoMedia`;
-      const urlFreqModCam = `http://${ip}:8080/respostaFreqModCam`;
-      const urlDurModCam = `http://${ip}:8080/respostaDurModCam`;
+      const url = `/usuarios-pesquisa/${pesquisaNome}`;
+      const urlIMC = `/respostaIMC`;
+      const urlClassificacao = `/classificacao`;
+      const urlDuracaoModerada = `/respostaDuracaoModerada`;
+      const urlDuracaovigorosa = `/respostaDuracaoVigorosa`;
+      const urlDuracaoCaminhada = `/respostaDuracaoMedia`;
+      const urlFreqModCam = `/respostaFreqModCam`;
+      const urlDurModCam = `/respostaDurModCam`;
 
       // Fazendo as requisições
       const [
@@ -34,14 +35,14 @@ const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
         responseFreqModCam,
         responseDurModCam,
       ] = await Promise.all([
-        axios.get(url),
-        axios.get(urlIMC),
-        axios.get(urlClassificacao),
-        axios.get(urlDuracaoModerada),
-        axios.get(urlDuracaovigorosa),
-        axios.get(urlDuracaoCaminhada),
-        axios.get(urlFreqModCam),
-        axios.get(urlDurModCam),
+        api.get(url),
+        api.get(urlIMC),
+        api.get(urlClassificacao),
+        api.get(urlDuracaoModerada),
+        api.get(urlDuracaovigorosa),
+        api.get(urlDuracaoCaminhada),
+        api.get(urlFreqModCam),
+        api.get(urlDurModCam),
       ]);
 
       console.log("Projetos vinculados:", response.data);

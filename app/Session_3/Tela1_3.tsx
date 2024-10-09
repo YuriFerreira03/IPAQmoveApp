@@ -22,10 +22,10 @@ const Tela1_3 = () => {
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/14`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `/questao/14`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
-      const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
+      const response = await api.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
       console.log("Dados da seção recebidos:", response.data);
 
       setQuestao(response.data);
@@ -44,8 +44,8 @@ const Tela1_3 = () => {
   const handleSaveResposta = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/responde`;
-      await axios.post(url, {
+      const url = `/responde`;
+      await api.post(url, {
         fk_Usuario_id_usuario: id_usuario, // Substitua pelo ID do usuário real
         fk_Questao_id_questao: id_questao,
         resposta: isChecked ? "SIM" : "NÃO",
@@ -88,6 +88,7 @@ const Tela1_3 = () => {
 };
 
 import { StyleSheet } from "react-native";
+import { api } from "@/api/api";
 
 const styles1 = StyleSheet.create({
   label: {

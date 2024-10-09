@@ -17,6 +17,7 @@ import styles from "../styles/LoginUsu";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Importar o ícone
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { api } from "@/api/api";
 
 const LoginVisitante = () => {
   const [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ const LoginVisitante = () => {
 
     try {
       const ip = await getIp();
-      const url = `http://${ip}:8080/login`;
+      const url = `/login`;
 
       const userType = "visitante";
 
@@ -56,7 +57,7 @@ const LoginVisitante = () => {
         type: userType,
       });
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         { email, password, type: userType },
         { timeout: 20000 }

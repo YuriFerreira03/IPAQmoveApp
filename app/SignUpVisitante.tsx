@@ -17,6 +17,7 @@ import styles from "../styles/SignUp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Ícones de senha visível/invisível
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { api } from "@/api/api";
 
 const SignUpPesquisador = () => {
   const [name, setName] = useState("");
@@ -105,7 +106,7 @@ const SignUpPesquisador = () => {
 
     try {
       const ip = await getIp();
-      const url = `http://${ip}:8080/Usuario`;
+      const url = `/Usuario`;
 
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
@@ -116,7 +117,7 @@ const SignUpPesquisador = () => {
         type: "visitante",
       });
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         { name, email, locality, password, type: "visitante" }, // Enviar dados de cadastro
         { timeout: 20000 }

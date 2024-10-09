@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles/Resultados";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import getIp from "./getIp";
+import { api } from "@/api/api";
 
 const Resultados: React.FC = () => {
   const [respostas, setRespostas] = useState([]);
@@ -51,11 +52,11 @@ const Resultados: React.FC = () => {
   const fetchRespostas = async () => {
     try {
       const ip = getIp();
-      const url = `http://${ip}:8080/Respostas/${userId}`;
-      const urlClassificacao = `http://${ip}:8080/classificacao`;
+      const url = `/Respostas/${userId}`;
+      const urlClassificacao = `/classificacao`;
 
-      const response = await axios.get(url);
-      const responseClassificacao = await axios.get(urlClassificacao);
+      const response = await api.get(url);
+      const responseClassificacao = await api.get(urlClassificacao);
       console.log("Classificação recebida:", responseClassificacao.data); // Verifique os dados recebidos
 
       // Encontre a classificação do usuário com base no id

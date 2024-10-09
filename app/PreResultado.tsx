@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../styles/Resultados";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import getIp from "./getIp";
+import { api } from "@/api/api";
 
 const PreResultado: React.FC = () => {
   const [respostas, setRespostas] = useState([]);
@@ -31,9 +32,9 @@ const PreResultado: React.FC = () => {
   const fetchRespostas = async () => {
     try {
       const ip = getIp();
-      const url = `http://${ip}:8080/Respostas/${userId}`;
+      const url = `/Respostas/${userId}`;
 
-      const response = await axios.get(url);
+      const response = await api.get(url);
 
       // Certifique-se de acessar response.data.respostas e response.data.classificacao
       setRespostas(response.data.respostas); // Armazena as respostas
@@ -80,7 +81,7 @@ const PreResultado: React.FC = () => {
             </TouchableOpacity>
 
             {/* Botão para Visualizar Resultados em PDF */}
-            <TouchableOpacity style={styles.pdfButton} onPress={() => { }}>
+            <TouchableOpacity style={styles.pdfButton} onPress={() => {}}>
               <Icon name="picture-as-pdf" size={24} color="#FFFFFF" />
               <Text style={styles.pdfButtonText}>
                 VISUALIZAR RESULTADOS EM PDF

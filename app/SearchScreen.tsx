@@ -18,6 +18,7 @@ import getIp from "../app/getIp";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Importando AsyncStorage
 import React, { useEffect, useState } from "react";
 import HomePage from "@/styles/HomePage";
+import { api } from "@/api/api";
 
 const SearchScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -85,7 +86,7 @@ const SearchScreen: React.FC = () => {
     try {
       console.log("Iniciando cadastro de pesquisa...");
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/Pesquisa`;
+      const url = `/Pesquisa`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         nome_pesquisa: searchName,
@@ -94,7 +95,7 @@ const SearchScreen: React.FC = () => {
         instituicao: institution, // Utilize o valor do campo instituição
       });
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         {
           nome_pesquisa: searchName,
@@ -199,13 +200,13 @@ const SearchScreen: React.FC = () => {
         </TouchableOpacity>
 
         <View style={styles.space}>
-            <TouchableOpacity
-              style={styles.buttonSearch1}
-              onPress={() => navigation.navigate("Home")}
-            >
-              <Icon name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.buttonSearch1}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Icon name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </LinearGradient>
     </KeyboardAwareScrollView>
   );

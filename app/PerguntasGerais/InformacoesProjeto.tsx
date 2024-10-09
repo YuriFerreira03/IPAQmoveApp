@@ -13,6 +13,7 @@ import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
 import getIp from "../getIp";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api } from "@/api/api";
 
 const InformacoesProjeto: React.FC = () => {
   const navigation = useNavigation();
@@ -34,9 +35,9 @@ const InformacoesProjeto: React.FC = () => {
       if (nomePesquisa.length > 0) {
         try {
           const ip = getIp(); // Endereço IP da sua máquina
-          const url = `http://${ip}:8080/search-pesquisa?query=${nomePesquisa}`;
+          const url = `/search-pesquisa?query=${nomePesquisa}`;
 
-          const response = await axios.get(url);
+          const response = await api.get(url);
           setPesquisas(response.data);
         } catch (error) {
           console.error("Erro ao buscar pesquisas:", error);
@@ -56,9 +57,9 @@ const InformacoesProjeto: React.FC = () => {
 
     try {
       const ip = getIp(); // Supondo que você tenha uma função para obter o IP
-      const url = `http://${ip}:8080/Vincular_projeto`;
+      const url = `/Vincular_projeto`;
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         {
           fk_Usuario_id_usuario: userId,

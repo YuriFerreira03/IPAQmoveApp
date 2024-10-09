@@ -20,6 +20,7 @@ import {
 } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { api } from "@/api/api";
 
 type TelaLocalizacaoRouteProp = RouteProp<
   RootStackParamList,
@@ -95,11 +96,11 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
       };
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp();
-      const url = `http://${ip}:8080/Resposta`;
+      const url = `/Resposta`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", data);
 
-      const response = await axios.post(url, data);
+      const response = await api.post(url, data);
       console.log("Resposta do backend:", response.data);
       Alert.alert("Sucesso", "Resposta cadastrada com sucesso!");
       setSearchName("");
@@ -128,76 +129,78 @@ const TelaLocalizacao: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({
       enableOnAndroid={true}
       extraScrollHeight={20}
     >
-    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
-      <View style={styles.container}>
-        <Text style={styles.textI}>
-          Nós estamos interessados em saber que tipos de atividade física as
-          pessoas fazem como parte do seu dia a dia!
-        </Text>
-        <Text style={styles.textII}>
-          Para começar coloque sua{" "}
-          <Text style={styles.localizacao}>localização</Text>:
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Localização:"
-          placeholderTextColor="#b3b3b3"
-          value={resposta}
-          onChangeText={setresposta}
-        />
-
-        {/* Lista de Sugestões de Cidades */}
-        {filteredCidades.length > 0 && (
-          <FlatList
-            data={filteredCidades}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  setresposta(
-                    `${item.nome}, ${item.microrregiao.mesorregiao.UF.nome}`
-                  );
-                  setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
-                  setFilteredCidades([]);
-                }}
-              >
-                <Text style={styles.suggestionText}>
-                  {item.nome}, {item.microrregiao.mesorregiao.UF.sigla}
-                </Text>
-              </TouchableOpacity>
-            )}
-            style={styles.suggestionsContainer}
-          />
-        )}
-
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            value={isChecked}
-            onValueChange={setChecked}
-            style={styles.checkbox}
-          />
-          <Text style={styles.textIV}>
-            Li e estou de acordo com os{" "}
-            <Text style={styles.textVI}>
-              Termos de Uso e Política de Privacidade
-            </Text>
+      <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.gradient}>
+        <View style={styles.container}>
+          <Text style={styles.textI}>
+            Nós estamos interessados em saber que tipos de atividade física as
+            pessoas fazem como parte do seu dia a dia!
           </Text>
+          <Text style={styles.textII}>
+            Para começar coloque sua{" "}
+            <Text style={styles.localizacao}>localização</Text>:
+          </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Localização:"
+            placeholderTextColor="#b3b3b3"
+            value={resposta}
+            onChangeText={setresposta}
+          />
+
+          {/* Lista de Sugestões de Cidades */}
+          {filteredCidades.length > 0 && (
+            <FlatList
+              data={filteredCidades}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    setresposta(
+                      `${item.nome}, ${item.microrregiao.mesorregiao.UF.nome}`
+                    );
+                    setFilteredCidades([]); // Limpar a lista de sugestões após a seleção
+                    setFilteredCidades([]);
+                  }}
+                >
+                  <Text style={styles.suggestionText}>
+                    {item.nome}, {item.microrregiao.mesorregiao.UF.sigla}
+                  </Text>
+                </TouchableOpacity>
+              )}
+              style={styles.suggestionsContainer}
+            />
+          )}
+
+          <View style={styles.checkboxContainer}>
+            <Checkbox
+              value={isChecked}
+              onValueChange={setChecked}
+              style={styles.checkbox}
+            />
+            <Text style={styles.textIV}>
+              Li e estou de acordo com os{" "}
+              <Text style={styles.textVI}>
+                Termos de Uso e Política de Privacidade
+              </Text>
+            </Text>
+          </View>
+          <Text style={styles.textV}>
+            Deseja responder o questionário como:
+          </Text>
+          <TouchableOpacity
+            onPress={() => handlePress("ScreenExpli1")}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>VISITANTE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePress("InformacoesProjeto")}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>PARTICIPANTE</Text>
+          </TouchableOpacity>
         </View>
-        <Text style={styles.textV}>Deseja responder o questionário como:</Text>
-        <TouchableOpacity
-          onPress={() => handlePress("ScreenExpli1")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>VISITANTE</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handlePress("InformacoesProjeto")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>PARTICIPANTE</Text>
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
     </KeyboardAwareScrollView>
   );
 };

@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getIp from "../getIp";
+import { api } from "@/api/api";
 
 const GeneralQuestionsScreen = () => {
   const [isChecked, setChecked] = useState(false);
@@ -79,9 +80,9 @@ const GeneralQuestionsScreen = () => {
 
     try {
       const ip = getIp();
-      const url = `http://${ip}:8080/perguntas_gerais`;
+      const url = `/perguntas_gerais`;
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         {
           fk_Usuario_id_usuario: userId,

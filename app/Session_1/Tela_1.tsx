@@ -15,6 +15,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api } from "@/api/api";
 
 type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela_2">;
 
@@ -52,10 +53,10 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/questao/1`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `/questao/1`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
-      const response = await axios.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
+      const response = await api.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
       console.log("Dados da seção recebidos:", response.data);
 
       setQuestao(response.data);
@@ -75,7 +76,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
     try {
       console.log("Iniciando cadastro de resposta...");
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http://${ip}:8080/Resposta`;
+      const url = `/Resposta`;
       console.log("URL de requisição:", url);
       console.log("Enviando dados para o backend:", {
         fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
@@ -101,7 +102,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         JSON.stringify(dadosParaEnvio, null, 2)
       );
 
-      const response = await axios.post(
+      const response = await api.post(
         url,
         {
           fk_Usuario_id_usuario: userId, // Utilize o ID do usuário logado
@@ -142,7 +143,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
       enableOnAndroid={true}
       extraScrollHeight={20}
     >
-    <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
+      <LinearGradient colors={["#032D45", "#0A4E66"]} style={styles.container}>
         <Text style={styles.title}>SEÇÃO 1</Text>
         <CustomStepper steps={steps} activeStep={activeStep} />
 
@@ -184,7 +185,7 @@ const Tela_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
         >
           <Icon name="chevron-right" size={30} color="#032D45" />
         </TouchableOpacity>
-    </LinearGradient>
+      </LinearGradient>
     </KeyboardAwareScrollView>
   );
 };
