@@ -98,19 +98,23 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   text: {
-    color: "#FFFFF"
+    color: "#FFFFF",
   },
   buttonSearch: {
+    width: "70%",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 200,
-    marginTop: -10,
+    backgroundColor: "#0A4E66",
+    borderWidth: 3,
+    borderColor: "#032D45",
+    paddingVertical: 17,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    marginTop: 10,
+    zIndex: 1000,
   },
   space: {
-    marginRight: 260
+    marginRight: 260,
   },
   notice: {
     backgroundColor: "#032D45",

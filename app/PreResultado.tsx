@@ -79,14 +79,14 @@ const PreResultado: React.FC = () => {
                 VISUALIZAR RESULTADOS NO APLICATIVO
               </Text>
             </TouchableOpacity>
-
-            {/* Botão para Visualizar Resultados em PDF */}
+            {/* 
+            Botão para Visualizar Resultados em PDF
             <TouchableOpacity style={styles.pdfButton} onPress={() => {}}>
               <Icon name="picture-as-pdf" size={24} color="#FFFFFF" />
               <Text style={styles.pdfButtonText}>
                 VISUALIZAR RESULTADOS EM PDF
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           {/* Botão de Voltar */}

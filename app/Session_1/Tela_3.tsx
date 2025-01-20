@@ -53,43 +53,44 @@ const Tela_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   const activeStep = 0;
 
   const handleTextInputChange = (text: string) => {
-    // Permite que o usuário apague o texto completamente
-    if (text === "") {
-      sethoraeminuto(""); // Se o campo estiver vazio, atualiza o estado e retorna
-      return;
-    }
-
-    // Remove qualquer caractere que não seja número
+    // Remove caracteres não numéricos
     const cleanText = text.replace(/[^0-9]/g, "");
 
-    // Se o usuário digitou 3 ou mais caracteres, inserimos o ":"
+    // Se o texto estiver vazio, apenas atualiza o estado
+    if (cleanText === "") {
+      sethoraeminuto("");
+      return;
+    }
+    // Monta o formato HH:MM conforme os caracteres digitados
+    let formattedTime = cleanText;
     if (cleanText.length > 2) {
       const hours = cleanText.substring(0, 2);
       const minutes = cleanText.substring(2, 4);
-      const formattedTime = `${hours}:${minutes}`;
+      formattedTime = `${hours}:${minutes}`;
+
       sethoraeminuto(formattedTime);
 
-      // Validação para o formato HH:MM completo (exibe alerta só após 5 caracteres, que inclui ":")
-      if (text.length === 5) {
+      // Valida se o formato é válido após completar 5 caracteres
+      if (formattedTime.length === 5) {
         const regexFinal = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
 
-        // Se o formato estiver errado, exibe o alerta
         if (!regexFinal.test(formattedTime)) {
           Alert.alert(
             "Formato inválido",
             "Por favor, insira um horário válido no formato HH:MM."
           );
+          sethoraeminuto(""); // Reseta o valor para forçar a correção
         }
       }
     } else {
-      sethoraeminuto(cleanText); // Mantém apenas os números digitados antes dos dois pontos
+      sethoraeminuto(cleanText); // Atualiza parcialmente enquanto digita
     }
   };
 
   const fetchQuestao = async () => {
     try {
       const ip = getIp(); // Endereço IP da sua máquina
-      const url = `http:/questao/3`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
+      const url = `/questao/3`; // Passando o id_questao diretamente so colocar o numero de acordo com o banco
       console.log("URL de requisição:", url);
 
       const response = await api.get(url, { timeout: 10000 }); // 10 segundos de tempo limite
@@ -109,9 +110,14 @@ const Tela_3: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
   }, []);
 
   const validateForm = () => {
-    // Verifica se o campo de diasSemana está vazio e se o checkbox não está marcado
-    if (!horaeminuto) {
-      Alert.alert("Erro", "Preencha o campo de Horas e Minutos");
+    // Verifica se o campo está vazio ou com formato incorreto
+    const regexFinal = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
+
+    if (!horaeminuto || !regexFinal.test(horaeminuto)) {
+      Alert.alert(
+        "Erro",
+        "Preencha o campo de Horas e Minutos no formato HH:MM."
+      );
       return false;
     }
     return true;

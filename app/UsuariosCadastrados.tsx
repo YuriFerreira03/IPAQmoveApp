@@ -6,11 +6,68 @@ import getIp from "./getIp";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { api } from "@/api/api";
+import XLSX from "xlsx";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
+import { Alert } from "react-native";
 
 const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
   const { pesquisaNome } = route.params; // Use 'pesquisaNome' ao invés de 'nome_pesq'
   console.log("Nome da pesquisa selecionada:", pesquisaNome); // Verifique o valor de nome_pesq
   const [usuarios, setUsuarios] = useState<any[]>([]);
+
+  const exportToExcel = async () => {
+    try {
+      // Converte os dados dos usuários para formato de planilha
+      const worksheet = XLSX.utils.json_to_sheet(
+        usuarios.map((usuario) => ({
+          Nome: usuario.nome || "Desconhecido",
+          Sexo: usuario.sexo || "Não informado",
+          Idade: usuario.idade || "Não informada",
+          Peso: usuario.peso
+            ? `${parseFloat(usuario.peso).toFixed(1)} kg`
+            : "Não informado",
+          Estatura: usuario.estatura
+            ? `${parseFloat(usuario.estatura).toFixed(2)} m`
+            : "Não informada",
+          IMC: usuario.imc || "Não calculado",
+          "Duração Vigorosa": usuario.duracaoVigorosa || "0 minutos",
+          "Duração Moderada": usuario.duracaoModerada || "0 minutos",
+          "Duração Caminhada": usuario.duracaoCaminhada || "0 minutos",
+          "Freq. Mod. Caminhada": usuario.freqModCam || "Não informada",
+          "Dur. Mod. Caminhada": usuario.durModCam || "Não informada",
+          Classificação: usuario.classificacao || "Não classificado",
+        }))
+      );
+
+      // Cria a planilha
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Participantes");
+
+      // Gera o arquivo Excel em base64
+      const excelOutput = XLSX.write(workbook, {
+        type: "base64",
+        bookType: "xlsx",
+      });
+      const path = `${FileSystem.documentDirectory}Participantes_${pesquisaNome}.xlsx`;
+
+      // Salva o arquivo localmente
+      await FileSystem.writeAsStringAsync(path, excelOutput, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      // Compartilha o arquivo
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(path);
+        Alert.alert("Sucesso", "Arquivo exportado com sucesso!");
+      } else {
+        Alert.alert("Sucesso", `Arquivo salvo em: ${path}`);
+      }
+    } catch (error) {
+      console.error("Erro ao exportar para Excel:", error);
+      Alert.alert("Erro", "Não foi possível exportar os dados.");
+    }
+  };
 
   const fetchProjetosVinculados = async () => {
     try {
@@ -159,10 +216,10 @@ const UsuariosCadastrados: React.FC<{ route: any }> = ({ route }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Text style={styles.title}>PARTICIPANTES DO PROJETO</Text>
-      {/* Botão para Visualizar Resultados em PDF */}
-      <TouchableOpacity style={styles.pdfButton} onPress={() => {}}>
-        <Icon name="picture-as-pdf" size={30} color="#FFFFFF" />
-        <Text style={styles.pdfButtonText}>VISUALIZAR TODOS EM PDF</Text>
+      {/* Botão para Exportar para Excel */}
+      <TouchableOpacity style={styles.pdfButton} onPress={exportToExcel}>
+        <Icon name="file-download" size={30} color="#FFFFFF" />
+        <Text style={styles.pdfButtonText}>Exportar para Excel</Text>
       </TouchableOpacity>
       <View style={styles.container}>
         <FlatList

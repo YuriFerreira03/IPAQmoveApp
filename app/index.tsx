@@ -83,7 +83,7 @@ export default function App() {
       <NavigationContainer independent>
         <SafeAreaView style={styles.safeArea}>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="Tela3"
             screenOptions={{
               headerShown: false,
               cardStyle: { backgroundColor: "transparent" },

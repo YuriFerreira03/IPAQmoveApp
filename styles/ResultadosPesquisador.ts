@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginTop: 50,
+    marginTop: 5,
     marginBottom: 60,
   },
   card: {
@@ -68,17 +68,49 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonSearch: {
+    width: "70%",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#032D45",
     paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 200,
-    marginTop: -10,
+    paddingHorizontal: 17,
+    borderRadius: 20,
+    marginTop: 15,
+  },
+  buttonTextI: {
+    color: "white",
+    fontSize: 20,
+    marginLeft: 10,
   },
   space: {
     marginRight: 310,
-    marginLeft: 10
+    marginLeft: 10,
+  },
+  resultContainer: {
+    marginTop: 20,
+    padding: 11,
+    borderRadius: 8,
+    backgroundColor: "#0A4E66",
+    borderColor: "#032D45",
+    borderWidth: 2,
+  },
+  resultTitle: {
+    fontSize: 27,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  resultSubtitle: {
+    fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    marginVertical: 15,
+  },
+  resultItem: {
+    fontSize: 20,
+    color: "white",
+    marginVertical: 8,
+    textAlign: "center",
   },
 });
 
