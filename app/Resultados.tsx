@@ -144,26 +144,7 @@ const Resultados: React.FC = () => {
               </Text>
             )}
           </ScrollView>
-
-          {/* <TouchableOpacity
-            style={styles.pdfButton}
-            onPress={() => {
-            }}
-          >
-            <Icon name="picture-as-pdf" size={24} color="#FFFFFF" />
-            <Text style={styles.pdfButtonText}>
-              VISUALIZAR RESULTADOS EM PDF
-            </Text>
-          </TouchableOpacity> */}
         </View>
-        {/* <View style={styles.space}>
-          <TouchableOpacity
-            style={styles.buttonSearch}
-            onPress={() => navigation.navigate("PreResultado")}
-          >
-            <Icon name="arrow-back" size={24} color="black" />
-          </TouchableOpacity>
-        </View> */}
       </SafeAreaView>
     </LinearGradient>
   );
