@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 export default StyleSheet.create({
   gradient: {
@@ -13,84 +14,83 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 30,
+    padding: scale(30),
   },
   title: {
-    marginTop: 30,
-    fontSize: 24,
+    marginTop: verticalScale(30),
+    fontSize: moderateScale(24),
     fontWeight: "bold",
     color: "#FFFFFF",
-    marginBottom: 10, // Pequeno espaçamento abaixo do título
-    textAlign: "center", // Centralizar o título
+    marginBottom: verticalScale(10),
+    textAlign: "center",
   },
   resultContainer: {
-    flex: 1, // Preenche o espaço restante na tela
-    justifyContent: "center", // Centraliza os botões verticalmente
-    alignItems: "center", // Centraliza os botões horizontalmente
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-
   pdfButton: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center", // Centraliza o conteúdo horizontalmente
+    justifyContent: "center",
     backgroundColor: "#0A4E66",
-    paddingVertical: 40, // Ajuste para padronizar com o outro botão
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginVertical: 10, // Margem entre os botões
+    paddingVertical: verticalScale(40),
+    paddingHorizontal: scale(20),
+    borderRadius: moderateScale(10),
+    marginVertical: verticalScale(10),
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: verticalScale(5) },
     shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5, // Para sombras no Android
+    shadowRadius: moderateScale(10),
+    elevation: 5,
   },
   pdfButtonText: {
     color: "#FFFFFF",
-    fontSize: 18, // Padroniza com o appButtonText
+    fontSize: moderateScale(18),
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: scale(10),
   },
   appButton: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center", // Centraliza o conteúdo horizontalmente
-    backgroundColor: "#119797", // Cor de fundo verde-azulado
-    paddingVertical: 40,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginVertical: 30, // Margem entre os botões
+    justifyContent: "center",
+    backgroundColor: "#119797",
+    paddingVertical: verticalScale(40),
+    paddingHorizontal: scale(20),
+    borderRadius: moderateScale(10),
+    marginVertical: verticalScale(30),
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: verticalScale(5) },
     shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5, // Para sombras no Android
+    shadowRadius: moderateScale(10),
+    elevation: 5,
   },
   appButtonText: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: "bold",
-    marginLeft: 10,
+    marginLeft: scale(10),
   },
   pdfButtonText2: {
     color: "#FFFFFF",
-    fontSize: 20,
-    marginLeft: 10,
-    marginTop: 5,
+    fontSize: moderateScale(20),
+    marginLeft: scale(10),
+    marginTop: verticalScale(5),
   },
   respostaItem: {
     backgroundColor: "#032D45",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 8,
+    padding: scale(10),
+    marginBottom: verticalScale(10),
+    borderRadius: moderateScale(8),
   },
   respostaText: {
-    fontSize: 20,
-    marginTop: 15,
+    fontSize: moderateScale(20),
+    marginTop: verticalScale(15),
     color: "#D8EBF2",
   },
   noRespostas: {
     color: "#D8EBF2",
-    fontSize: 18,
+    fontSize: moderateScale(18),
     textAlign: "center",
   },
   labelText: {
@@ -105,44 +105,44 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#0A4E66",
-    borderWidth: 3,
+    borderWidth: moderateScale(3),
     borderColor: "#032D45",
-    paddingVertical: 17,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    marginTop: 10,
+    paddingVertical: verticalScale(17),
+    paddingHorizontal: scale(15),
+    borderRadius: moderateScale(10),
+    marginTop: verticalScale(10),
     zIndex: 1000,
   },
   space: {
-    marginRight: 260,
+    marginRight: scale(260),
   },
   notice: {
     backgroundColor: "#032D45",
-    padding: 5,
-    borderRadius: 10,
+    marginTop: verticalScale(30),
+    padding: scale(5),
+    borderRadius: moderateScale(10),
     textAlign: "center",
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: "bold",
     color: "#D8EBF2",
-    marginBottom: 2,
-    fontSize: 16,
+    marginBottom: verticalScale(4),
   },
   classificacaoText: {
-    fontSize: 28, // Tamanho grande para destaque
-    fontWeight: "bold", // Negrito
-    color: "#FFFFFF", // Cor branca para o texto
-    backgroundColor: "#0A4E66", // Cor de fundo azul escuro
-    paddingVertical: 15, // Espaçamento vertical
-    paddingHorizontal: 20, // Espaçamento horizontal
-    borderRadius: 0, // Bordas arredondadas para parecer uma "caixa"
-    borderWidth: 2, // Borda para destacar a caixa
-    borderColor: "#0A4E66", // Cor da borda verde-azulada da logo
-    textAlign: "center", // Centralizar o texto
-    marginVertical: 20, // Margem acima e abaixo do texto
-    shadowColor: "#14E2C3", // Cor da sombra
-    shadowOffset: { width: 0, height: 0 }, // Deslocamento da sombra
-    shadowOpacity: 0.8, // Opacidade da sombra
-    shadowRadius: 8, // Raio da sombra
-    elevation: 10, // Para funcionar no Android
+    fontSize: moderateScale(28),
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    backgroundColor: "#0A4E66",
+    paddingVertical: verticalScale(15),
+    paddingHorizontal: scale(20),
+    borderRadius: moderateScale(0),
+    borderWidth: moderateScale(2),
+    borderColor: "#0A4E66",
+    textAlign: "center",
+    marginVertical: verticalScale(20),
+    shadowColor: "#14E2C3",
+    shadowOffset: { width: 0, height: verticalScale(0) },
+    shadowOpacity: 0.8,
+    shadowRadius: moderateScale(8),
+    elevation: 10,
   },
 });

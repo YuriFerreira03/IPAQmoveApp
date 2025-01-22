@@ -1,4 +1,5 @@
 import React from "react";
+import { moderateScale } from "react-native-size-matters";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
@@ -83,7 +84,7 @@ export default function App() {
       <NavigationContainer independent>
         <SafeAreaView style={styles.safeArea}>
           <Stack.Navigator
-            initialRouteName="Tela3"
+            initialRouteName="Login"
             screenOptions={{
               headerShown: false,
               cardStyle: { backgroundColor: "transparent" },
@@ -184,8 +185,8 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     margin: 0,
-    paddingTop: 100,
-    marginTop: -62,
-    marginBottom: -40,
+    paddingTop: moderateScale(50), // Responsivo
+    marginTop: moderateScale(-90), // Responsivo
+    marginBottom: moderateScale(-40), // Responsivo
   },
 });

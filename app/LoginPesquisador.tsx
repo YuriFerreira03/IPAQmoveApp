@@ -92,7 +92,7 @@ const LoginPesquisador = () => {
         console.log("Localidade armazenada:", locality);
       }
 
-      Alert.alert("Usuário entrou!");
+      // Alert.alert("Usuário entrou!");
       navigation.navigate("Home");
     } catch (error) {
       console.error("Erro ao entrar:", error);

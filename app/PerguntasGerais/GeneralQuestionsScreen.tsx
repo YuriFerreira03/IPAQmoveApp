@@ -12,6 +12,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import getIp from "../getIp";
 import { api } from "@/api/api";
+import { ButtonNext } from "../Components/ButtonNext";
 
 const GeneralQuestionsScreen = () => {
   const [isChecked, setChecked] = useState(false);
@@ -320,10 +321,10 @@ const GeneralQuestionsScreen = () => {
             }}
           />
         </View>
-
-        <TouchableOpacity style={styles.button3} onPress={handleRegister}>
+        <ButtonNext onPress={handleRegister} />
+        {/* <TouchableOpacity style={styles.button3} onPress={handleRegister}>
           <Icon name="chevron-right" size={30} color="#032D45" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </LinearGradient>
     </KeyboardAwareScrollView>
   );

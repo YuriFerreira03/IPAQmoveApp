@@ -92,7 +92,7 @@ const LoginVisitante = () => {
         console.log("Localidade armazenada:", locality);
       }
 
-      Alert.alert("Usuário entrou!");
+      // Alert.alert("Usuário entrou!");
       navigation.navigate("HomeVisitante");
     } catch (error) {
       console.error("Erro ao entrar:", error);

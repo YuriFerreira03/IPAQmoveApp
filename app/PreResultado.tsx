@@ -91,12 +91,12 @@ const PreResultado: React.FC = () => {
 
           {/* Botão de Voltar */}
           <View style={styles.space}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.buttonSearch}
               onPress={() => navigation.navigate("HomeVisitante")}
             >
               <Icon name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </SafeAreaView>

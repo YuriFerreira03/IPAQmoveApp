@@ -46,7 +46,7 @@ export default StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 50,
-    marginTop: 30
+    marginTop: 30,
   },
   buttonlog1: {
     flexDirection: "row",

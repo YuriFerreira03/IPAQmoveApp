@@ -6,6 +6,7 @@ import { View, Text, StyleSheet } from "react-native";
 import styles from "../../styles/ScreensExpli";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { ButtonNext } from "../Components/ButtonNext";
 
 const ScreenExpli2 = () => {
   const navigation = useNavigation();
@@ -21,12 +22,14 @@ const ScreenExpli2 = () => {
 
       <Icon2 name="home" size={80} color="white" style={styles.home}></Icon2>
 
-      <TouchableOpacity
+      <ButtonNext onPress={() => navigation.navigate("ScreenExpli3")} />
+
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ScreenExpli3")}
       >
         <Icon name="chevron-right" size={30} color="#032D45" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </LinearGradient>
   );
 };

@@ -6,8 +6,9 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/EvilIcons";
+import { ButtonNext } from "../Components/ButtonNext";
 
-const ScreenExpli1 = () => {
+export const ScreenExpli1 = () => {
   const navigation = useNavigation();
 
   return (
@@ -24,12 +25,14 @@ const ScreenExpli1 = () => {
       <Text style={styles.textXIII}>SEMANA</Text>
       <View style={styles.line}></View>
 
-      <TouchableOpacity
+      <ButtonNext onPress={() => navigation.navigate("ScreenExpli2")} />
+
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("ScreenExpli2")}
       >
         <Icon name="chevron-right" size={30} color="#032D45" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </LinearGradient>
   );
 };

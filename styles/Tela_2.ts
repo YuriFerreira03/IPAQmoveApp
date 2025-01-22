@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { scale, verticalScale } from "react-native-size-matters";
 
 const styles = StyleSheet.create({
   container: {
@@ -72,15 +73,15 @@ const styles = StyleSheet.create({
     lineHeight: 45,
   },
   button: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: scale(50),
+    height: scale(50),
+    borderRadius: scale(25),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -4,
-    marginBottom: 30,
-    marginLeft: 300,
+    marginTop: verticalScale(-15),
+    marginBottom: verticalScale(40),
+    marginLeft: scale(220),
   },
   label3: {
     fontSize: 26,

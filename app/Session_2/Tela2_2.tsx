@@ -17,6 +17,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { api } from "@/api/api";
+import { ButtonNext } from "../Components/ButtonNext";
 
 type TelaLocalizacaoRouteProp = RouteProp<RootStackParamList, "tela2_2">;
 
@@ -230,12 +231,13 @@ const Tela2_2: React.FC<{ route: TelaLocalizacaoRouteProp }> = ({ route }) => {
             </View>
           )}
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.button}
             onPress={handleRegister} // Armazena a resposta ao clicar no botão e navega para Tela_2
           >
             <Icon name="chevron-right" size={30} color="#032D45" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <ButtonNext onPress={handleRegister} />
         </ScrollView>
       </LinearGradient>
     </KeyboardAwareScrollView>

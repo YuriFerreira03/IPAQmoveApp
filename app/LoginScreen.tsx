@@ -92,7 +92,7 @@ const LoginScreen = () => {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.termsContainer}>
+        {/* <TouchableOpacity style={styles.termsContainer}>
           <FontAwesome
             name="file-text-o"
             size={30}
@@ -106,7 +106,7 @@ const LoginScreen = () => {
           >
             Termos de Uso
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </LinearGradient>
     </View>
   );

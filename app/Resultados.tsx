@@ -156,14 +156,14 @@ const Resultados: React.FC = () => {
             </Text>
           </TouchableOpacity> */}
         </View>
-        <View style={styles.space}>
+        {/* <View style={styles.space}>
           <TouchableOpacity
             style={styles.buttonSearch}
             onPress={() => navigation.navigate("PreResultado")}
           >
             <Icon name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </SafeAreaView>
     </LinearGradient>
   );
